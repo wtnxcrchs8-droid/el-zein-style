@@ -22,7 +22,9 @@ function configureVapid() {
   const subject = env("VAPID_SUBJECT");
   const publicKey = env("VAPID_PUBLIC_KEY");
   const privateKey = env("VAPID_PRIVATE_KEY");
-  if (!/^[A-Za-z0-9_-]{86,88}$/.test(publicKey)) {
+  if (!/^[A-Za-z0-9_-]+$/.test(publicKey)) {
+  throw new Error("VAPID_PUBLIC_KEY contains invalid characters.");
+}
     throw new Error("VAPID_PUBLIC_KEY format invalid. Check the secret value.");
   }
   if (!/^[A-Za-z0-9_-]{43}$/.test(privateKey)) {
