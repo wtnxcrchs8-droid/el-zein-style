@@ -145,7 +145,7 @@ Deno.serve(async (req) => {
       await webpush.sendNotification(
         subscription,
         JSON.stringify({
-          title: "EL ZEIN STYLE 🔔",
+          title: "Salon Anas 1 🔔",
           body: "Test erfolgreich! Deine Benachrichtigungen funktionieren."
         }),
         { TTL: 60, urgency: "high" }
