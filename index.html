@@ -176,4 +176,53 @@ if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.se
   button.addEventListener("click", subscribeToPush);
 })();
 </script>
+
+<script>
+(() => {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.textContent = "🔔 Testbenachrichtigung senden";
+  button.style.cssText =
+    "display:block;margin:16px auto;padding:14px 20px;border:0;border-radius:12px;background:#d4af37;color:#111;font-weight:bold;cursor:pointer";
+
+  const adminView = document.getElementById("adminView");
+  adminView?.appendChild(button);
+
+  button.addEventListener("click", async () => {
+    try {
+      const { data } = await db.auth.getSession();
+      const token = data.session?.access_token;
+
+      if (!token) {
+        alert("Bitte zuerst als Administrator anmelden.");
+        return;
+      }
+
+      const response = await fetch(
+        SUPABASE_URL + "/functions/v1/push-notifications",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token,
+            "apikey": SUPABASE_PUBLISHABLE_KEY
+          },
+          body: JSON.stringify({ action: "test" })
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "HTTP " + response.status);
+      }
+
+      alert("Testbenachrichtigung wurde gesendet!");
+    } catch (error) {
+      alert("Fehler: " + error.message);
+    }
+  });
+})();
+</script>
 </body></html>
+
