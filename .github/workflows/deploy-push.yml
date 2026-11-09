@@ -21,4 +21,4 @@ jobs:
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
         run: |
-          cd supabase && supabase functions deploy push-notifications --project-ref eunplrfzhslimfgcwyzj --yes
+          cd supabase/supabase && supabase functions deploy push-notifications --project-ref eunplrfzhslimfgcwyzj --yes
