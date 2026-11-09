@@ -58,4 +58,34 @@ $('installCardBtn').onclick=async()=>{
 };
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(err=>console.warn('Service worker:',err)));}
 (async()=>{const token=new URLSearchParams(location.search).get('card');if(token){await loadPublic(token);return}const {data}=await db.auth.getSession();if(data.session){const {data:a}=await db.from('admins').select('user_id').eq('user_id',data.session.user.id).maybeSingle();if(a){show('adminView');await refresh();return}}show('loginView')})();
-</script></body></html>
+</script>
+<script>
+(async function () {
+  const button = document.createElement("button");
+  button.textContent = "🔔 Benachrichtigungen aktivieren";
+  button.type = "button";
+  button.style.cssText =
+    "display:block;margin:16px auto;padding:14px 20px;border:0;border-radius:12px;background:#d4af37;color:#111;font-weight:bold;cursor:pointer";
+
+  document.querySelector("main")?.appendChild(button);
+
+  button.addEventListener("click", async () => {
+    if (!("serviceWorker" in navigator) ||
+        !("PushManager" in window) ||
+        !("Notification" in window)) {
+      alert("Push-Benachrichtigungen werden hier nicht unterstützt. Auf dem iPhone bitte zuerst zum Home-Bildschirm hinzufügen.");
+      return;
+    }
+
+    const permission = await Notification.requestPermission();
+
+    if (permission !== "granted") {
+      alert("Benachrichtigungen wurden nicht erlaubt.");
+      return;
+    }
+
+    alert("Berechtigung erteilt. Push-Verbindung muss noch eingerichtet werden.");
+  });
+})();
+</script>
+</body></html>
