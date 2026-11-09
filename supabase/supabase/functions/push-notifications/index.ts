@@ -185,6 +185,7 @@ Deno.serve(async (req) => {
         : `✂️ Neuer Stempel! Du hast jetzt ${card.stamps} von ${card.stamp_goal} Stempeln.`;
 
       configureVapid();
+      // Customer notifications update
 
       let sent = 0;
       for (const row of rows || []) {
