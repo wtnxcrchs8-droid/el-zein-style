@@ -23,7 +23,8 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const jwt = req.headers.get("Authorization")?.replace(/^Bearer /i, "");
+    const jwt = req.headers.get("Authorization")
+      ?.replace(/^Bearer /i, "");
 
     if (!jwt) {
       return reply({ error: "Login required" }, 401);
@@ -34,6 +35,7 @@ Deno.serve(async (req) => {
     const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
     const authClient = createClient(url, anonKey);
+
     const { data: { user }, error: authError } =
       await authClient.auth.getUser(jwt);
 
@@ -45,7 +47,24 @@ Deno.serve(async (req) => {
     const body = await req.json();
     const action = body.action || "send";
 
+    const { data: adminRecord, error: adminError } =
+      await adminClient
+        .from("admins")
+        .select("user_id")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+    if (adminError) {
+      throw adminError;
+    }
+
+    const isAdmin = !!adminRecord;
+
     if (action === "subscribe") {
+      if (!isAdmin) {
+        return reply({ error: "Admin only" }, 403);
+      }
+
       const sub = body.subscription;
 
       if (
@@ -71,8 +90,47 @@ Deno.serve(async (req) => {
       return reply({ success: true, subscribed: true });
     }
 
+    if (action === "test") {
+      if (!isAdmin) {
+        return reply({ error: "Admin only" }, 403);
+      }
+
+      const { data: rows, error } = await adminClient
+        .from("customer_push_subscriptions")
+        .select("subscription")
+        .is("card_id", null)
+        .eq("active", true)
+        .order("updated_at", { ascending: false })
+        .limit(1);
+
+      if (error) throw error;
+
+      const subscription = rows?.[0]?.subscription;
+
+      if (!subscription?.endpoint || !subscription?.keys) {
+        return reply({ error: "No active admin subscription" }, 404);
+      }
+
+      webpush.setVapidDetails(
+        Deno.env.get("VAPID_SUBJECT")!,
+        Deno.env.get("VAPID_PUBLIC_KEY")!,
+        Deno.env.get("VAPID_PRIVATE_KEY")!
+      );
+
+      await webpush.sendNotification(
+        subscription,
+        JSON.stringify({
+          title: "EL ZEIN STYLE 🔔",
+          body: "Test erfolgreich! Deine Benachrichtigungen funktionieren."
+        }),
+        { TTL: 60, urgency: "high" }
+      );
+
+      return reply({ success: true, sent: true });
+    }
+
     if (action === "send") {
-      if (user.app_metadata?.role !== "admin") {
+      if (!isAdmin) {
         return reply({ error: "Admin only" }, 403);
       }
 
