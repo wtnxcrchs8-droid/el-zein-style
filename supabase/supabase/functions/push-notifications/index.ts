@@ -13,6 +13,37 @@ function reply(data: unknown, status = 200) {
   return new Response(JSON.stringify(data), { status, headers });
 }
 
+function cleanVapidKey(value: string | undefined) {
+  return (value || "")
+    .trim()
+    .replace(/^["'`]+|["'`,;]+$/g, "")
+    .replace(/\s+/g, "")
+    .replace(/=+$/g, "");
+}
+
+function configureVapid() {
+  const subject = (Deno.env.get("VAPID_SUBJECT") || "").trim();
+  const publicKey = cleanVapidKey(Deno.env.get("VAPID_PUBLIC_KEY"));
+  const privateKey = cleanVapidKey(Deno.env.get("VAPID_PRIVATE_KEY"));
+
+  if (!/^[A-Za-z0-9_-]{87}$/.test(publicKey)) {
+    throw new Error("VAPID_PUBLIC_KEY format invalid");
+  }
+
+  if (!/^[A-Za-z0-9_-]{43}$/.test(privateKey)) {
+    throw new Error(
+      "VAPID_PRIVATE_KEY format invalid. Check the secret value."
+    );
+  }
+
+  if (!/^mailto:\S+@\S+\.\S+$/.test(subject) &&
+      !/^https?:\/\/\S+$/.test(subject)) {
+    throw new Error("VAPID_SUBJECT format invalid");
+  }
+
+  webpush.setVapidDetails(subject, publicKey, privateKey);
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers });
@@ -54,9 +85,7 @@ Deno.serve(async (req) => {
         .eq("user_id", user.id)
         .maybeSingle();
 
-    if (adminError) {
-      throw adminError;
-    }
+    if (adminError) throw adminError;
 
     const isAdmin = !!adminRecord;
 
@@ -111,11 +140,7 @@ Deno.serve(async (req) => {
         return reply({ error: "No active admin subscription" }, 404);
       }
 
-      webpush.setVapidDetails(
-        Deno.env.get("VAPID_SUBJECT")!,
-        Deno.env.get("VAPID_PUBLIC_KEY")!,
-        Deno.env.get("VAPID_PRIVATE_KEY")!
-      );
+      configureVapid();
 
       await webpush.sendNotification(
         subscription,
@@ -146,11 +171,7 @@ Deno.serve(async (req) => {
         return reply({ error: "Invalid input" }, 400);
       }
 
-      webpush.setVapidDetails(
-        Deno.env.get("VAPID_SUBJECT")!,
-        Deno.env.get("VAPID_PUBLIC_KEY")!,
-        Deno.env.get("VAPID_PRIVATE_KEY")!
-      );
+      configureVapid();
 
       await webpush.sendNotification(
         subscription,
