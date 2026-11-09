@@ -25,8 +25,6 @@ function configureVapid() {
   if (!/^[A-Za-z0-9_-]+$/.test(publicKey)) {
   throw new Error("VAPID_PUBLIC_KEY contains invalid characters.");
 }
-    throw new Error("VAPID_PUBLIC_KEY format invalid. Check the secret value.");
-  }
   if (!/^[A-Za-z0-9_-]{43}$/.test(privateKey)) {
     throw new Error("VAPID_PRIVATE_KEY format invalid. Check the secret value.");
   }
