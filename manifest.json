@@ -3,7 +3,7 @@
   "name": "Salon Anas 1 Treueprogramm",
   "short_name": "Salon Anas 1",
   "description": "Digitale Treuekarte von Salon Anas 1",
-  "start_url": "/",
+  
   "scope": "/",
   "display": "standalone",
   "background_color": "#080808",
