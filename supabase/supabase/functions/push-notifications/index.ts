@@ -2,54 +2,112 @@
 import webpush from "npm:web-push@3.6.7";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
+const headers = {
+  "Access-Control-Allow-Origin": "https://el-zein-style.vercel.app",
+  "Access-Control-Allow-Headers": "authorization, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Content-Type": "application/json"
+};
+
+function reply(data: unknown, status = 200) {
+  return new Response(JSON.stringify(data), { status, headers });
+}
+
 Deno.serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers });
+  }
+
+  if (req.method !== "POST") {
+    return reply({ error: "POST required" }, 405);
+  }
+
   try {
-    if (req.method !== "POST") {
-      return Response.json({ error: "POST required" }, { status: 405 });
+    const jwt = req.headers.get("Authorization")?.replace(/^Bearer /i, "");
+
+    if (!jwt) {
+      return reply({ error: "Login required" }, 401);
     }
 
-    const token = req.headers.get("Authorization")?.replace("Bearer ", "");
-    if (!token) {
-      return Response.json({ error: "Unauthorized" }, { status: 401 });
+    const url = Deno.env.get("SUPABASE_URL")!;
+    const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+    const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+
+    const authClient = createClient(url, anonKey);
+    const { data: { user }, error: authError } =
+      await authClient.auth.getUser(jwt);
+
+    if (authError || !user) {
+      return reply({ error: "Invalid login" }, 401);
     }
 
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_ANON_KEY")!,
-      { global: { headers: { Authorization: `Bearer ${token}` } } }
-    );
+    const adminClient = createClient(url, serviceKey);
+    const body = await req.json();
+    const action = body.action || "send";
 
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user || user.app_metadata?.role !== "admin") {
-      return Response.json({ error: "Admin only" }, { status: 403 });
+    if (action === "subscribe") {
+      const sub = body.subscription;
+
+      if (
+        typeof sub?.endpoint !== "string" ||
+        !sub.endpoint.startsWith("https://") ||
+        !sub.keys?.p256dh ||
+        !sub.keys?.auth
+      ) {
+        return reply({ error: "Invalid subscription" }, 400);
+      }
+
+      const { error } = await adminClient
+        .from("customer_push_subscriptions")
+        .upsert({
+          endpoint: sub.endpoint,
+          subscription: sub,
+          active: true,
+          updated_at: new Date().toISOString()
+        }, { onConflict: "endpoint" });
+
+      if (error) throw error;
+
+      return reply({ success: true, subscribed: true });
     }
 
-    const { subscription, title, message } = await req.json();
+    if (action === "send") {
+      if (user.app_metadata?.role !== "admin") {
+        return reply({ error: "Admin only" }, 403);
+      }
 
-    if (!subscription?.endpoint || !subscription?.keys?.p256dh ||
-        !subscription?.keys?.auth || !message) {
-      return Response.json({ error: "Invalid input" }, { status: 400 });
+      const { subscription, title, message } = body;
+
+      if (
+        !subscription?.endpoint ||
+        !subscription?.keys?.p256dh ||
+        !subscription?.keys?.auth ||
+        typeof message !== "string" ||
+        !message.trim()
+      ) {
+        return reply({ error: "Invalid input" }, 400);
+      }
+
+      webpush.setVapidDetails(
+        Deno.env.get("VAPID_SUBJECT")!,
+        Deno.env.get("VAPID_PUBLIC_KEY")!,
+        Deno.env.get("VAPID_PRIVATE_KEY")!
+      );
+
+      await webpush.sendNotification(
+        subscription,
+        JSON.stringify({
+          title: String(title || "EL ZEIN STYLE").slice(0, 80),
+          body: message.slice(0, 240)
+        })
+      );
+
+      return reply({ success: true });
     }
 
-    webpush.setVapidDetails(
-      Deno.env.get("VAPID_SUBJECT")!,
-      Deno.env.get("VAPID_PUBLIC_KEY")!,
-      Deno.env.get("VAPID_PRIVATE_KEY")!
-    );
-
-    await webpush.sendNotification(
-      subscription,
-      JSON.stringify({
-        title: String(title || "EL ZEIN STYLE").slice(0, 80),
-        body: String(message).slice(0, 240)
-      })
-    );
-
-    return Response.json({ success: true });
+    return reply({ error: "Unknown action" }, 400);
   } catch (error) {
-    return Response.json(
-      { error: String(error) },
-      { status: 500 }
-    );
+    console.error(error);
+    return reply({ error: "Request failed" }, 500);
   }
 });
