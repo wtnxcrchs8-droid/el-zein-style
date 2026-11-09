@@ -20,3 +20,44 @@ self.addEventListener('fetch', event => {
     return response;
   }).catch(() => caches.match(request).then(cached => cached || caches.match('/index.html'))));
 });
+
+self.addEventListener("push", (event) => {
+  let data = {};
+
+  try {
+    data = event.data ? event.data.json() : {};
+  } catch {
+    data = {
+      body: event.data ? event.data.text() : ""
+    };
+  }
+
+  event.waitUntil(
+    self.registration.showNotification(
+      data.title || "EL ZEIN STYLE",
+      {
+        body: data.body || "Du hast eine neue Nachricht!",
+        icon: "/icon-192.png",
+        badge: "/icon-192.png",
+        data: {
+          url: data.url || "/"
+        }
+      }
+    )
+  );
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+
+  const url = new URL(
+    event.notification.data?.url || "/",
+    self.location.origin
+  );
+
+  if (url.origin !== self.location.origin) return;
+
+  event.waitUntil(
+    clients.openWindow(url.href)
+  );
+});
