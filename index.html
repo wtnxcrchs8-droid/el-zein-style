@@ -32,7 +32,48 @@ function cardUrl(token){return location.origin+location.pathname+'?card='+encode
 async function loadPublic(token){show('publicView');$('pubName').textContent='...';const {data,error}=await db.rpc('get_loyalty_card',{p_token:token});if(error||!data||!data.length){$('pubName').textContent='Karte nicht gefunden';return}const c=data[0];$('pubName').textContent=c.customer_name;$('pubCount').textContent=c.stamps+'/'+c.stamp_goal;$('pubLeft').textContent=Math.max(0,c.stamp_goal-c.stamps);$('pubReward').textContent=c.is_reward_ready?'Belohnung verfügbar: '+c.reward:c.reward;stamps($('pubStamps'),c.stamps,c.stamp_goal);$('pubQr').src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data='+encodeURIComponent(cardUrl(token))}
 async function refresh(){const {data,error}=await db.from('loyalty_cards').select('id,public_token,stamps,stamp_goal,reward,created_at,customers(full_name,phone)').order('created_at',{ascending:false});if(error){msg($('adminMsg'),'تعذّر تحميل البطاقات: '+error.message,true);return}window.cards=data||[];render()}
 function render(){const q=$('search').value.trim().toLowerCase(),list=$('customerList');list.innerHTML='';const rows=(window.cards||[]).filter(c=>(c.customers?.full_name||'').toLowerCase().includes(q)||(c.customers?.phone||'').toLowerCase().includes(q));if(!rows.length){list.textContent='Noch keine Karten vorhanden.';return}rows.forEach(c=>{const row=document.createElement('div');row.className='customer';const info=document.createElement('div'),b=document.createElement('b'),sm=document.createElement('small');b.textContent=c.customers?.full_name||'Kunde';sm.textContent=(c.customers?.phone||'Keine Telefonnummer')+' · '+c.stamps+'/'+c.stamp_goal+' Stempel';info.append(b,sm);const acts=document.createElement('div');acts.className='actions';const add=document.createElement('button');add.className='btn';add.textContent='+ Stempel';add.onclick=()=>addStamp(c);const link=document.createElement('button');link.className='btn secondary';link.textContent='Link kopieren';link.onclick=async()=>{await navigator.clipboard.writeText(cardUrl(c.public_token));link.textContent='Kopiert ✓'};const remove=document.createElement('button');remove.className='btn danger';remove.textContent='Letzten Stempel entfernen';remove.onclick=()=>removeStamp(c);const qr=document.createElement('button');qr.className='btn secondary';qr.textContent='QR anzeigen';qr.onclick=()=>window.open(cardUrl(c.public_token),'_blank');acts.append(add,remove,link,qr);if(c.stamps>=c.stamp_goal){const redeem=document.createElement('button');redeem.className='btn';redeem.textContent='Belohnung einlösen';redeem.onclick=()=>redeemReward(c);acts.append(redeem)}if(c.stamps>0){const reset=document.createElement('button');reset.className='btn danger';reset.textContent='Karte zurücksetzen';reset.onclick=()=>resetCard(c);acts.append(reset)}row.append(info,acts);list.append(row)})}
-async function addStamp(c){if(c.stamps>=c.stamp_goal){alert('Alle Stempel gesammelt. Deine Belohnung ist bereit.');return}const {error}=await db.rpc('add_loyalty_stamp',{p_card_id:c.id});if(error){msg($('adminMsg'),'Stempel konnte nicht hinzugefügt werden: '+error.message,true);return}await refresh();msg($('adminMsg'),'Stempel erfolgreich hinzugefügt.')}
+
+async function addStamp(c){
+  if(c.stamps>=c.stamp_goal){
+    alert('Alle Stempel gesammelt. Deine Belohnung ist bereit.');
+    return;
+  }
+
+  const {error}=await db.rpc('add_loyalty_stamp',{p_card_id:c.id});
+
+  if(error){
+    msg($('adminMsg'),'Stempel konnte nicht hinzugefügt werden: '+error.message,true);
+    return;
+  }
+
+  await refresh();
+  msg($('adminMsg'),'Stempel erfolgreich hinzugefügt.');
+
+  try {
+    const {data:{session}}=await db.auth.getSession();
+    if(!session?.access_token) return;
+
+    const response=await fetch(FUNCTION_URL,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'apikey':SUPABASE_PUBLISHABLE_KEY,
+        'Authorization':'Bearer '+session.access_token
+      },
+      body:JSON.stringify({
+        action:'notify_card',
+        card_id:c.id
+      })
+    });
+
+    if(!response.ok){
+      console.error('Notification failed:',await response.text());
+    }
+  }catch(e){
+    console.error('Notification error:',e);
+  }
+}
+
 async function removeStamp(c){if(c.stamps<=0){alert('Diese Karte hat noch keine Stempel.');return}if(!confirm('Letzten Stempel bei '+(c.customers?.full_name||'diesem Kunden')+' wirklich entfernen?'))return;const {error}=await db.rpc('remove_loyalty_stamp',{p_card_id:c.id});if(error){msg($('adminMsg'),'Stempel konnte nicht entfernt werden. '+error.message,true);return}await refresh();msg($('adminMsg'),'Letzter Stempel wurde entfernt.')}
 async function redeemReward(c){if(c.stamps<c.stamp_goal){alert('Die Karte hat noch nicht alle Stempel.');return}if(!confirm('Belohnung für '+(c.customers?.full_name||'diesen Kunden')+' als eingelöst markieren und Karte auf 0/6 zurücksetzen?'))return;const {error}=await db.rpc('redeem_loyalty_reward',{p_card_id:c.id});if(error){msg($('adminMsg'),'Einlösen fehlgeschlagen. '+error.message,true);return}await refresh();msg($('adminMsg'),'Belohnung eingelöst. Die Karte startet wieder bei 0/6.')}
 async function resetCard(c){if(!confirm('Karte von '+(c.customers?.full_name||'diesem Kunden')+' wirklich auf 0 zurücksetzen? Dieser Vorgang wird protokolliert.'))return;const {error}=await db.rpc('reset_loyalty_card',{p_card_id:c.id});if(error){msg($('adminMsg'),'Zurücksetzen fehlgeschlagen. '+error.message,true);return}await refresh();msg($('adminMsg'),'Karte wurde auf 0 Stempel zurückgesetzt.')}
