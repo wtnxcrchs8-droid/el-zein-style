@@ -154,6 +154,58 @@ Deno.serve(async (req) => {
       return reply({ success: true });
     }
 
+    if (action === "notify_card") {
+      const cardId = body.card_id;
+      if (typeof cardId !== "string" ||
+          !/^[0-9a-f-]{36}$/i.test(cardId)) {
+        return reply({ error: "Invalid card ID" }, 400);
+      }
+
+      const { data: card, error: cardError } = await adminClient
+        .from("loyalty_cards")
+        .select("id, stamps, stamp_goal")
+        .eq("id", cardId)
+        .single();
+
+      if (cardError || !card) {
+        return reply({ error: "Card not found" }, 404);
+      }
+
+      const { data: rows, error } = await adminClient
+        .from("customer_push_subscriptions")
+        .select("subscription")
+        .eq("card_id", cardId)
+        .eq("active", true);
+
+      if (error) throw error;
+
+      const completed = card.stamps >= card.stamp_goal;
+      const message = completed
+        ? "🎁 Glückwunsch! Deine Belohnung ist bereit!"
+        : `✂️ Neuer Stempel! Du hast jetzt ${card.stamps} von ${card.stamp_goal} Stempeln.`;
+
+      configureVapid();
+
+      let sent = 0;
+      for (const row of rows || []) {
+        try {
+          await webpush.sendNotification(
+            row.subscription,
+            JSON.stringify({
+              title: "SALON ANAS 1 🔔",
+              body: message,
+            }),
+            { TTL: 3600 }
+          );
+          sent++;
+        } catch (err) {
+          console.error("Customer push failed:", err);
+        }
+      }
+
+      return reply({ success: true, sent });
+    }
+
     return reply({ error: "Unknown action" }, 400);
   } catch (error) {
     console.error(error);
