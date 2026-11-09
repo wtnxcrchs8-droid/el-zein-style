@@ -34,7 +34,7 @@ self.addEventListener("push", (event) => {
 
   event.waitUntil(
     self.registration.showNotification(
-      data.title || "EL ZEIN STYLE",
+      data.title || "Salon Anas",
       {
         body: data.body || "Du hast eine neue Nachricht!",
         icon: "/icon-192.png",
