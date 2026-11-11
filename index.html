@@ -719,6 +719,37 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 #adminView .sa-admin-tabs button.selected{border:2px solid #ffdb7e!important;background:linear-gradient(135deg,#fce29a,#a86a20)!important;box-shadow:0 0 15px #f4bd4c88!important}
 #adminView .sa-admin-page[data-admin-page="appointments"] .lux-panel,#adminView .sa-admin-page[data-admin-page="customers"] .section,#adminView .sa-admin-page[data-admin-page="messages"] .section{border:2px solid #e9b65a!important;box-shadow:0 0 10px #c3913440!important;background:#090807!important}
 @media(max-width:370px){#adminView .sa-admin-member{grid-template-columns:30% 1fr 42px;gap:7px;padding:7px}#adminView .sa-admin-member-info em{font-size:8px;padding:6px}#adminView .sa-admin-member-seal{height:51px}#adminView .lux-brand{left:52px!important;right:52px!important}}
+
+/* Signature VIP manager refinement: exact customer visual language, polished card hierarchy */
+#adminView{font-family:system-ui,-apple-system,Arial,sans-serif!important}
+#adminView .lux-top{min-height:184px!important;border-radius:0 0 5px 5px!important;background:radial-gradient(ellipse at 20% 50%,#6e421a44,transparent 36%),radial-gradient(ellipse at 85% 30%,#8b511c30,transparent 35%),repeating-linear-gradient(90deg,#100a06 0 45px,#2d1b0e 46px 48px,#100a06 50px 100px)!important}
+#adminView .lux-brand{top:12px!important}
+#adminView .lux-scissors{font-size:23px!important}
+#adminView .lux-name{font-size:clamp(38px,10.4vw,61px)!important;line-height:1.04!important}
+#adminView .lux-sub{font-size:clamp(18px,4.8vw,25px)!important}
+#adminView .sa-admin-stars{margin-top:4px;font-size:17px!important;letter-spacing:5px}
+#adminView .sa-admin-member{grid-template-columns:30% minmax(0,1fr) 53px!important;gap:10px!important;min-height:150px!important;border-radius:23px!important;padding:9px!important;background:radial-gradient(ellipse at 75% 40%,#7144173d,transparent 60%),#050505!important}
+#adminView .sa-admin-monogram{height:130px!important;background:repeating-linear-gradient(45deg,#080808 0 11px,#1b1917 12px 22px)!important;border-right:3px solid #eac05e!important}
+#adminView .sa-admin-monogram strong{font-size:49px!important;line-height:1.05!important}
+#adminView .sa-member-kicker{font-size:9px!important;color:#d9b266!important;letter-spacing:1.5px!important}
+#adminView .sa-admin-member-info strong{font-size:clamp(19px,5vw,28px)!important;line-height:1.08!important;text-shadow:0 0 9px #ad752d44!important}
+#adminView .sa-admin-member-info em{border:1px solid #fff0a9!important;box-shadow:0 0 16px #f0b6428c!important}
+#adminView .lux-welcome{background:linear-gradient(105deg,#211609,#090807 90%)!important;margin:12px 0!important;padding:13px 15px!important;border-width:1.5px!important}
+#adminView .lux-welcome h2{font-size:24px!important}
+#adminView .lux-stats{gap:9px!important}
+#adminView .lux-stat,#adminView .lux-stat:nth-child(1),#adminView .lux-stat:nth-child(2),#adminView .lux-stat:nth-child(3),#adminView .lux-stat:nth-child(4){min-height:100px!important;padding:13px!important;border:1.5px solid #dba84b!important;background:linear-gradient(140deg,#22180e,#080808 78%)!important;box-shadow:inset 0 1px #ffe29b2b,0 0 11px #b57b2440!important}
+#adminView .lux-stat-icon{top:10px!important;right:10px!important}
+#adminView .lux-stat strong{font-size:34px!important}
+#adminView .lux-section-heading{margin:19px 3px 10px!important}
+#adminView .lux-actions{gap:9px!important}
+#adminView .lux-actions button,#adminView .lux-actions button.active,#adminView .lux-actions button:nth-child(1),#adminView .lux-actions button:nth-child(2),#adminView .lux-actions button:nth-child(3),#adminView .lux-actions button:nth-child(4){min-height:98px!important;padding:12px!important;border:1.5px solid #e8b85a!important;background:linear-gradient(145deg,#251708,#080808 82%)!important}
+#adminView .lux-actions button:nth-child(1){background:linear-gradient(135deg,#67400d,#1a1005)!important}
+#adminView .lux-actions span{width:33px!important;height:33px!important}
+#adminView .sa-admin-tabs{padding:5px!important}
+#adminView .sa-admin-tabs button{min-height:50px!important}
+#adminView .sa-admin-tabs button.selected{background:linear-gradient(150deg,#ffe7a6,#c18b2f)!important}
+#adminView .sa-admin-page[data-admin-page="appointments"] .lux-panel h3,#adminView .sa-admin-page[data-admin-page="customers"] h3,#adminView .sa-admin-page[data-admin-page="messages"] h3{font-family:Georgia,serif!important;font-size:21px!important}
+@media(max-width:375px){#adminView .sa-admin-member{grid-template-columns:29% minmax(0,1fr) 42px!important;gap:6px!important}#adminView .sa-admin-member-info strong{font-size:18px!important}#adminView .sa-admin-monogram strong{font-size:40px!important}}
 </style>
 </head>
 <body><main class="wrap">
@@ -740,7 +771,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <section id="loginView" class="hidden"><div class="hero"><div style="font-size:44px;color:#eac271">✂</div><h2>SA Club Admin</h2><p>SALON ANAS 1 · Verwaltung der Treuekarten</p></div><div class="section" style="max-width:460px;margin:0 auto"><h3>Administrator-Login</h3><div class="field"><label>E-Mail-Adresse</label><input id="email" type="email" autocomplete="username" placeholder="admin@example.com"></div><div class="field" style="margin-top:12px"><label>Passwort</label><input id="password" type="password" autocomplete="current-password" placeholder="••••••••"></div><div class="actions"><button class="btn" id="loginBtn">Anmelden</button></div><div id="loginMsg" class="muted" aria-live="polite"></div></div></section>
 <section id="adminView" class="hidden"><div class="lux-top"><button class="lux-icon" type="button" onclick="document.getElementById('luxMenu').classList.toggle('hidden')" aria-label="Menü">☰</button><div class="lux-brand"><div class="lux-scissors">♛</div><div class="lux-name"><span class="sa-gold-ornament">❧</span>SA Club<span class="sa-gold-ornament">❧</span></div><div class="lux-sub">Salon Anas 1</div><div class="sa-admin-subtitle">Dein Management</div><div class="sa-admin-stars">★★★★★</div></div><button class="lux-icon" type="button" onclick="saAdminGo('messages','broadcastTitle')" aria-label="Benachrichtigungen">♧<i></i></button></div>
 <div id="luxMenu" class="lux-menu hidden"><button onclick="saAdminGo('customers','customerList')">Kunden verwalten</button><button onclick="saAdminGo('messages','broadcastTitle')">Benachrichtigungen</button></div>
-<div class="sa-admin-page" data-admin-page="overview"><div class="sa-admin-member"><div class="sa-admin-monogram"><span>♛</span><strong>SA</strong><small>SALON ANAS 1<br>BARBERSHOP</small><span>✂</span></div><div class="sa-admin-member-info"><strong>SA Club Manager</strong><span>Salon Anas 1</span><em>♛ GOLD ADMIN</em></div><div class="sa-admin-member-seal">♛<small>ADMIN</small></div></div><div class="lux-welcome"><div class="sa-admin-eyebrow">✦ DEIN SALON AUF EINEN BLICK <span class="sa-admin-date" id="saAdminDate"></span></div><h2>Übersicht <span>✦</span></h2><p>Termine, Kunden & Treuepunkte</p></div>
+<div class="sa-admin-page" data-admin-page="overview"><div class="sa-admin-member"><div class="sa-admin-monogram"><span>♛</span><strong>SA</strong><small>SALON ANAS 1<br>BARBERSHOP</small><span>✂</span></div><div class="sa-admin-member-info"><span class="sa-member-kicker">EXCLUSIVE ACCESS</span><strong>SA Club<br>Manager</strong><span>Salon Anas 1</span><em>♛ GOLD ADMIN</em></div><div class="sa-admin-member-seal">♛<small>ADMIN</small></div></div><div class="lux-welcome"><div class="sa-admin-eyebrow">✦ DEIN SALON AUF EINEN BLICK <span class="sa-admin-date" id="saAdminDate"></span></div><h2>Dein Club. <span>✦</span></h2><p>Alle Zahlen. Alle Termine. Ein Ort.</p></div>
 <div class="lux-stats"><div class="lux-stat"><div class="lux-stat-icon">◷</div><div class="lux-stat-label">Heutige<br>Termine</div><strong id="saTodayAppointments">—</strong></div>
 <div class="lux-stat"><div class="lux-stat-icon">♙</div><div class="lux-stat-label">Kunden<br>gesamt</div><strong id="saCustomers">—</strong></div>
 <div class="lux-stat"><div class="lux-stat-icon">✂</div><div class="lux-stat-label">Stempel<br>gesamt</div><strong id="saStamps">—</strong></div>
