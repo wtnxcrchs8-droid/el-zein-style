@@ -472,6 +472,24 @@ body:has(#publicView:not(.hidden)) .wrap{padding:0 10px!important}
 #publicView .vip-booking-features{padding-top:4px!important;margin-top:4px!important}
 #publicView .vip-bottom{margin:4px 0!important}
 }
+
+/* Premium SA Club appointments header: photographic barbershop, compact layout */
+@media(max-width:700px){
+#publicView .vip-booking-hero{height:clamp(160px,23dvh,205px)!important;position:relative!important;isolation:isolate!important;background:linear-gradient(90deg,rgba(0,0,0,.62),rgba(0,0,0,.20) 52%,rgba(0,0,0,.48)),url('https://images.pexels.com/photos/3998424/pexels-photo-3998424.jpeg?auto=compress&cs=tinysrgb&w=900') center 52%/cover no-repeat!important;border-bottom:2px solid #ffd35a!important;overflow:hidden!important}
+#publicView .vip-booking-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 5%,#ffc54c2b,transparent 55%),linear-gradient(0deg,#09060399,transparent 65%);z-index:-1}
+#publicView .vip-booking-hero-brand{position:absolute!important;top:4px;left:13%;right:13%;display:flex!important;flex-wrap:wrap;justify-content:center;align-items:center;column-gap:4px;text-align:center!important;color:#ffcf5d!important;font-family:Georgia,serif!important;font-size:clamp(25px,7.2vw,39px)!important;line-height:.94!important;text-shadow:0 2px 4px #000,0 0 13px #c88824!important}
+#publicView .vip-brand-title{white-space:nowrap}
+#publicView .vip-hero-laurel{font-size:clamp(19px,5vw,27px);color:#ffca4e}
+#publicView .vip-booking-hero-brand small{flex-basis:100%;font:700 clamp(11px,3vw,15px) Georgia,serif!important;color:#fff!important;margin-top:2px}
+#publicView .vip-booking-hero-brand em{flex-basis:100%;font:normal clamp(10px,2.5vw,12px) Arial,sans-serif!important;color:#fff!important;margin-top:1px}
+#publicView .vip-hero-stars{flex-basis:100%;font:700 clamp(12px,3.3vw,17px) Arial,sans-serif;letter-spacing:3px;color:#ffce42}
+#publicView .vip-hero-heading{position:absolute;left:4%;bottom:13%;width:58%;z-index:2}
+#publicView .vip-booking-hero .vip-hero-heading h2{font:700 clamp(27px,7.5vw,41px) Georgia,serif!important;color:#ffe08b!important;text-shadow:0 0 11px #a56a1b,0 2px 4px #000!important;margin:0 0 3px!important}
+#publicView .vip-booking-hero .vip-hero-heading p{font:500 clamp(11px,3vw,16px) Arial,sans-serif!important;max-width:100%!important;line-height:1.16!important;color:white!important;margin:0!important}
+#publicView .vip-hero-heading i{display:block;width:74%;height:3px;background:linear-gradient(90deg,transparent,#ffd24d,#fff1a0,transparent);border-radius:100%;margin-top:8px;box-shadow:0 0 8px #ffc33f}
+#publicView .vip-hero-chair{right:4%!important;bottom:6px!important;width:29%!important;height:49%!important;border:2px solid #ffce55!important;border-radius:26% 26% 13% 13%!important;background:linear-gradient(#0009,#0009),repeating-linear-gradient(45deg,#0b0a0a 0 10px,#9e742d 11px 12px,#080808 13px 22px)!important;box-shadow:0 0 12px #d6a139, inset 0 0 9px #c78b36!important;font-size:clamp(20px,6vw,35px)!important}
+#publicView .vip-hero-chair small{font:700 7px Georgia,serif;color:#ffda73}
+}
 </style>
 </head>
 <body><main class="wrap">
@@ -713,7 +731,7 @@ put('.vip-head','start');put('.vip-stamp-panel','start');put('.vip-quick','start
 put('.vip-member','karte');put('#vipBookingPanel','termine');put('#vipOffers','angebote');put('#vipHistory','profil');put('.vip-ai-teaser','profil');put('#vipAiPanel','profil');
 const mk=(page,title,body)=>{const x=document.createElement('div');x.className='vip-panel';x.innerHTML='<h3>'+title+'</h3><p>'+body+'</p>';pages[page].prepend(x)};
 mk('karte','♛ Meine Mitgliedskarte','Zeige deinen persönlichen QR-Code an der Kasse vor.');
-const hero=document.createElement('div');hero.className='vip-booking-hero';hero.innerHTML='<div class="vip-booking-hero-brand">♛ SA Club <small>Salon Anas 1</small><em>Deine Treuekarte · ★★★★★</em></div><h2>▣ Termine</h2><p>Buche jetzt bequem deinen nächsten Termin!</p><div class="vip-hero-chair" aria-hidden="true"><span>♛</span>SA</div>';pages.termine.prepend(hero);const modes=document.createElement('div');modes.className='vip-booking-modes';modes.innerHTML='<button type="button" class="selected">▦ Termin buchen</button><button type="button">➤ Termin anfragen</button>';pages.termine.insertBefore(modes,$('vipBookingPanel'));modes.querySelectorAll('button').forEach((b,i)=>b.onclick=()=>{modes.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('vipBookingStatus').textContent=i?'Wähle Datum, Uhrzeit und Service für deine Anfrage.':'Dein Termin wird erst nach Bestätigung durch den Salon verbindlich.'});
+const hero=document.createElement('div');hero.className='vip-booking-hero';hero.innerHTML='<div class="vip-booking-hero-brand"><span class="vip-hero-laurel">❧</span><span class="vip-brand-title">♛ SA Club</span><span class="vip-hero-laurel">❧</span><small>Salon Anas 1</small><em>Deine Treuekarte</em><span class="vip-hero-stars">★★★★★</span></div><div class="vip-hero-heading"><h2>▣ Termine</h2><p>Buche jetzt bequem deinen nächsten Termin!</p><i></i></div><div class="vip-hero-chair" aria-hidden="true"><span>♛</span>SA<small>SALON ANAS 1</small></div>';pages.termine.prepend(hero);const modes=document.createElement('div');modes.className='vip-booking-modes';modes.innerHTML='<button type="button" class="selected">▦ Termin buchen</button><button type="button">➤ Termin anfragen</button>';pages.termine.insertBefore(modes,$('vipBookingPanel'));modes.querySelectorAll('button').forEach((b,i)=>b.onclick=()=>{modes.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('vipBookingStatus').textContent=i?'Wähle Datum, Uhrzeit und Service für deine Anfrage.':'Dein Termin wird erst nach Bestätigung durch den Salon verbindlich.'});
 mk('angebote','◇ Angebote & Vorteile','Entdecke deine Treueprämien und aktuelle Vorteile.');
 mk('profil','♙ Mein Profil','Deine Mitgliedschaft bei SALON ANAS 1.');
 const cardClone=root.querySelector('.vip-member').cloneNode(true);cardClone.querySelectorAll('[id]').forEach(x=>x.removeAttribute('id'));pages.start.insertBefore(cardClone,pages.start.querySelector('.vip-stamp-panel'));
