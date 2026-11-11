@@ -503,6 +503,39 @@ body:has(#publicView:not(.hidden)) .wrap{padding:0 10px!important}
 #adminView .sa-admin-page[data-admin-page="customers"] .hero{margin-top:8px}
 #adminView .sa-admin-page[data-admin-page="messages"] .push-broadcast{margin-top:12px}
 @media(max-width:700px){#adminView .lux-welcome{padding:8px 4px!important}#adminView .lux-feature{margin:12px 0!important}#adminView .sa-admin-page .section{margin:10px 0!important}#adminView .sa-admin-page>.lux-two{grid-template-columns:1fr!important}#adminView .sa-admin-tabs{bottom:calc(5px + env(safe-area-inset-bottom,0px))}}
+
+/* SA Club manager dashboard 2026: actual compact redesign */
+body:has(#adminView:not(.hidden)) main{padding-bottom:96px!important}
+#adminView{max-width:740px;margin:auto;padding:0 10px 10px!important}
+#adminView .lux-top{display:grid!important;grid-template-columns:42px 1fr 42px;align-items:center!important;gap:8px!important;padding:10px 0 13px!important;border-bottom:1px solid #735427}
+#adminView .lux-brand{display:flex!important;flex-direction:column;align-items:center;gap:1px}
+#adminView .lux-scissors{font-size:20px!important;line-height:1!important}
+#adminView .lux-name{font-size:clamp(23px,6vw,33px)!important;letter-spacing:.3px!important}
+#adminView .lux-sub{font-size:11px!important;margin:0!important;letter-spacing:1.5px;text-transform:uppercase;color:#c2a46d!important}
+#adminView .lux-icon{width:42px!important;height:42px!important;border-radius:13px!important;font-size:21px!important}
+#adminView .lux-welcome{padding:18px 3px 14px!important;text-align:left!important}
+#adminView .sa-admin-eyebrow{font-size:10px;letter-spacing:2px;color:#d6a94d;font-weight:800}
+#adminView .lux-welcome h2{font:700 clamp(29px,8vw,40px) Georgia,serif!important;line-height:1.1;margin:7px 0!important;color:#f7d27d!important}
+#adminView .lux-welcome h2 span{font-size:18px;color:#b88935}
+#adminView .lux-welcome p{font-size:13px!important;color:#c9bdab!important;margin:0!important;line-height:1.3}
+#adminView .lux-stats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+#adminView .lux-stat{min-height:95px!important;display:grid!important;grid-template-columns:38px 1fr!important;grid-template-rows:auto auto!important;gap:1px 8px!important;padding:12px!important;border:1px solid #9c7438!important;border-radius:17px!important;background:linear-gradient(145deg,#251a0e,#100e0b 75%)!important;box-shadow:inset 0 1px #ffdf8333,0 5px 12px #0005!important}
+#adminView .lux-stat-icon{grid-row:1/3;width:35px!important;height:35px!important;font-size:20px!important;border-radius:10px!important}
+#adminView .lux-stat-label{font-size:12px!important;line-height:1.15!important;color:#d9c5a1!important}
+#adminView .lux-stat strong{font-size:clamp(25px,7vw,35px)!important;line-height:1.1!important;color:#ffdb78!important;justify-self:start!important}
+#adminView .lux-section-heading{display:flex!important;align-items:center;justify-content:space-between;margin:19px 2px 10px!important}
+#adminView .lux-section-heading h3{font-size:18px!important;margin:0!important;color:#f4ce7b!important}
+#adminView .lux-section-heading span{font-size:11px;color:#bda679}
+#adminView .lux-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+#adminView .lux-actions button{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:12px!important;min-height:67px!important;padding:10px 12px!important;border-radius:16px!important;text-align:left!important;font-size:13px!important;line-height:1.2!important;background:linear-gradient(135deg,#261c10,#100e0b)!important;border:1px solid #98703a!important}
+#adminView .lux-actions button.active{background:linear-gradient(135deg,#493117,#1a130b)!important}
+#adminView .lux-actions span{font-size:26px!important;margin:0!important;min-width:30px}
+#adminView .sa-admin-tabs{position:fixed!important;left:50%;transform:translateX(-50%);bottom:calc(8px + env(safe-area-inset-bottom,0px))!important;width:min(calc(100% - 20px),720px)!important;margin:0!important;z-index:999!important;box-sizing:border-box;background:#0d0b09f7!important;backdrop-filter:blur(18px);box-shadow:0 4px 24px #000c,0 0 12px #d0a04733!important}
+#adminView .sa-admin-tabs button{min-height:52px!important;font-size:21px!important}
+#adminView .sa-admin-tabs button small{font-size:10px!important}
+#adminView .sa-admin-page[data-admin-page="appointments"] .lux-panel,#adminView .sa-admin-page[data-admin-page="customers"] .section,#adminView .sa-admin-page[data-admin-page="messages"] .section{border-radius:18px!important}
+#adminView .sa-admin-page[data-admin-page="appointments"] .lux-two{grid-template-columns:1fr!important}
+@media(max-width:380px){#adminView .lux-stat{padding:9px!important;min-height:84px!important}#adminView .lux-actions button{font-size:12px!important;gap:7px!important;padding:8px!important}}
 </style>
 </head>
 <body><main class="wrap">
@@ -524,21 +557,20 @@ body:has(#publicView:not(.hidden)) .wrap{padding:0 10px!important}
 <section id="loginView" class="hidden"><div class="hero"><div style="font-size:44px;color:#eac271">✂</div><h2>SA Club Admin</h2><p>SALON ANAS 1 · Verwaltung der Treuekarten</p></div><div class="section" style="max-width:460px;margin:0 auto"><h3>Administrator-Login</h3><div class="field"><label>E-Mail-Adresse</label><input id="email" type="email" autocomplete="username" placeholder="admin@example.com"></div><div class="field" style="margin-top:12px"><label>Passwort</label><input id="password" type="password" autocomplete="current-password" placeholder="••••••••"></div><div class="actions"><button class="btn" id="loginBtn">Anmelden</button></div><div id="loginMsg" class="muted" aria-live="polite"></div></div></section>
 <section id="adminView" class="hidden"><div class="lux-top"><button class="lux-icon" type="button" onclick="document.getElementById('luxMenu').classList.toggle('hidden')" aria-label="Menü">☰</button><div class="lux-brand"><div class="lux-scissors">✂</div><div class="lux-name">SA Club Admin</div><div class="lux-sub">Salon Anas 1</div></div><button class="lux-icon" type="button" onclick="saAdminGo('messages','broadcastTitle')" aria-label="Benachrichtigungen">♧<i></i></button></div>
 <div id="luxMenu" class="lux-menu hidden"><button onclick="saAdminGo('customers','customerList')">Kunden verwalten</button><button onclick="saAdminGo('messages','broadcastTitle')">Benachrichtigungen</button></div>
-<div class="sa-admin-page" data-admin-page="overview"><div class="lux-welcome"><h2>Willkommen, Manager!</h2><p>Hier ist der aktuelle Überblick über deinen<br>SA Club in Salon Anas 1.</p></div>
+<div class="sa-admin-page" data-admin-page="overview"><div class="lux-welcome"><div class="sa-admin-eyebrow">✦ SALON ANAS 1 · MANAGEMENT</div><h2>Dashboard <span>✦</span></h2><p>Alles Wichtige auf einen Blick.</p></div>
 <div class="lux-stats"><div class="lux-stat"><div class="lux-stat-icon">▦</div><div class="lux-stat-label">Heutige<br>Termine</div><strong id="saTodayAppointments">—</strong></div>
 <div class="lux-stat"><div class="lux-stat-icon">▦</div><div class="lux-stat-label">Kunden<br>gesamt</div><strong id="saCustomers">—</strong></div>
 <div class="lux-stat"><div class="lux-stat-icon">♙</div><div class="lux-stat-label">Stempel<br>gesamt</div><strong id="saStamps">—</strong></div>
 <div class="lux-stat"><div class="lux-stat-icon">♕</div><div class="lux-stat-label">Belohnungen<br>bereit</div><strong id="saRewards">—</strong></div>
 
 </div>
-<div class="lux-section-heading"><h3>ϟ Schnellaktionen</h3><span>SA Club</span></div>
+<div class="lux-section-heading"><h3>⚡ Schnellaktionen</h3><span>Direktzugriff</span></div>
 <div class="lux-actions">
 <button class="active" onclick="saAdminGo('customers','search')"><span>♙</span>Stempel<br>hinzufügen</button>
 <button onclick="saAdminGo('customers','customerName')"><span>▤</span>Karte<br>erstellen</button>
 <button onclick="saAdminGo('customers','search')"><span>▦</span>Kunden<br>suchen</button>
 <button onclick="saAdminGo('messages','broadcastTitle')"><span>♧</span>Erinnerung<br>senden</button>
 </div>
-<div class="lux-feature"><div class="lux-feature-inner"><span class="lux-sparkle">✧</span><h3>Dein Salon.<br>Dein Club.</h3><p>Verwalte Kunden, Stempel und Prämien ganz einfach an einem Ort.</p><button onclick="saAdminGo('customers','customerList')">Kunden verwalten ›</button></div><div class="lux-feature-art">✂</div></div>
 </div><div class="sa-admin-page" data-admin-page="appointments"><div class="lux-two"><div class="lux-panel" id="appointmentsPanel"><h3>▦ Nächste Termine</h3><div id="appointmentList">Termine werden geladen …</div></div><div class="lux-panel" id="activityPanel"><h3>ϟ Letzte Aktivitäten</h3><div id="activityList">Aktivitäten werden geladen …</div></div></div><div class="lux-panel" id="appointmentForm"><h3>▦ Neuen Termin erstellen</h3><div class="lux-appointment-form"><select id="appointmentCustomer"><option value="">Kunde auswählen</option></select><input type="date" id="appointmentDate"><input type="time" id="appointmentTime"><select id="appointmentService"><option>Haarschnitt</option><option>Haarschnitt & Bart</option><option>Fade Cut</option><option>Bart</option></select><button class="btn" type="button" id="appointmentSave">Termin speichern</button></div><div id="appointmentMsg"></div></div></div><div class="sa-admin-page" data-admin-page="customers"><div class="lux-section-heading"><h3>✧ Club-Verwaltung</h3></div>
 <div class="hero"><h2>✦ Kundenverwaltung</h2><p>Kunden, Besuche und Belohnungen verwalten</p></div><div class="section"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h3>Neuen Kunden hinzufügen</h3><button class="btn secondary" id="logoutBtn">Abmelden</button></div><div class="grid"><div class="field"><label>Kundenname</label><input id="customerName" placeholder="Vollständiger Name"></div><div class="field"><label>Telefonnummer (optional)</label><input id="customerPhone" placeholder="+49..."></div></div><div class="actions"><button class="btn" id="createBtn">QR-Karte erstellen</button></div><div id="adminMsg" aria-live="polite"></div></div><div class="section"><h3>Kundenkarten</h3><div class="field"><label>Suche nach Name oder Telefonnummer</label><input id="search" placeholder="Suchen..."></div><div id="customerList" style="margin-top:12px"></div></div>
 </div><div class="sa-admin-page" data-admin-page="messages"><div class="section push-broadcast">
