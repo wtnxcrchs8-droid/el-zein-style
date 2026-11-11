@@ -490,6 +490,19 @@ body:has(#publicView:not(.hidden)) .wrap{padding:0 10px!important}
 #publicView .vip-hero-chair{right:4%!important;bottom:6px!important;width:29%!important;height:49%!important;border:2px solid #ffce55!important;border-radius:26% 26% 13% 13%!important;background:linear-gradient(#0009,#0009),repeating-linear-gradient(45deg,#0b0a0a 0 10px,#9e742d 11px 12px,#080808 13px 22px)!important;box-shadow:0 0 12px #d6a139, inset 0 0 9px #c78b36!important;font-size:clamp(20px,6vw,35px)!important}
 #publicView .vip-hero-chair small{font:700 7px Georgia,serif;color:#ffda73}
 }
+
+/* Admin: four short focused sections rather than one endless page */
+#adminView .sa-admin-page{display:none}
+#adminView .sa-admin-page.is-current{display:block}
+#adminView .sa-admin-tabs{position:sticky;bottom:8px;z-index:110;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;margin:12px 0 4px;padding:7px 5px;background:#0b0908;border:1.5px solid #d4a746;border-radius:24px;box-shadow:0 0 18px #dba94355}
+#adminView .sa-admin-tabs button{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;min-width:0;min-height:55px;padding:6px 2px;border:1px solid transparent;border-radius:17px;background:transparent;color:#f3dfb4;font-size:24px;cursor:pointer}
+#adminView .sa-admin-tabs button small{font-size:clamp(9px,2.5vw,12px);font-weight:600}
+#adminView .sa-admin-tabs button.selected{background:linear-gradient(145deg,#ffe28c,#b27a22);border-color:#ffebaa;color:#181005;box-shadow:0 0 13px #e7b44380}
+#adminView .sa-admin-page>.lux-two{display:grid;gap:12px}
+#adminView .sa-admin-page>.lux-two .lux-panel{min-width:0}
+#adminView .sa-admin-page[data-admin-page="customers"] .hero{margin-top:8px}
+#adminView .sa-admin-page[data-admin-page="messages"] .push-broadcast{margin-top:12px}
+@media(max-width:700px){#adminView .lux-welcome{padding:8px 4px!important}#adminView .lux-feature{margin:12px 0!important}#adminView .sa-admin-page .section{margin:10px 0!important}#adminView .sa-admin-page>.lux-two{grid-template-columns:1fr!important}#adminView .sa-admin-tabs{bottom:calc(5px + env(safe-area-inset-bottom,0px))}}
 </style>
 </head>
 <body><main class="wrap">
@@ -509,9 +522,9 @@ body:has(#publicView:not(.hidden)) .wrap{padding:0 10px!important}
 <button id="installCardBtn" type="button" class="vip-install hidden">＋ Zum Home-Bildschirm hinzufügen</button>
 </section>
 <section id="loginView" class="hidden"><div class="hero"><div style="font-size:44px;color:#eac271">✂</div><h2>SA Club Admin</h2><p>SALON ANAS 1 · Verwaltung der Treuekarten</p></div><div class="section" style="max-width:460px;margin:0 auto"><h3>Administrator-Login</h3><div class="field"><label>E-Mail-Adresse</label><input id="email" type="email" autocomplete="username" placeholder="admin@example.com"></div><div class="field" style="margin-top:12px"><label>Passwort</label><input id="password" type="password" autocomplete="current-password" placeholder="••••••••"></div><div class="actions"><button class="btn" id="loginBtn">Anmelden</button></div><div id="loginMsg" class="muted" aria-live="polite"></div></div></section>
-<section id="adminView" class="hidden"><div class="lux-top"><button class="lux-icon" type="button" onclick="document.getElementById('luxMenu').classList.toggle('hidden')" aria-label="Menü">☰</button><div class="lux-brand"><div class="lux-scissors">✂</div><div class="lux-name">SA Club Admin</div><div class="lux-sub">Salon Anas 1</div></div><button class="lux-icon" type="button" onclick="document.getElementById('broadcastTitle').scrollIntoView({behavior:'smooth'})" aria-label="Benachrichtigungen">♧<i></i></button></div>
-<div id="luxMenu" class="lux-menu hidden"><button onclick="document.getElementById('customerList').scrollIntoView({behavior:'smooth'})">Kunden verwalten</button><button onclick="document.getElementById('broadcastTitle').scrollIntoView({behavior:'smooth'})">Benachrichtigungen</button></div>
-<div class="lux-welcome"><h2>Willkommen, Manager!</h2><p>Hier ist der aktuelle Überblick über deinen<br>SA Club in Salon Anas 1.</p></div>
+<section id="adminView" class="hidden"><div class="lux-top"><button class="lux-icon" type="button" onclick="document.getElementById('luxMenu').classList.toggle('hidden')" aria-label="Menü">☰</button><div class="lux-brand"><div class="lux-scissors">✂</div><div class="lux-name">SA Club Admin</div><div class="lux-sub">Salon Anas 1</div></div><button class="lux-icon" type="button" onclick="saAdminGo('messages','broadcastTitle')" aria-label="Benachrichtigungen">♧<i></i></button></div>
+<div id="luxMenu" class="lux-menu hidden"><button onclick="saAdminGo('customers','customerList')">Kunden verwalten</button><button onclick="saAdminGo('messages','broadcastTitle')">Benachrichtigungen</button></div>
+<div class="sa-admin-page" data-admin-page="overview"><div class="lux-welcome"><h2>Willkommen, Manager!</h2><p>Hier ist der aktuelle Überblick über deinen<br>SA Club in Salon Anas 1.</p></div>
 <div class="lux-stats"><div class="lux-stat"><div class="lux-stat-icon">▦</div><div class="lux-stat-label">Heutige<br>Termine</div><strong id="saTodayAppointments">—</strong></div>
 <div class="lux-stat"><div class="lux-stat-icon">▦</div><div class="lux-stat-label">Kunden<br>gesamt</div><strong id="saCustomers">—</strong></div>
 <div class="lux-stat"><div class="lux-stat-icon">♙</div><div class="lux-stat-label">Stempel<br>gesamt</div><strong id="saStamps">—</strong></div>
@@ -520,15 +533,15 @@ body:has(#publicView:not(.hidden)) .wrap{padding:0 10px!important}
 </div>
 <div class="lux-section-heading"><h3>ϟ Schnellaktionen</h3><span>SA Club</span></div>
 <div class="lux-actions">
-<button class="active" onclick="document.getElementById('search').focus();document.getElementById('customerList').scrollIntoView({behavior:'smooth'})"><span>♙</span>Stempel<br>hinzufügen</button>
-<button onclick="document.getElementById('customerName').focus();document.getElementById('customerName').scrollIntoView({behavior:'smooth'})"><span>▤</span>Karte<br>erstellen</button>
-<button onclick="document.getElementById('search').focus();document.getElementById('search').scrollIntoView({behavior:'smooth'})"><span>▦</span>Kunden<br>suchen</button>
-<button onclick="document.getElementById('broadcastTitle').scrollIntoView({behavior:'smooth'})"><span>♧</span>Erinnerung<br>senden</button>
+<button class="active" onclick="saAdminGo('customers','search')"><span>♙</span>Stempel<br>hinzufügen</button>
+<button onclick="saAdminGo('customers','customerName')"><span>▤</span>Karte<br>erstellen</button>
+<button onclick="saAdminGo('customers','search')"><span>▦</span>Kunden<br>suchen</button>
+<button onclick="saAdminGo('messages','broadcastTitle')"><span>♧</span>Erinnerung<br>senden</button>
 </div>
-<div class="lux-feature"><div class="lux-feature-inner"><span class="lux-sparkle">✧</span><h3>Dein Salon.<br>Dein Club.</h3><p>Verwalte Kunden, Stempel und Prämien ganz einfach an einem Ort.</p><button onclick="document.getElementById('customerList').scrollIntoView({behavior:'smooth'})">Kunden verwalten ›</button></div><div class="lux-feature-art">✂</div></div>
-<div class="lux-two"><div class="lux-panel" id="appointmentsPanel"><h3>▦ Nächste Termine</h3><div id="appointmentList">Termine werden geladen …</div></div><div class="lux-panel" id="activityPanel"><h3>ϟ Letzte Aktivitäten</h3><div id="activityList">Aktivitäten werden geladen …</div></div></div><div class="lux-panel" id="appointmentForm"><h3>▦ Neuen Termin erstellen</h3><div class="lux-appointment-form"><select id="appointmentCustomer"><option value="">Kunde auswählen</option></select><input type="date" id="appointmentDate"><input type="time" id="appointmentTime"><select id="appointmentService"><option>Haarschnitt</option><option>Haarschnitt & Bart</option><option>Fade Cut</option><option>Bart</option></select><button class="btn" type="button" id="appointmentSave">Termin speichern</button></div><div id="appointmentMsg"></div></div><div class="lux-section-heading"><h3>✧ Club-Verwaltung</h3></div>
+<div class="lux-feature"><div class="lux-feature-inner"><span class="lux-sparkle">✧</span><h3>Dein Salon.<br>Dein Club.</h3><p>Verwalte Kunden, Stempel und Prämien ganz einfach an einem Ort.</p><button onclick="saAdminGo('customers','customerList')">Kunden verwalten ›</button></div><div class="lux-feature-art">✂</div></div>
+</div><div class="sa-admin-page" data-admin-page="appointments"><div class="lux-two"><div class="lux-panel" id="appointmentsPanel"><h3>▦ Nächste Termine</h3><div id="appointmentList">Termine werden geladen …</div></div><div class="lux-panel" id="activityPanel"><h3>ϟ Letzte Aktivitäten</h3><div id="activityList">Aktivitäten werden geladen …</div></div></div><div class="lux-panel" id="appointmentForm"><h3>▦ Neuen Termin erstellen</h3><div class="lux-appointment-form"><select id="appointmentCustomer"><option value="">Kunde auswählen</option></select><input type="date" id="appointmentDate"><input type="time" id="appointmentTime"><select id="appointmentService"><option>Haarschnitt</option><option>Haarschnitt & Bart</option><option>Fade Cut</option><option>Bart</option></select><button class="btn" type="button" id="appointmentSave">Termin speichern</button></div><div id="appointmentMsg"></div></div></div><div class="sa-admin-page" data-admin-page="customers"><div class="lux-section-heading"><h3>✧ Club-Verwaltung</h3></div>
 <div class="hero"><h2>✦ Kundenverwaltung</h2><p>Kunden, Besuche und Belohnungen verwalten</p></div><div class="section"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h3>Neuen Kunden hinzufügen</h3><button class="btn secondary" id="logoutBtn">Abmelden</button></div><div class="grid"><div class="field"><label>Kundenname</label><input id="customerName" placeholder="Vollständiger Name"></div><div class="field"><label>Telefonnummer (optional)</label><input id="customerPhone" placeholder="+49..."></div></div><div class="actions"><button class="btn" id="createBtn">QR-Karte erstellen</button></div><div id="adminMsg" aria-live="polite"></div></div><div class="section"><h3>Kundenkarten</h3><div class="field"><label>Suche nach Name oder Telefonnummer</label><input id="search" placeholder="Suchen..."></div><div id="customerList" style="margin-top:12px"></div></div>
-<div class="section push-broadcast">
+</div><div class="sa-admin-page" data-admin-page="messages"><div class="section push-broadcast">
 <h3>🔔 Nachricht an alle Kunden senden</h3>
 <div class="actions" style="margin-bottom:16px"><button class="btn secondary" id="pushBtnAdmin" type="button">🔔 Benachrichtigungen für mein Gerät aktivieren</button><button class="btn secondary" id="testPushBtn" type="button">Testbenachrichtigung an mich senden</button></div>
 <p class="muted">Eine Push-Nachricht wird nur an Geräte versendet, die den Empfang von Angeboten ausdrücklich erlaubt haben.</p>
@@ -537,7 +550,7 @@ body:has(#publicView:not(.hidden)) .wrap{padding:0 10px!important}
 <div class="field" style="margin-top:12px"><label for="broadcastMessage">Nachricht (max. 240 Zeichen)</label><textarea id="broadcastMessage" maxlength="240" rows="4" placeholder="Zum Beispiel: Diese Woche gibt es ein besonderes Angebot!"></textarea></div>
 <div class="actions"><button class="btn" id="sendBroadcastBtn" type="button">🔔 An alle senden</button><button class="btn secondary" id="refreshAudienceBtn" type="button">Empfänger aktualisieren</button></div>
 <div id="broadcastMsg" aria-live="polite"></div>
-</div><nav class="sa-nav"><button type="button" onclick="document.getElementById('adminView').scrollIntoView({behavior:'smooth'})">⌂ Übersicht</button><button type="button" onclick="document.getElementById('appointmentForm').scrollIntoView({behavior:'smooth'})">▦ Termine</button><button type="button" onclick="document.getElementById('customerList').scrollIntoView({behavior:'smooth'})">♙ Kunden</button><button type="button" onclick="document.getElementById('broadcastTitle').scrollIntoView({behavior:'smooth'})">♧ Nachrichten</button><button type="button" onclick="document.getElementById('activityPanel').scrollIntoView({behavior:'smooth'})">▥ Statistik</button></nav></section>
+</div></div><nav class="sa-nav sa-admin-tabs" aria-label="Admin Bereiche"><button type="button" class="selected" data-admin-target="overview">⌂<small>Übersicht</small></button><button type="button" data-admin-target="appointments">▦<small>Termine</small></button><button type="button" data-admin-target="customers">♙<small>Kunden</small></button><button type="button" data-admin-target="messages">♧<small>Nachrichten</small></button></nav></section>
 <div id="globalMsg" aria-live="polite"></div><footer class="foot">SALON ANAS 1 · DIGITALES TREUEPROGRAMM</footer>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
@@ -775,6 +788,11 @@ draw();
 vipInitCalendar();
 (function(){const input=$('vipBookingService'),cards=$('vipServiceCards');cards.querySelectorAll('[data-service]').forEach(b=>b.onclick=()=>{input.value=b.dataset.service;cards.querySelectorAll('[data-service]').forEach(x=>{const active=x===b;x.classList.toggle('chosen',active);x.setAttribute('aria-pressed',String(active));x.querySelector('.vip-service-check').textContent=active?'✓':'○'})})})();
 (function(){const root=$('vipTimeSlots'),input=$('vipBookingTime');root.querySelectorAll('[data-time]').forEach(b=>b.onclick=()=>{input.value=b.dataset.time;root.querySelectorAll('[data-time]').forEach(x=>{const chosen=x===b;x.classList.toggle('chosen',chosen);x.setAttribute('aria-pressed',String(chosen))})});})();
+
+
+function saAdminGo(page,focusId){const view=document.getElementById('adminView');if(!view)return;const allowed=['overview','appointments','customers','messages'];if(!allowed.includes(page))page='overview';view.querySelectorAll('.sa-admin-page').forEach(el=>el.classList.toggle('is-current',el.dataset.adminPage===page));view.querySelectorAll('.sa-admin-tabs [data-admin-target]').forEach(btn=>{const active=btn.dataset.adminTarget===page;btn.classList.toggle('selected',active);btn.setAttribute('aria-current',active?'page':'false')});const menu=document.getElementById('luxMenu');if(menu)menu.classList.add('hidden');if(focusId){const el=document.getElementById(focusId);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});if(['INPUT','TEXTAREA'].includes(el.tagName))setTimeout(()=>el.focus({preventScroll:true}),250)}}else window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('#adminView .sa-admin-tabs [data-admin-target]').forEach(btn=>btn.addEventListener('click',()=>saAdminGo(btn.dataset.adminTarget)));
+saAdminGo('overview');
 
 (async()=>{const token=new URLSearchParams(location.search).get('card');if(token){await loadPublic(token);return}const {data}=await db.auth.getSession();if(data.session){const {data:a}=await db.from('admins').select('user_id').eq('user_id',data.session.user.id).maybeSingle();if(a){show('adminView');await refresh();await refreshAudience();return}}show('loginView')})();
 </script></body></html>
