@@ -290,6 +290,51 @@ body:has(#publicView:not(.hidden)){background:#030201}
 #publicView .vip-bottom button{font-size:clamp(23px,5.7vw,32px)!important}
 #publicView .vip-bottom small{font-size:clamp(11px,3vw,15px)!important}
 @media(max-width:400px){#publicView .vip-head{min-height:210px!important}#publicView .vip-member{min-height:144px!important}#publicView .vip-quick{gap:5px!important}#publicView .vip-quick button{min-height:98px!important}#publicView .vip-appointment{min-height:177px!important}}
+
+/* FINAL mobile compact layout: one screen of content, no oversized sections */
+@media(max-width:700px){
+body:has(#publicView:not(.hidden)) .wrap{padding:0 10px!important}
+#publicView #vipPage_start{gap:7px!important;min-height:0!important}
+#publicView #vipPage_start>.vip-head{height:clamp(125px,20dvh,185px)!important;min-height:0!important;padding:5px 0 7px!important;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;overflow:hidden}
+#publicView .vip-head .vip-crown{font-size:20px!important;line-height:1!important}
+#publicView .vip-head h1{font-size:clamp(38px,9vw,57px)!important;line-height:1!important;margin:0!important}
+#publicView .vip-head strong{font-size:clamp(15px,3.9vw,19px)!important;line-height:1.15!important}
+#publicView .vip-head p{font-size:clamp(12px,3.2vw,16px)!important;margin:1px 0!important;line-height:1.1!important}
+#publicView .vip-stars{font-size:14px!important;line-height:1!important;margin:2px 0!important}
+#publicView .vip-header-menu,#publicView .vip-header-bell{top:9px!important}
+#publicView #vipPage_start>.vip-member{height:clamp(104px,15dvh,148px)!important;min-height:0!important;padding:6px!important;border-radius:18px!important;overflow:hidden}
+#publicView .vip-emblem{min-height:0!important;height:100%!important}
+#publicView .vip-monogram{font-size:clamp(33px,8vw,56px)!important}
+#publicView .vip-emblem span{font-size:clamp(8px,2vw,11px)!important}
+#publicView .vip-emblem small{font-size:8px!important}
+#publicView .vip-member-info h2{font-size:clamp(14px,3.7vw,20px)!important;margin:0 0 3px!important}
+#publicView .vip-member-info strong{font-size:clamp(13px,3.4vw,20px)!important}
+#publicView .vip-member-info small{font-size:clamp(9px,2.5vw,12px)!important;margin:3px 0!important}
+#publicView .vip-tier{padding:4px 6px!important}
+#publicView #vipPage_start>.vip-stamp-panel{padding:8px 11px!important;border-radius:18px!important}
+#publicView .vip-panel-title h2{font-size:clamp(17px,4.7vw,23px)!important;margin:0!important}
+#publicView .vip-stamps{margin:5px 0!important;gap:clamp(3px,1vw,7px)!important}
+#publicView .vip-stamp{border-width:2px!important}
+#publicView .vip-stamp span{font-size:clamp(19px,5vw,29px)!important}
+#publicView .vip-progress{height:10px!important}
+#publicView .vip-progress-line strong{font-size:clamp(14px,3.6vw,20px)!important}
+#publicView .vip-reward{margin:6px auto 0!important;padding:5px 4px!important;font-size:clamp(11px,2.8vw,16px)!important}
+#publicView .vip-quick{gap:5px!important}
+#publicView .vip-quick button{min-height:clamp(68px,10dvh,89px)!important;padding:5px 1px!important;border-radius:15px!important;font-size:clamp(9px,2.35vw,13px)!important;line-height:1.1!important}
+#publicView .vip-quick span{font-size:clamp(23px,6vw,30px)!important;margin:0 0 3px!important}
+#publicView #vipPage_start>.vip-appointment{min-height:0!important;height:clamp(115px,17dvh,158px)!important;padding:9px 12px!important;border-radius:18px!important}
+#publicView .vip-appointment h3{font-size:clamp(26px,6.7vw,40px)!important}
+#publicView .vip-appointment p{font-size:clamp(12px,3.2vw,18px)!important;margin:4px 0 6px!important;line-height:1.15!important}
+#publicView .vip-appointment .vip-gold-btn{padding:7px 11px!important;font-size:clamp(12px,3vw,16px)!important}
+#publicView .vip-chair-art{height:100%!important;bottom:-13px!important}
+#publicView .vip-home-install{padding:8px 5px!important;min-height:0!important;font-size:clamp(11px,3vw,15px)!important;border-radius:18px!important;line-height:1.2!important}
+#publicView .vip-home-install:before{font-size:16px!important;margin-right:6px!important}
+#publicView .vip-bottom{padding:3px 2px!important;margin:3px 0 max(5px,env(safe-area-inset-bottom))!important;border-radius:28px!important;position:relative!important}
+#publicView .vip-bottom button{font-size:clamp(18px,4.7vw,25px)!important;padding:4px 0!important}
+#publicView .vip-bottom small{font-size:clamp(9px,2.5vw,12px)!important}
+#publicView .vip-page.hidden{display:none!important}
+#publicView .vip-ai-teaser{display:none!important}
+}
 </style>
 </head>
 <body><main class="wrap">
