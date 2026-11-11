@@ -443,6 +443,36 @@ body:has(#publicView:not(.hidden)) .wrap{padding:0 10px!important}
 #publicView #vipBookingStatus{margin:2px!important}
 #publicView .vip-bottom{margin:5px 0!important}
 }
+
+/* Booking screen reference v4: compact header, illustrated chair, image service choices */
+@media(max-width:700px){
+#publicView #vipPage_termine{gap:5px!important;padding:0 2px 0!important}
+#publicView .vip-booking-hero{height:clamp(140px,21dvh,185px)!important;min-height:0!important;padding:3px 10px 5px!important;border-bottom:2px solid #ffca48!important;box-shadow:0 0 11px #ffc84780!important}
+#publicView .vip-booking-hero:after{display:none!important}
+#publicView .vip-booking-hero-brand{font-size:clamp(27px,6.7vw,41px)!important;line-height:.94!important}
+#publicView .vip-booking-hero-brand small{font-size:12px!important}
+#publicView .vip-booking-hero-brand em{font-size:10px!important}
+#publicView .vip-booking-hero h2{font-size:clamp(26px,6.3vw,37px)!important;margin:6px 0 0!important}
+#publicView .vip-booking-hero p{font-size:clamp(11px,3vw,15px)!important;max-width:58%!important}
+#publicView .vip-hero-chair{position:absolute;right:5%;bottom:7px;width:27%;height:56%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px double #f7c451;border-radius:40% 40% 16% 16%;font:700 clamp(22px,6vw,38px) Georgia,serif;color:#f6c95b;background:repeating-linear-gradient(45deg,#080808 0 9px,#d5a74a77 10px 11px,#070707 12px 20px);box-shadow:0 0 15px #e9b348}
+#publicView .vip-hero-chair span{font-size:15px}
+#publicView .vip-booking-modes button{padding:7px 2px!important}
+#publicView #vipBookingPanel{padding:7px 10px!important}
+#publicView #vipCalendar{padding:2px 5px!important}
+#publicView .vip-cal-grid{gap:2px 4px!important}
+#publicView .vip-cal-grid button{height:clamp(23px,5.6vw,30px)!important}
+#publicView .vip-time-slots{gap:3px 6px!important}
+#publicView .vip-time-slots button{padding:4px 0!important}
+#publicView .vip-service-cards button{height:clamp(94px,13dvh,117px)!important;overflow:hidden}
+#publicView .vip-service-art{font-size:0!important;height:clamp(47px,7dvh,65px)!important;border-radius:8px 8px 0 0!important;background-size:cover!important;background-position:center 35%!important;background-repeat:no-repeat!important}
+#publicView .vip-service-cards button:nth-child(1) .vip-service-art{background-image:url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=250&h=200&fit=crop')}
+#publicView .vip-service-cards button:nth-child(2) .vip-service-art{background-image:url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=250&h=200&fit=crop')}
+#publicView .vip-service-cards button:nth-child(3) .vip-service-art{background-image:url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=250&h=200&fit=crop')}
+#publicView .vip-service-cards button:nth-child(4) .vip-service-art{background-image:url('https://images.unsplash.com/photo-1596727147705-61a532a659bd?w=250&h=200&fit=crop')}
+#publicView .vip-service-cards strong{font-size:clamp(9px,2.5vw,12px)!important}
+#publicView .vip-booking-features{padding-top:4px!important;margin-top:4px!important}
+#publicView .vip-bottom{margin:4px 0!important}
+}
 </style>
 </head>
 <body><main class="wrap">
@@ -684,7 +714,7 @@ put('.vip-head','start');put('.vip-stamp-panel','start');put('.vip-quick','start
 put('.vip-member','karte');put('#vipBookingPanel','termine');put('#vipOffers','angebote');put('#vipHistory','profil');put('.vip-ai-teaser','profil');put('#vipAiPanel','profil');
 const mk=(page,title,body)=>{const x=document.createElement('div');x.className='vip-panel';x.innerHTML='<h3>'+title+'</h3><p>'+body+'</p>';pages[page].prepend(x)};
 mk('karte','♛ Meine Mitgliedskarte','Zeige deinen persönlichen QR-Code an der Kasse vor.');
-const hero=document.createElement('div');hero.className='vip-booking-hero';hero.innerHTML='<div class="vip-booking-hero-brand">♛ SA Club <small>Salon Anas 1</small><em>Deine Treuekarte · ★★★★★</em></div><h2>▣ Termine</h2><p>Buche jetzt bequem deinen nächsten Termin!</p>';pages.termine.prepend(hero);const modes=document.createElement('div');modes.className='vip-booking-modes';modes.innerHTML='<button type="button" class="selected">▦ Termin buchen</button><button type="button">➤ Termin anfragen</button>';pages.termine.insertBefore(modes,$('vipBookingPanel'));modes.querySelectorAll('button').forEach((b,i)=>b.onclick=()=>{modes.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('vipBookingStatus').textContent=i?'Wähle Datum, Uhrzeit und Service für deine Anfrage.':'Dein Termin wird erst nach Bestätigung durch den Salon verbindlich.'});
+const hero=document.createElement('div');hero.className='vip-booking-hero';hero.innerHTML='<div class="vip-booking-hero-brand">♛ SA Club <small>Salon Anas 1</small><em>Deine Treuekarte · ★★★★★</em></div><h2>▣ Termine</h2><p>Buche jetzt bequem deinen nächsten Termin!</p><div class="vip-hero-chair" aria-hidden="true"><span>♛</span>SA</div>';pages.termine.prepend(hero);const modes=document.createElement('div');modes.className='vip-booking-modes';modes.innerHTML='<button type="button" class="selected">▦ Termin buchen</button><button type="button">➤ Termin anfragen</button>';pages.termine.insertBefore(modes,$('vipBookingPanel'));modes.querySelectorAll('button').forEach((b,i)=>b.onclick=()=>{modes.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('vipBookingStatus').textContent=i?'Wähle Datum, Uhrzeit und Service für deine Anfrage.':'Dein Termin wird erst nach Bestätigung durch den Salon verbindlich.'});
 mk('angebote','◇ Angebote & Vorteile','Entdecke deine Treueprämien und aktuelle Vorteile.');
 mk('profil','♙ Mein Profil','Deine Mitgliedschaft bei SALON ANAS 1.');
 const cardClone=root.querySelector('.vip-member').cloneNode(true);cardClone.querySelectorAll('[id]').forEach(x=>x.removeAttribute('id'));pages.start.insertBefore(cardClone,pages.start.querySelector('.vip-stamp-panel'));
