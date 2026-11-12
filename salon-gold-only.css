@@ -1,0 +1,96 @@
+/* SALON ANAS 1 — unified black & gold. Overrides legacy red accents
+   without changing loyalty, booking, push or account logic. */
+#publicView{--sa-gold:#f5ce79;--sa-gold-soft:#d7ae5c;--sa-near-black:#0c0906}
+#publicView .vip-header-bell i{
+  background:#eac268!important;
+  border:1px solid #ffe5a4!important;
+  box-shadow:0 0 10px #e8b85caa!important;
+}
+/* Legacy "first shortcut is red" rules must not affect the Preisliste. */
+#publicView .vip-quick button:first-child,
+#publicView #vipPage_start .sa-home-actions>button:first-child{
+  background:linear-gradient(145deg,#3b270f,#100c07 78%)!important;
+  color:#ffe4a9!important;
+  border:1.5px solid #dfb55f!important;
+  box-shadow:inset 0 1px #ffe0a63a,0 0 11px #c68c354a!important;
+}
+#publicView .vip-quick button:first-child:after,
+#publicView #vipPage_start .sa-home-actions>button:first-child:after{
+  content:none!important;
+  display:none!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#publicView .vip-new-tag{
+  color:#271908!important;
+  border:1px solid #ffeba9!important;
+  background:linear-gradient(110deg,#ffe09e,#cb9643)!important;
+  box-shadow:0 0 7px #caa04b88!important;
+}
+/* Even the "closed" day uses a subdued gold-dark treatment, not red. */
+#publicView .sa-home-opening p .sa-home-closed{
+  color:#ffe3ab!important;
+  background:linear-gradient(130deg,#5b431f,#20160b)!important;
+  border:1px solid #a58241!important;
+}
+#publicView .vip-cal-weekday.closed{
+  color:#c9a16a!important;
+}
+#publicView .vip-cal-grid button.sunday{
+  color:#d6b077!important;
+  border-color:#746041!important;
+  background:#15110c!important;
+}
+#publicView .vip-cal-grid button.sunday:disabled{
+  color:#ad9269!important;
+  border-color:#645438!important;
+}
+#publicView .vip-booking-hero,#publicView #vipBookingPanel,#publicView .vip-booking-modes{
+  --accent:#f4cf79;
+}
+#publicView .vip-booking-modes button.selected,
+#publicView .vip-time-slots button.chosen,
+#publicView .vip-service-cards button.chosen,
+#publicView .vip-cal-grid button.chosen{
+  border-color:#ffe2a2!important;
+  box-shadow:0 0 10px #dbab5877!important;
+}
+#publicView .vip-appointment a:focus-visible,
+#publicView .sa-home-actions button:focus-visible,
+#publicView .sa-home-tools button:focus-visible{
+  outline:2px solid #ffe5a1!important;
+}
+#publicView .notice.error,
+#publicView .error{
+  color:#ffe0a9!important;
+  border-color:#a6874f!important;
+  background:linear-gradient(130deg,#34230e,#100b06)!important;
+}
+#publicView input:invalid{border-color:#b59258!important}
+#publicView .vip-quick button:disabled,
+#publicView .sa-home-tools button:disabled{
+  opacity:.68!important;
+  filter:none!important;
+}
+/* Push opt-out is still an explicit, two-action confirmation,
+   but its destructive option doesn't introduce a red accent. */
+#publicView #pushDisableConfirm .vip-push-disable{
+  border:1px solid #8c723f!important;
+  background:#1c160d!important;
+  color:#e5c38b!important;
+}
+#publicView #pushDisableConfirm .vip-push-confirm-question{
+  color:#fce0a7!important;
+}
+#publicView #pushDisableConfirm h2,
+#publicView #pushDisableConfirm .vip-push-confirm-icon{
+  color:#ffda96!important;
+}
+/* Admin dashboard header indicator should match the brand as well. */
+#adminView .sa4-bell i,#adminView .sa4-square i,
+#adminView .lux-icon i{
+  background:#eac268!important;
+  box-shadow:0 0 10px #d19d48a6!important;
+}
+/* Keep labels legible when browsing the other pages, too. */
+#publicView :focus-visible{outline-color:#f6ce7c}
