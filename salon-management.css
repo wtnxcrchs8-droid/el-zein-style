@@ -1,0 +1,70 @@
+/* SALON ANAS 1 · Preis- & Angebotsverwaltung · black/gold */
+#adminView .sa9-management-cta{display:flex;align-items:center;gap:11px;width:100%;min-height:54px;padding:10px 14px;margin:9px 0 11px;background:linear-gradient(125deg,#39280f,#15100a 78%);border:1.5px solid #cf9e52;border-radius:16px;color:#ffe2a5;text-align:left;box-shadow:0 0 12px #bd883b44,inset 0 1px #ffe1a534}
+#adminView .sa9-management-cta .sa9-cta-icon{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;border:1px solid #d2a75b;border-radius:11px;background:#4c3110;font-size:24px}
+#adminView .sa9-management-cta>span:nth-child(2){flex:1;min-width:0}
+#adminView .sa9-management-cta strong{display:block;font:700 18px Georgia,serif;color:#ffdd99}
+#adminView .sa9-management-cta small{display:block;font-size:11px;color:#cbb38b;margin-top:3px}
+#adminView .sa9-management-cta>span:last-child{font-size:26px;color:#ebc47f}
+#adminView .sa9-management{padding:10px 2px 110px!important;color:#fbe9c9}
+#adminView .sa9-management *{box-sizing:border-box}
+#adminView .sa9-page-title{padding:8px 6px 13px}
+#adminView .sa9-page-title small{display:block;color:#d5a962;font-size:10px;font-weight:900;letter-spacing:2.3px}
+#adminView .sa9-page-title h2{font:700 clamp(31px,8vw,41px) Georgia,serif!important;color:#ffe1a5!important;margin:5px 0!important;line-height:1.08!important}
+#adminView .sa9-page-title p{color:#c5ae88;font-size:13px;line-height:1.4;margin:0}
+#adminView .sa9-manager-tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;background:#140e09;border:1px solid #8d6937;border-radius:15px;padding:4px;margin-bottom:11px}
+#adminView .sa9-manager-tabs button{min-height:41px;padding:8px 6px;font-weight:850;font-size:14px;color:#ddc59e;background:transparent;border:1px solid transparent;border-radius:11px}
+#adminView .sa9-manager-tabs button[aria-selected=true]{background:linear-gradient(110deg,#ffe3a4,#ce9741);color:#201407;border-color:#ffe6b7;box-shadow:0 0 11px #c99a5170}
+#adminView .sa9-panel{padding:14px 12px 15px!important;background:radial-gradient(ellipse at 90% 5%,#69431c33,transparent 55%),linear-gradient(140deg,#22170e,#0a0807 82%)!important;border:1.5px solid #a98245!important;border-radius:19px!important;box-shadow:0 0 14px #9e753442,inset 0 1px #f9d79a2e!important}
+#adminView .sa9-panel[hidden]{display:none!important}
+#adminView .sa9-panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+#adminView .sa9-panel-head h3{font:700 clamp(18px,5.1vw,23px) Georgia,serif!important;color:#ffe0a0!important;line-height:1.15;margin:0!important}
+#adminView .sa9-panel-head small{font-size:10px;color:#c4a876;text-align:right;line-height:1.2}
+#adminView .sa9-description{margin:0 0 12px;color:#c6b291;font-size:12px;line-height:1.45}
+#adminView .sa9-service-list{display:grid;gap:7px}
+#adminView .sa9-service-row{display:grid;grid-template-columns:minmax(0,1fr) 79px 64px;gap:7px;align-items:center;min-width:0;padding:9px 8px;border:1px solid #75592e;border-radius:13px;background:linear-gradient(130deg,#2b1d0f,#100c08)}
+#adminView .sa9-service-row .sa9-service-name{min-width:0;color:#ffdc9b;font-size:clamp(12px,3.3vw,15px);font-weight:800;overflow-wrap:anywhere}
+#adminView .sa9-service-row .sa9-service-name span{display:block;color:#bb9e70;font-size:10px;margin-top:3px;font-weight:500}
+#adminView .sa9-service-controls{display:flex;align-items:center;gap:3px;min-width:0}
+#adminView .sa9-service-price{height:39px;width:100%;min-width:0;max-width:79px;box-sizing:border-box;border-radius:9px;border:1px solid #b58c48;background:#0f0c09;color:#ffe7b6;font-size:15px;padding:7px 5px;font-weight:750;text-align:right}
+#adminView .sa9-service-row button{width:100%;height:39px;border-radius:9px;border:1px solid #f1cf85;background:linear-gradient(110deg,#ffeba9,#c99741);color:#281807;font-size:12px;font-weight:900;padding:4px 3px}
+#adminView .sa9-service-row button:disabled{opacity:.55}
+#adminView .sa9-from-label{display:inline-flex;align-items:center;gap:4px;color:#bba17b;font-size:10px;font-weight:700;margin-top:4px}
+#adminView .sa9-from-label input{accent-color:#dba84e;width:16px;height:16px}
+#adminView .sa9-muted-btn{min-height:39px;border:1px solid #986d39;border-radius:12px;background:#241a0f;color:#f6d9a0;font-size:12px;font-weight:800;padding:8px 11px}
+#adminView #sa9Refresh{width:100%;margin-top:12px}
+#adminView .sa9-offer-form{display:grid;gap:5px;background:#140f0a;border:1px solid #6b5030;border-radius:14px;padding:12px 10px;margin:10px 0 17px}
+#adminView .sa9-offer-form h4{font:700 20px Georgia,serif;color:#ffe0a6;margin:0 0 7px}
+#adminView .sa9-offer-form label{color:#e9c993;font-size:12px;font-weight:800;margin-top:7px}
+#adminView .sa9-offer-form input:not([type=checkbox]),#adminView .sa9-offer-form textarea{width:100%;min-width:0;max-width:100%;box-sizing:border-box;background:#080705;border:1px solid #a48249;border-radius:10px;color:#ffedcb;font-size:16px;padding:10px;min-height:41px}
+#adminView .sa9-offer-form textarea{resize:vertical;min-height:70px}
+#adminView .sa9-dates{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+#adminView .sa9-dates>div{min-width:0;display:flex;flex-direction:column;gap:7px}
+#adminView .sa9-dates input{min-width:0}
+#adminView .sa9-check{display:flex;align-items:center;gap:8px;line-height:1.3;padding:6px 0}
+#adminView .sa9-check input{accent-color:#e7b65a;width:18px;height:18px;flex:none}
+#adminView .sa9-form-buttons{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:9px}
+#adminView .sa9-primary{background:linear-gradient(115deg,#ffe6a8,#c7953e);color:#211406;min-height:43px;border:1px solid #ffdfa0;border-radius:11px;padding:8px 12px;font-weight:900;font-size:13px}
+#adminView .sa9-primary:disabled{opacity:.55}
+#adminView .sa9-offers-list-head{border-top:1px solid #675037;padding-top:14px}
+#adminView .sa9-offers-list{display:grid;gap:8px}
+#adminView .sa9-offer-row{border:1px solid #856337;border-radius:12px;padding:10px;background:#19120a}
+#adminView .sa9-offer-row h4{color:#ffe0a0;font-size:15px;margin:0 0 4px;font-weight:850}
+#adminView .sa9-offer-row p{font-size:12px;color:#d3ba96;margin:4px 0;line-height:1.35;white-space:pre-line}
+#adminView .sa9-offer-meta{font-size:11px;color:#d8b681;margin:7px 0}
+#adminView .sa9-offer-state{border:1px solid #be9655;border-radius:15px;padding:3px 7px;background:#292014;color:#e7c899;font-size:10px;font-weight:800}
+#adminView .sa9-offer-state.is-active{background:#463111;color:#ffdfa0}
+#adminView .sa9-offer-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:6px;margin-top:9px}
+#adminView .sa9-offer-actions button{min-height:37px;border:1px solid #b28c4b;color:#ffe2a3;background:#2a1c0d;border-radius:9px;font-weight:800;font-size:12px;padding:7px}
+#adminView .sa9-offer-actions button.sa9-delete{color:#d7b38b;border-color:#78603c;padding:6px 10px}
+#adminView .sa9-info{color:#f9d7a2;min-height:0;font-size:12px;line-height:1.4;margin:8px 4px}
+#adminView .sa9-info[data-error=true]{color:#ffcc8c}
+/* Customer offers and price list are live from Supabase. */
+#publicView .sa9-public-offers{display:grid;gap:9px;margin:8px 0}
+#publicView .sa9-public-heading{font:700 19px Georgia,serif!important;color:#f9d28d!important;margin:16px 0 9px!important}
+#publicView .sa9-offer-public{border:1.2px solid #b68e4b;border-radius:13px;padding:12px 12px;background:radial-gradient(ellipse at 90% 0%,#70471a40,transparent 65%),#140e09}
+#publicView .sa9-offer-public strong{display:block;color:#ffe0a2;font:700 18px Georgia,serif}
+#publicView .sa9-offer-public p{margin:7px 0;color:#dec6a4;font-size:13px;line-height:1.4;white-space:pre-line}
+#publicView .sa9-offer-public b{display:inline-flex;background:linear-gradient(115deg,#ffe0a1,#cb9440);color:#251507;border-radius:11px;padding:6px 9px;font-size:13px;font-weight:900;margin-top:3px}
+#publicView .sa9-offer-public small{display:block;color:#c5ab7e;font-size:10px;margin-top:7px}
+#publicView #sa9PublicPrices.sa-price-list>div{display:flex;justify-content:space-between;align-items:center;gap:9px;padding:9px 5px}
+@media(max-width:375px){#adminView .sa9-panel{padding:12px 9px!important}#adminView .sa9-service-row{grid-template-columns:minmax(0,1fr) 70px 58px;gap:5px;padding:8px 5px}#adminView .sa9-service-price{max-width:70px}#adminView .sa9-service-row button{font-size:11px}#adminView .sa9-offer-actions{gap:4px}}
