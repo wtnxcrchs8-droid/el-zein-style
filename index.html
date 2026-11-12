@@ -1205,4 +1205,4 @@ document.querySelectorAll('#adminView .sa-admin-tabs [data-admin-target]').forEa
 saAdminGo('overview');const saDate=document.getElementById('saAdminDate');if(saDate)saDate.textContent=new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'short'}).format(new Date());
 
 (async()=>{const token=new URLSearchParams(location.search).get('card');if(token){await loadPublic(token);return}const {data}=await db.auth.getSession();if(data.session){const {data:a}=await db.from('admins').select('user_id').eq('user_id',data.session.user.id).maybeSingle();if(a){show('adminView');await refresh();await refreshAudience();return}}show('loginView')})();
-</script><script src="/admin-premium.js?v=5"></script><script src="/customer-cards.js?v=1"></script></body></html>
+</script><script src="/admin-premium.js?v=8"></script><script src="/customer-cards.js?v=1"></script></body></html>
