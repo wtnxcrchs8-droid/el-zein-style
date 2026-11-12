@@ -1,0 +1,78 @@
+
+/* SA Club Admin · Kundenkarten v1 — approved premium black/gold member cards */
+#adminView .sa5-customer-page{padding-top:12px!important}
+#adminView .sa5-customer-panel{background:radial-gradient(ellipse at 18% 8%,#4e301429,transparent 50%),linear-gradient(140deg,#1c140b,#0b0806)!important;border:1.5px solid #b38542!important;border-radius:22px!important;box-shadow:inset 0 0 17px #bd8a3028,0 7px 24px #0008!important;padding:16px 14px 17px!important}
+#adminView .sa5-intro{display:flex;align-items:center;gap:11px;margin-bottom:16px}
+#adminView .sa5-intro-icon{flex:0 0 45px;height:45px;display:grid;place-items:center;border:1px solid #966c35;border-radius:13px;background:linear-gradient(140deg,#382715,#15100b);color:#f2c778;box-shadow:inset 0 1px #d6b16e4a}
+#adminView .sa5-intro-icon svg{width:27px;height:27px}
+#adminView .sa5-intro-title{min-width:0;flex:1}
+#adminView .sa5-intro h3{font:700 clamp(24px,6vw,31px) Georgia,serif!important;margin:0 0 3px!important;color:#f9d38d!important;line-height:1.1}
+#adminView .sa5-intro p{color:#c5ae87!important;font-size:clamp(11px,2.9vw,13px);margin:0!important;line-height:1.25}
+#adminView .sa5-search-shell{position:relative;margin-bottom:10px}
+#adminView .sa5-search-shell svg{position:absolute;width:20px;height:20px;left:15px;top:50%;transform:translateY(-50%);pointer-events:none;color:#d4ab68}
+#adminView #search{display:block!important;width:100%!important;min-height:48px!important;padding:12px 12px 12px 45px!important;background:#100d09!important;border:1.5px solid #866536!important;border-radius:14px!important;color:#ffedd0!important;font-size:16px!important;outline:none}
+#adminView #search:focus{border-color:#f4c46d!important;box-shadow:0 0 0 3px #e1ae5c2a!important}
+#adminView .sa5-create-toggle{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:46px;padding:10px 13px;border:1px solid #f6d484;border-radius:13px;background:linear-gradient(115deg,#ffdfa0,#cd943c);box-shadow:0 0 13px #bb853849;color:#1e1205;font-weight:850;font-size:15px;letter-spacing:.1px}
+#adminView .sa5-create-toggle svg{height:17px;width:17px}
+#adminView .sa5-create-toggle[aria-expanded="true"]{background:#382915;color:#f8d79b;border-color:#bc8a42}
+#adminView .sa5-create-form{padding:14px 12px 12px;margin:11px 0 4px;background:#100d09;border:1px solid #6f542f;border-radius:14px}
+#adminView .sa5-create-form[hidden]{display:none!important}
+#adminView .sa5-create-form h4{color:#f7d08b;font:700 19px Georgia,serif;margin:0 0 13px}
+#adminView .sa5-create-form .grid{display:grid;grid-template-columns:1fr;gap:10px}
+#adminView .sa5-create-form .field{margin:0}
+#adminView .sa5-create-form label{font-size:12px;color:#d1b78d!important}
+#adminView .sa5-create-form input{min-height:44px;font-size:16px;border:1px solid #806138;border-radius:11px}
+#adminView .sa5-create-form .actions{margin:12px 0 0}
+#adminView .sa5-create-form .btn{width:100%}
+#adminView .sa5-inline-message{margin:10px 0 0}
+#adminView .sa5-result-row{display:flex;align-items:center;justify-content:space-between;padding:16px 1px 9px;font-size:11px;font-weight:700;letter-spacing:1px;color:#bc9a61}
+#adminView .sa5-card-list{display:grid;gap:11px;margin-top:0!important}
+#adminView .sa5-card{position:relative;isolation:isolate;min-width:0;padding:15px 13px 12px;border:1.4px solid #a97b38;border-radius:19px;background:radial-gradient(ellipse at 90% 0%,#59401f33,transparent 58%),linear-gradient(135deg,#20170d 0%,#0e0c09 72%);box-shadow:0 2px 12px #0007,inset 0 1px #f2d48a24}
+#adminView .sa5-card.sa5-menu-open{z-index:10}
+#adminView .sa5-card-top{display:grid;grid-template-columns:39px minmax(0,1fr) auto;align-items:center;gap:8px}
+#adminView .sa5-avatar{width:39px;height:39px;display:grid;place-items:center;flex:none;border:1px solid #946b32;border-radius:11px;color:#f4ca78;background:linear-gradient(135deg,#47301a,#191109)}
+#adminView .sa5-avatar svg{width:23px;height:23px}
+#adminView .sa5-person{min-width:0}
+#adminView .sa5-name{display:block;font:700 clamp(17px,4.3vw,22px) Georgia,serif;color:#ffdf9c;white-space:normal;overflow-wrap:anywhere;line-height:1.08}
+#adminView .sa5-phone{display:block;color:#dfcdae;font-size:clamp(10px,2.6vw,12px);margin-top:5px;overflow-wrap:anywhere}
+#adminView .sa5-progress{display:flex;flex-direction:column;gap:7px;align-items:flex-end;padding-left:3px}
+#adminView .sa5-progress-label{font-size:clamp(10px,2.7vw,12px);white-space:nowrap;color:#f1d08e}
+#adminView .sa5-dots{display:flex;justify-content:flex-end;gap:3px;max-width:100%}
+#adminView .sa5-dot{width:clamp(11px,3.1vw,16px);height:clamp(11px,3.1vw,16px);border:1.5px solid #7b756a;border-radius:100%;background:#171411;display:grid;place-items:center;line-height:1;color:#2a1c09;font-size:9px}
+#adminView .sa5-dot.sa5-filled{background:linear-gradient(135deg,#fff0aa,#d4a342);border-color:#f8d88b;color:#3b2709;box-shadow:0 0 6px #dda54b77}
+#adminView .sa5-card-actions{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) 42px;gap:7px;align-items:stretch;margin-top:14px}
+#adminView .sa5-action{display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;min-height:43px;border:1px solid #9e7439;border-radius:12px;font-size:clamp(10px,2.9vw,13px);font-weight:750;color:#ffe0a2;background:linear-gradient(135deg,#302012,#16100a);padding:7px 6px;white-space:nowrap}
+#adminView .sa5-action svg{width:17px;height:17px;flex:none}
+#adminView .sa5-action-primary{background:linear-gradient(120deg,#ffe6a5,#d39941);border-color:#f4d18b;color:#1b1005;box-shadow:0 0 9px #dbad5755}
+#adminView .sa5-action:disabled{opacity:.55;cursor:not-allowed}
+#adminView .sa5-more{font-size:23px;padding:0}
+#adminView .sa5-options{position:absolute;right:0;top:calc(100% + 6px);width:min(100%,280px);z-index:25;padding:7px;background:#21180f;border:1px solid #c09553;border-radius:14px;box-shadow:0 12px 24px #000d,0 0 12px #a87a3545}
+#adminView .sa5-options[hidden]{display:none!important}
+#adminView .sa5-options button{width:100%;display:flex;align-items:center;gap:10px;text-align:left;padding:11px 9px;border:0;border-bottom:1px solid #574127;background:transparent;color:#f6deaf;font-size:12px;border-radius:6px}
+#adminView .sa5-options button:last-child{border-bottom:0}
+#adminView .sa5-options button svg{width:17px;height:17px;flex:none}
+#adminView .sa5-options button:active{background:#49301a}
+#adminView .sa5-options button.sa5-danger{color:#edaaa0}
+#adminView .sa5-empty{padding:21px 10px;text-align:center;color:#dcc29d;border:1px dashed #856536;border-radius:15px}
+#adminView .sa5-qr-overlay[hidden]{display:none!important}
+#adminView .sa5-qr-overlay{position:fixed;inset:0;z-index:3500;display:grid;place-items:center;background:#000c;padding:20px;backdrop-filter:blur(6px)}
+#adminView .sa5-qr-dialog{position:relative;width:min(100%,360px);padding:21px 18px;border:1px solid #d4a451;border-radius:20px;background:linear-gradient(130deg,#31200d,#0d0a06);box-shadow:0 0 28px #c6944d55;text-align:center}
+#adminView .sa5-qr-dialog h3{font:700 24px Georgia,serif;color:#ffe09a;margin:0 0 7px}
+#adminView .sa5-qr-dialog p{font-size:13px;color:#ddc59f;margin:0 0 14px}
+#adminView .sa5-qr-dialog img{display:block;width:210px;max-width:100%;height:auto;aspect-ratio:1;object-fit:contain;padding:8px;margin:0 auto 13px;background:white;border:3px solid #d9b065;border-radius:13px}
+#adminView .sa5-qr-dialog .sa5-qr-url{display:block;color:#dfc59c;font-size:10px;overflow-wrap:anywhere;margin-bottom:12px}
+#adminView .sa5-qr-dialog .sa5-qr-close{position:absolute;right:10px;top:9px;border:0;background:#3e2a13;color:#fbe0a7;border-radius:10px;width:34px;height:34px}
+#adminView .sa5-qr-dialog .sa5-qr-link{display:inline-block;text-decoration:none;padding:10px 16px;background:linear-gradient(120deg,#ffe6a5,#cb9138);color:#281702;font-weight:800;border-radius:12px}
+#adminView:has(#search:focus) .sa4-bottomnav,
+#adminView:has(#customerName:focus) .sa4-bottomnav,
+#adminView:has(#customerPhone:focus) .sa4-bottomnav{transform:translate(-50%,160%)!important;pointer-events:none}
+#adminView #search{scroll-margin-top:15px}
+@media(max-width:380px){
+ #adminView .sa5-customer-panel{padding:13px 9px!important}
+ #adminView .sa5-card{padding:12px 9px}
+ #adminView .sa5-card-top{grid-template-columns:33px minmax(0,1fr) auto;gap:6px}
+ #adminView .sa5-avatar{width:33px;height:33px}
+ #adminView .sa5-dots{gap:2px}
+ #adminView .sa5-action{font-size:10px}
+ #adminView .sa5-card-actions{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) 38px;gap:5px}
+}
