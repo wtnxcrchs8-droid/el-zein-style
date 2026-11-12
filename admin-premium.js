@@ -17,6 +17,7 @@ function go(page,focusId){
   closeMenu();closeQr();closeAi();
   if(page==="rewards"||page==="stats")renderExtras();
   if(focusId){
+    if(focusId==="customerName")window.sa5OpenForm?.();
     requestAnimationFrame(()=>{
       const el=byId(focusId);if(!el)return;
       el.scrollIntoView({behavior:"smooth",block:"center"});
