@@ -816,6 +816,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <link rel="stylesheet" href="/admin-messages.css?v=3">
 <link rel="stylesheet" href="/appointments-v3.css?v=1">
 <link rel="stylesheet" href="/push-confirm.css?v=1">
+<link rel="stylesheet" href="/salon-home.css?v=1">
 </head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">S</div><div><h1>SALON ANAS 1</h1><small>TREUEPROGRAMM</small></div></div><span class="pill">BLACK · GOLD EDITION</span></header>
@@ -824,7 +825,22 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <div class="vip-member"><div class="vip-emblem"><div class="vip-monogram">SA</div><span>SALON ANAS 1</span><small>BARBERSHOP</small></div><div class="vip-member-info"><h2>SA Club Member</h2><strong id="pubName">Member</strong><small id="vipMemberNumber">Mitglied · Salon Anas 1</small><span class="vip-tier">♛ GOLD MEMBER</span></div><div class="vip-qr"><img id="pubQr" alt="Dein persönlicher QR-Code"></div></div>
 <div class="vip-panel vip-stamp-panel"><div class="vip-panel-title"><h2>♙ Meine Stempel</h2><strong id="pubCount">0/6</strong></div><div class="vip-stamps" id="pubStamps"></div><div class="vip-progress-line"><div class="vip-progress"><div id="pubProgressFill"></div></div><strong id="vipPercent">0 %</strong></div><div class="vip-reward"><span aria-hidden="true" class="vip-gift-icon">♔</span> <b>Belohnung:</b> <span id="pubReward">Kostenloser Haarschnitt</span></div><div class="vip-remaining hidden">Noch <b id="pubLeft">6</b> Stempel bis zur Belohnung</div></div>
 
-<div class="vip-quick"><button type="button" id="vipPushShortcut"><span class="vip-bell-symbol">♧</span>Benachrichtigungen<br>aktivieren</button><button type="button" id="vipHistoryShortcut"><span>◴</span>Mein<br>Verlauf</button><button type="button" id="vipOffersShortcut"><span>◇<i class="vip-new-tag">Neu</i></span>Angebote</button><button type="button" id="vipBenefitsShortcut"><span>♔</span>Meine<br>Vorteile</button></div><div class="vip-panel vip-ai-teaser hidden"><div><h3>✦ KI Style Studio</h3><p>Finde Inspiration für deinen nächsten Haarschnitt.</p></div><button type="button" class="vip-gold-btn" id="vipAiOpen">KI entdecken ›</button></div><div class="vip-panel vip-appointment"><div class="vip-appointment-copy"><h3>Neuer Look?</h3><p>Buche jetzt deinen<br>nächsten Termin!</p><a class="vip-gold-btn" href="#vipBookingPanel" id="vipAppointmentLink"><span class="vip-calendar">▦</span> Termin buchen ❯</a></div><div class="vip-chair-art" aria-hidden="true"><div class="vip-chair-head"></div><div class="vip-chair-back"><span>SA</span><small>Salon Anas 1</small></div><div class="vip-chair-seat"></div></div></div>
+<div class="vip-quick sa-home-actions" aria-label="Schnellzugriff">
+  <button type="button" id="vipBookTile"><span aria-hidden="true">▦</span><b>Termin<br>buchen</b></button>
+  <button type="button" id="vipPriceTile"><span aria-hidden="true">✂</span><b>Preisliste</b><small>Unsere Preise</small></button>
+  <button type="button" id="vipContactTile"><span aria-hidden="true">♧</span><b>Kontakt</b><small>Kontaktiere uns</small></button>
+  <button type="button" id="vipBenefitsShortcut"><span aria-hidden="true">♛</span><b>Prämien</b><small>Deine Vorteile</small></button>
+</div>
+<div class="sa-home-details vip-panel">
+  <div class="sa-home-address"><span class="sa-home-symbol" aria-hidden="true">⌖</span><div><strong>Wurzner Straße 48</strong><span>04315 Leipzig</span><a href="https://www.google.com/maps/search/?api=1&amp;query=Wurzner+Stra%C3%9Fe+48%2C+04315+Leipzig" target="_blank" rel="noopener noreferrer">▤ Auf Karte zeigen</a></div></div>
+  <div class="sa-home-opening"><span class="sa-home-symbol" aria-hidden="true">◷</span><div><strong>Öffnungszeiten</strong><p>Mo – Fr <b>09:00 – 19:00</b></p><p>Sa <b>09:00 – 19:00</b></p><p>So <b class="sa-home-closed">Geschlossen</b></p></div></div>
+</div>
+<div class="sa-home-tools">
+  <button type="button" id="vipPushShortcut"><span aria-hidden="true">♧</span><b>Benachrichtigungen<br>aktivieren</b></button>
+  <button type="button" id="vipAddHomeTile"><span aria-hidden="true">⊞</span><b>Zum Home-Bildschirm<br>hinzufügen</b></button>
+</div>
+<div class="sa-home-legacy-shortcuts" hidden aria-hidden="true"><button type="button" id="vipHistoryShortcut" tabindex="-1">Verlauf</button><button type="button" id="vipOffersShortcut" tabindex="-1">Angebote</button></div>
+<div class="vip-panel vip-ai-teaser hidden"><div><h3>✦ KI Style Studio</h3><p>Finde Inspiration für deinen nächsten Haarschnitt.</p></div><button type="button" class="vip-gold-btn" id="vipAiOpen">KI entdecken ›</button></div><div class="vip-panel vip-appointment"><div class="vip-appointment-copy"><h3>Neuer Look?</h3><p>Buche jetzt deinen<br>nächsten Termin!</p><a class="vip-gold-btn" href="#vipBookingPanel" id="vipAppointmentLink"><span class="vip-calendar">▦</span> Termin buchen ❯</a></div><div class="vip-chair-art" aria-hidden="true"><div class="vip-chair-head"></div><div class="vip-chair-back"><span>SA</span><small>Salon Anas 1</small></div><div class="vip-chair-seat"></div></div></div>
 
 
 <div id="vipBookingPanel" class="vip-panel hidden"><label for="vipBookingDate">▣ Datum wählen <small>Mo – Sa geöffnet · <span style="color:#f44">So geschlossen</span></small></label><input id="vipBookingDate" type="date" required class="vip-date-source"><div id="vipCalendar" class="vip-calendar"></div><label for="vipBookingTime">◷ Uhrzeit wählen</label><select id="vipBookingTime" class="vip-time-source" required><option value="">Uhrzeit wählen</option><option value="09:30">09:30</option><option value="10:00">10:00</option><option value="10:30">10:30</option><option value="11:00">11:00</option><option value="11:30">11:30</option><option value="12:00">12:00</option><option value="12:30">12:30</option><option value="13:00">13:00</option><option value="13:30">13:30</option><option value="14:00">14:00</option><option value="14:30">14:30</option><option value="15:00">15:00</option><option value="15:30">15:30</option><option value="16:00">16:00</option><option value="16:30">16:30</option><option value="17:00">17:00</option><option value="17:30">17:30</option><option value="18:00">18:00</option><option value="18:30">18:30</option></select><div id="vipTimeSlots" class="vip-time-slots" role="group" aria-label="Uhrzeit wählen"><button type="button" data-time="09:30" aria-pressed="false">09:30</button><button type="button" data-time="10:00" aria-pressed="false">10:00</button><button type="button" data-time="10:30" aria-pressed="false">10:30</button><button type="button" data-time="11:00" aria-pressed="false">11:00</button><button type="button" data-time="11:30" aria-pressed="false">11:30</button><button type="button" data-time="12:00" aria-pressed="false">12:00</button><button type="button" data-time="12:30" aria-pressed="false">12:30</button><button type="button" data-time="13:00" aria-pressed="false">13:00</button><button type="button" data-time="13:30" aria-pressed="false">13:30</button><button type="button" data-time="14:00" aria-pressed="false">14:00</button><button type="button" data-time="14:30" aria-pressed="false">14:30</button><button type="button" data-time="15:00" aria-pressed="false">15:00</button><button type="button" data-time="15:30" aria-pressed="false">15:30</button><button type="button" data-time="16:00" aria-pressed="false">16:00</button><button type="button" data-time="16:30" aria-pressed="false">16:30</button><button type="button" data-time="17:00" aria-pressed="false">17:00</button><button type="button" data-time="17:30" aria-pressed="false">17:30</button><button type="button" data-time="18:00" aria-pressed="false">18:00</button><button type="button" data-time="18:30" aria-pressed="false">18:30</button></div><label for="vipBookingService">✂ Service wählen</label><select id="vipBookingService" class="vip-service-source" aria-label="Service"><option>Haarschnitt</option><option>Haarschnitt & Bart</option><option>Fade Cut</option><option>Bart</option></select><div id="vipServiceCards" class="vip-service-cards" role="group" aria-label="Service wählen"><button type="button" data-service="Haarschnitt" class="chosen" aria-pressed="true"><span class="vip-service-art">✂</span><strong>Haarschnitt</strong><span class="vip-service-check">✓</span></button><button type="button" data-service="Haarschnitt & Bart" aria-pressed="false"><span class="vip-service-art">♛</span><strong>Haarschnitt<br>& Bart</strong><span class="vip-service-check">○</span></button><button type="button" data-service="Fade Cut" aria-pressed="false"><span class="vip-service-art">✦</span><strong>Fade Cut</strong><span class="vip-service-check">○</span></button><button type="button" data-service="Bart" aria-pressed="false"><span class="vip-service-art">♧</span><strong>Bart</strong><span class="vip-service-check">○</span></button></div><button type="button" class="vip-gold-btn" id="vipBookingCopy">▦ Terminanfrage vorbereiten</button><p id="vipBookingStatus" aria-live="polite"></p><div class="vip-booking-features"><span>♧<small>Bestätigung<br>vom Salon</small></span><span>▦<small>Einfache<br>Anfrage</small></span><span>◷<small>Schnell &<br>unkompliziert</small></span></div></div><div id="vipAiPanel" class="vip-panel hidden"><h3>✦ KI Style Studio</h3><p>Frisurenberatung mit KI ist noch in Vorbereitung. Hier kannst du schon dein Foto ansehen und einen Stil wählen; es wird noch kein KI-Bild erzeugt.</p><label for="vipAiPhoto">Dein Foto (bleibt auf deinem Gerät)</label><input id="vipAiPhoto" type="file" accept="image/*"><img id="vipAiPreview" alt="Dein ausgewähltes Foto" class="hidden"><select id="vipAiStyle"><option>Fade Cut</option><option>Classic Cut</option><option>Buzz Cut</option><option>Pompadour</option></select><p id="vipAiStyleNote">Stil auswählen und beim Salon beraten lassen.</p></div><div id="vipHistory" class="vip-panel hidden"><h3>Mein Verlauf</h3><p>Dein aktueller Stempelstand: <span id="vipHistoryCount">—</span>. Für eine vollständige Besuchshistorie ist eine sichere Kundenanmeldung erforderlich.</p></div>
@@ -841,6 +857,34 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
     <button type="button" id="pushKeepEnabled" class="vip-push-keep">Abbrechen · Aktiviert lassen</button>
     <button type="button" id="pushConfirmDisable" class="vip-push-disable">Ja, deaktivieren</button>
   </div>
+</dialog>
+<dialog id="saPriceDialog" class="sa-home-dialog" aria-labelledby="saPriceHeading">
+ <div class="sa-dialog-head"><span>✂</span><div><small>SA CLUB · SALON ANAS 1</small><h2 id="saPriceHeading">Unsere Preisliste</h2></div><button type="button" data-sa-dialog-close aria-label="Preisliste schließen">✕</button></div>
+ <div class="sa-price-list">
+  <div><span>Haarschnitt</span><strong>19 €</strong></div>
+  <div><span>Bartrasur</span><strong>12 €</strong></div>
+  <div><span>Kinder</span><strong>ab 14 €</strong></div>
+  <div><span>Waschen</span><strong>3 €</strong></div>
+  <div><span>Augenbrauen</span><strong>5 €</strong></div>
+  <div><span>Wachsen</span><strong>5 €</strong></div>
+  <div><span>Kreatin</span><strong>ab 50 €</strong></div>
+  <div><span>Dauerwelle</span><strong>ab 50 €</strong></div>
+  <div><span>Färben</span><strong>ab 30 €</strong></div>
+ </div>
+ <p class="sa-dialog-footnote">Preise gemäß Salon-Preisliste. Bei „ab“ richtet sich der Endpreis nach dem Aufwand.</p>
+ <button class="sa-dialog-book" type="button" id="saPriceBook">▦ Termin buchen</button>
+</dialog>
+<dialog id="saContactDialog" class="sa-home-dialog" aria-labelledby="saContactHeading">
+ <div class="sa-dialog-head"><span>♧</span><div><small>SA CLUB · SALON ANAS 1</small><h2 id="saContactHeading">Kontakt</h2></div><button type="button" data-sa-dialog-close aria-label="Kontakt schließen">✕</button></div>
+ <p class="sa-contact-label">Wir freuen uns auf deinen Besuch!</p>
+ <div class="sa-contact-links">
+  <a href="tel:+491608397477">☎ <span>Jetzt anrufen<small>+49 160 8397477</small></span></a>
+  <a href="https://wa.me/491608397477" target="_blank" rel="noopener noreferrer">◉ <span>WhatsApp<small>Nachricht schreiben</small></span></a>
+  <a href="https://www.instagram.com/ahmad.vibe_/" target="_blank" rel="noopener noreferrer">◎ <span>Instagram<small>@Ahmad.vibe_</small></span></a>
+  <a href="https://www.tiktok.com/@ahmad.vibe_" target="_blank" rel="noopener noreferrer">♪ <span>TikTok<small>@Ahmad.vibe_</small></span></a>
+  <a href="https://www.facebook.com/search/top?q=Ahmad%20zenah" target="_blank" rel="noopener noreferrer">f <span>Facebook<small>Ahmad zenah · Profil suchen</small></span></a>
+  <a href="https://www.google.com/maps/search/?api=1&amp;query=Wurzner+Stra%C3%9Fe+48%2C+04315+Leipzig" target="_blank" rel="noopener noreferrer">⌖ <span>Salon besuchen<small>Wurzner Straße 48, Leipzig</small></span></a>
+ </div>
 </dialog>
 </section>
 <section id="loginView" class="hidden"><div class="hero"><div style="font-size:44px;color:#eac271">✂</div><h2>SA Club Admin</h2><p>SALON ANAS 1 · Verwaltung der Treuekarten</p></div><div class="section" style="max-width:460px;margin:0 auto"><h3>Administrator-Login</h3><div class="field"><label>E-Mail-Adresse</label><input id="email" type="email" autocomplete="username" placeholder="admin@example.com"></div><div class="field" style="margin-top:12px"><label>Passwort</label><input id="password" type="password" autocomplete="current-password" placeholder="••••••••"></div><div class="actions"><button class="btn" id="loginBtn">Anmelden</button></div><div id="loginMsg" class="muted" aria-live="polite"></div></div></section>
@@ -1304,14 +1348,20 @@ const root=$('publicView');if(root.dataset.tabsReady)return;root.dataset.tabsRea
 const nav=root.querySelector('.vip-bottom');
 const pages={};for(const key of ['start','karte','termine','angebote','profil']){const el=document.createElement('div');el.id='vipPage_'+key;el.className='vip-page';el.dataset.page=key;root.insertBefore(el,nav);pages[key]=el}
 const put=(sel,page)=>{const el=root.querySelector(sel);if(el)pages[page].append(el)};
-put('.vip-head','start');put('.vip-stamp-panel','start');put('.vip-quick','start');put('.vip-appointment','start');
+put('.vip-head','start');put('.vip-stamp-panel','start');put('.vip-quick','start');put('.sa-home-details','start');put('.sa-home-tools','start');put('.vip-appointment','start');
 put('.vip-member','karte');put('#vipBookingPanel','termine');put('#vipOffers','angebote');put('#vipHistory','profil');put('.vip-ai-teaser','profil');put('#vipAiPanel','profil');
 const mk=(page,title,body)=>{const x=document.createElement('div');x.className='vip-panel';x.innerHTML='<h3>'+title+'</h3><p>'+body+'</p>';pages[page].prepend(x)};
 mk('karte','♛ Meine Mitgliedskarte','Zeige deinen persönlichen QR-Code an der Kasse vor.');
 const hero=document.createElement('div');hero.className='vip-booking-hero';hero.innerHTML='<div class="vip-booking-hero-brand"><span class="vip-hero-laurel">❧</span><span class="vip-brand-title">♛ SA Club</span><span class="vip-hero-laurel">❧</span><small>Salon Anas 1</small><em>Deine Treuekarte</em><span class="vip-hero-stars">★★★★★</span></div><div class="vip-hero-heading"><h2>▣ Termine</h2><p>Buche jetzt bequem deinen nächsten Termin!</p><i></i></div><div class="vip-hero-chair" aria-hidden="true"><span>♛</span>SA<small>SALON ANAS 1</small></div>';pages.termine.prepend(hero);const modes=document.createElement('div');modes.className='vip-booking-modes';modes.innerHTML='<button type="button" class="selected">▦ Termin buchen</button><button type="button">➤ Termin anfragen</button>';pages.termine.insertBefore(modes,$('vipBookingPanel'));modes.querySelectorAll('button').forEach((b,i)=>b.onclick=()=>{modes.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('vipBookingStatus').textContent=i?'Wähle Datum, Uhrzeit und Service für deine Anfrage.':'Dein Termin wird erst nach Bestätigung durch den Salon verbindlich.'});
 mk('angebote','◇ Angebote & Vorteile','Entdecke deine Treueprämien und aktuelle Vorteile.');
 mk('profil','♙ Mein Profil','Deine Mitgliedschaft bei SALON ANAS 1.');
-const cardClone=root.querySelector('.vip-member').cloneNode(true);cardClone.querySelectorAll('[id]').forEach(x=>x.removeAttribute('id'));pages.start.insertBefore(cardClone,pages.start.querySelector('.vip-stamp-panel'));
+const cardClone=root.querySelector('.vip-member').cloneNode(true);
+cardClone.querySelectorAll('[id]').forEach(x=>x.removeAttribute('id'));
+const memberTitle=cardClone.querySelector('.vip-member-info h2');
+if(memberTitle){memberTitle.textContent='DEINE TREUEKARTE';const summary=document.createElement('p');summary.className='sa-home-card-lead';summary.textContent='Jeder Besuch bringt dich deiner Belohnung näher.';memberTitle.after(summary)}
+const loyalty=document.createElement('section');loyalty.className='sa-home-loyalty';
+pages.start.insertBefore(loyalty,pages.start.querySelector('.vip-stamp-panel'));
+loyalty.append(cardClone,pages.start.querySelector('.vip-stamp-panel'));
 const profile=document.createElement('div');profile.className='vip-panel';profile.innerHTML='<h3>Mitgliedsdaten</h3><p id="vipProfileName"></p><p>SALON ANAS 1 · Wurzner Straße 48, 04315 Leipzig</p>';pages.profil.prepend(profile);
 const install=$('installCardBtn');install.classList.remove('hidden');install.classList.add('vip-home-install');pages.start.append(install);
 nav.querySelectorAll('[data-vip-tab]').forEach(btn=>btn.onclick=()=>vipShowTab(btn.dataset.vipTab));
@@ -1359,4 +1409,4 @@ document.querySelectorAll('#adminView .sa-admin-tabs [data-admin-target]').forEa
 saAdminGo('overview');const saDate=document.getElementById('saAdminDate');if(saDate)saDate.textContent=new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'short'}).format(new Date());
 
 (async()=>{const token=new URLSearchParams(location.search).get('card');if(token){await loadPublic(token);return}const {data}=await db.auth.getSession();if(data.session){const {data:a}=await db.from('admins').select('user_id').eq('user_id',data.session.user.id).maybeSingle();if(a){show('adminView');await refresh();await refreshAudience();return}}show('loginView')})();
-</script><script src="/admin-premium.js?v=12"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=6"></script><script src="/appointments-v3.js?v=1"></script></body></html>
+</script><script src="/admin-premium.js?v=12"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=6"></script><script src="/appointments-v3.js?v=1"></script><script src="/salon-home.js?v=1"></script></body></html>
