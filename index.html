@@ -869,6 +869,48 @@ body:has(#adminView:not(.hidden)) main{background:#090b0e!important;padding-bott
 #adminView .re-nav button small{font-size:10px;font-weight:700}
 #adminView .re-nav button.selected{background:#d6b77e;color:#241a0e}
 @media(max-width:370px){#adminView .re-hero-body{padding:13px}#adminView .re-metric{min-height:113px;padding:12px}#adminView .re-quick button{min-height:120px;padding:12px}}
+
+/* ATELIER V3: entirely new editorial list layout, NO dashboard tiles */
+#adminView .re-top{padding:12px 2px 15px!important}
+#adminView .re-logo{background:#d6b77e!important;border-radius:50%!important;font:700 20px Georgia,serif!important}
+#adminView .re-brand b{font:700 22px Georgia,serif!important;letter-spacing:.5px!important}
+#adminView .sa-admin-page[data-admin-page="overview"]{padding:0 2px 18px!important}
+#adminView .atelier-intro{padding:27px 3px 24px;border-bottom:1px solid #60523b;background:radial-gradient(ellipse at 90% 40%,#72502438,transparent 50%)}
+#adminView .atelier-kicker{display:flex;justify-content:space-between;gap:10px;color:#d7b77c;font-size:10px;font-weight:800;letter-spacing:1.7px}
+#adminView .atelier-kicker #saAdminDate{color:#a6a39d;letter-spacing:0}
+#adminView .atelier-headline{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:25px}
+#adminView .atelier-overline{font-size:9px;letter-spacing:2px;color:#aaa8a0;font-weight:700}
+#adminView .atelier-headline h1{font:700 clamp(36px,10vw,56px) Georgia,serif!important;letter-spacing:-1.8px!important;line-height:1.05!important;margin:11px 0 12px!important;color:#fff1d7!important}
+#adminView .atelier-headline h1 em{font-weight:400;font-style:italic;color:#d9b87a}
+#adminView .atelier-headline p{font-size:12px;color:#b9b5aa;margin:0}
+#adminView .atelier-mark{position:relative;flex:0 0 89px;height:98px;border-radius:50%;border:1px solid #8c744d;background:repeating-linear-gradient(135deg,#151512 0 10px,#2d281f 11px 12px,#121313 13px 23px);display:grid;place-items:center;font:700 43px Georgia,serif;color:#e9ca8f;box-shadow:0 0 21px #b88a3c22}
+#adminView .atelier-mark span{position:absolute;bottom:-9px;right:-5px;display:grid;place-items:center;width:31px;height:31px;border-radius:50%;background:#d9b879;color:#14120e;font-size:18px}
+#adminView .atelier-counts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:22px 0;border-bottom:1px solid #49433a;gap:0}
+#adminView .atelier-counts>div{display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0;border-right:1px solid #4d463a}
+#adminView .atelier-counts>div:last-child{border-right:0}
+#adminView .atelier-counts strong{font:700 clamp(25px,7vw,39px) Georgia,serif;color:#f1d6a1;line-height:1}
+#adminView .atelier-counts span{font-size:clamp(8px,2.3vw,11px);color:#aeb0ac;text-align:center;white-space:normal}
+#adminView .atelier-heading{display:flex;justify-content:space-between;align-items:end;margin:29px 0 12px}
+#adminView .atelier-heading small{font-size:9px;letter-spacing:2px;color:#c3a16b;font-weight:800}
+#adminView .atelier-heading h2{font:700 26px Georgia,serif;margin:6px 0 0;color:#f7e8d0}
+#adminView .atelier-heading>span{font-size:11px;color:#8f8e89}
+#adminView .atelier-task-list{border-top:1px solid #5b5242}
+#adminView .atelier-task-list button{width:100%;display:flex;align-items:center;gap:16px;min-height:91px;padding:13px 3px;background:transparent;color:#f3eee5;text-align:left;border:0;border-bottom:1px solid #4b453b}
+#adminView .atelier-task-list button:active{background:#30281b}
+#adminView .atelier-task-num{align-self:flex-start;padding-top:4px;color:#bd9a60;font:700 13px Georgia,serif}
+#adminView .atelier-task-copy{flex:1;display:flex;flex-direction:column;gap:6px}
+#adminView .atelier-task-copy strong{font:700 20px Georgia,serif}
+#adminView .atelier-task-copy small{font-size:12px;color:#9da7a7}
+#adminView .atelier-task-arrow{display:grid;place-items:center;width:35px;height:35px;border:1px solid #6e5b3e;border-radius:50%;font-size:21px;color:#d8b77e}
+#adminView .atelier-footer{display:flex;align-items:center;gap:14px;margin-top:23px;padding:17px;border:1px solid #554630;border-radius:15px;background:linear-gradient(110deg,#292218,#141516)}
+#adminView .atelier-footer>span{font-size:25px;color:#d6b77e}
+#adminView .atelier-footer>span:last-child{margin-left:auto;font-size:17px}
+#adminView .atelier-footer>div{display:flex;flex-direction:column;gap:5px}
+#adminView .atelier-footer strong{font-size:11px;letter-spacing:1.1px;color:#e6c992}
+#adminView .atelier-footer small{font-size:11px;color:#a8a7a0}
+#adminView .re-nav{border-radius:26px!important;background:#111315fa!important}
+#adminView .re-nav button.selected{background:#e1c48c!important}
+@media(max-width:360px){#adminView .atelier-mark{flex-basis:68px;height:76px;font-size:33px}#adminView .atelier-task-copy strong{font-size:17px}}
 </style>
 </head>
 <body><main class="wrap">
@@ -891,13 +933,17 @@ body:has(#adminView:not(.hidden)) main{background:#090b0e!important;padding-bott
 <section id="adminView" class="hidden">
 <header class="re-top"><div class="re-logo">SA<span>✦</span></div><div class="re-brand"><b>SA CLUB</b><small>SALON ANAS 1 · MANAGEMENT</small></div><button type="button" class="re-top-btn" onclick="saAdminGo('messages','broadcastTitle')" aria-label="Nachrichten">♧</button></header>
 <div class="sa-admin-page" data-admin-page="overview">
-<div class="re-hero"><div class="re-hero-top"><span><i class="re-dot"></i> ADMIN DASHBOARD</span><span id="saAdminDate"></span></div><div class="re-hero-body"><div><p>Guten Tag,</p><h1>Salon Anas <em>1.</em></h1><span>Dein Business. Dein Überblick.</span></div><div class="re-scissor">✂</div></div><div class="re-hero-bottom"><span>✦ SA CLUB MANAGEMENT</span><span>LEIPZIG</span></div></div>
-<div class="re-title"><h2>Heute im Salon</h2><span>LIVE-ÜBERSICHT</span></div>
-<div class="re-metrics"><div class="re-metric"><div class="re-metric-icon">◷</div><span>Heutige Termine</span><strong id="saTodayAppointments">—</strong></div><div class="re-metric"><div class="re-metric-icon">♙</div><span>Kunden gesamt</span><strong id="saCustomers">—</strong></div><div class="re-metric"><div class="re-metric-icon">✂</div><span>Stempel gesamt</span><strong id="saStamps">—</strong></div><div class="re-metric"><div class="re-metric-icon">✧</div><span>Belohnungen bereit</span><strong id="saRewards">—</strong></div></div>
-<div class="re-title"><h2>Schnellaktionen</h2><span>DEIN WORKSPACE</span></div>
-<div class="re-quick"><button type="button" onclick="saAdminGo('customers','search')"><span>✂</span><strong>Stempel geben</strong><small>Kundenkarte öffnen</small><i>↗</i></button><button type="button" onclick="saAdminGo('customers','customerName')"><span>▤</span><strong>Neue Karte</strong><small>Mitglied hinzufügen</small><i>↗</i></button><button type="button" onclick="saAdminGo('appointments','appointmentForm')"><span>▦</span><strong>Termin erstellen</strong><small>Buchung verwalten</small><i>↗</i></button><button type="button" onclick="saAdminGo('messages','broadcastTitle')"><span>♧</span><strong>Nachricht</strong><small>Alle Kunden erreichen</small><i>↗</i></button></div>
+<div class="atelier-intro"><div class="atelier-kicker"><span>✦ SALON ANAS 1</span><span id="saAdminDate"></span></div><div class="atelier-headline"><div><span class="atelier-overline">MANAGER WORKSPACE</span><h1>Dein Salon.<br><em>Dein Tag.</em></h1><p>Willkommen zurück im SA Club.</p></div><div class="atelier-mark">SA<span>✂</span></div></div></div>
+<div class="atelier-counts"><div><strong id="saTodayAppointments">—</strong><span>Termine heute</span></div><div><strong id="saCustomers">—</strong><span>Kunden</span></div><div><strong id="saStamps">—</strong><span>Stempel</span></div><div><strong id="saRewards">—</strong><span>Prämien</span></div></div>
+<div class="atelier-heading"><div><small>DEINE ARBEIT</small><h2>Was steht an?</h2></div><span>01 — 04</span></div>
+<div class="atelier-task-list">
+<button type="button" onclick="saAdminGo('appointments','appointmentList')"><span class="atelier-task-num">01</span><span class="atelier-task-copy"><strong>Termine verwalten</strong><small>Kalender und Buchungen</small></span><span class="atelier-task-arrow">↗</span></button>
+<button type="button" onclick="saAdminGo('customers','search')"><span class="atelier-task-num">02</span><span class="atelier-task-copy"><strong>Stempel vergeben</strong><small>Kunden finden und belohnen</small></span><span class="atelier-task-arrow">↗</span></button>
+<button type="button" onclick="saAdminGo('customers','customerName')"><span class="atelier-task-num">03</span><span class="atelier-task-copy"><strong>Neue Kundenkarte</strong><small>Mitglied registrieren</small></span><span class="atelier-task-arrow">↗</span></button>
+<button type="button" onclick="saAdminGo('messages','broadcastTitle')"><span class="atelier-task-num">04</span><span class="atelier-task-copy"><strong>Nachricht senden</strong><small>Angebote und Erinnerungen</small></span><span class="atelier-task-arrow">↗</span></button>
 </div>
-<div class="sa-admin-page" data-admin-page="appointments"><div class="re-page-heading"><span>01 / TERMINE</span><h1>Termine</h1><p>Buchungen und Aktivitäten auf einen Blick.</p></div><div class="re-panel" id="appointmentsPanel"><h3>Nächste Termine</h3><div id="appointmentList">Termine werden geladen …</div></div><div class="re-panel" id="appointmentForm"><h3>Neuen Termin erstellen</h3><div class="lux-appointment-form"><select id="appointmentCustomer"><option value="">Kunde auswählen</option></select><input type="date" id="appointmentDate"><input type="time" id="appointmentTime"><select id="appointmentService"><option>Haarschnitt</option><option>Haarschnitt & Bart</option><option>Fade Cut</option><option>Bart</option></select><button class="btn" type="button" id="appointmentSave">Termin speichern</button></div><div id="appointmentMsg"></div></div><div class="re-panel" id="activityPanel"><h3>Letzte Aktivitäten</h3><div id="activityList">Aktivitäten werden geladen …</div></div></div>
+<div class="atelier-footer"><span>♛</span><div><strong>SA CLUB · MANAGEMENT</strong><small>Salon Anas 1 · Leipzig</small></div><span>✦</span></div>
+</div><div class="sa-admin-page" data-admin-page="appointments"><div class="re-page-heading"><span>01 / TERMINE</span><h1>Termine</h1><p>Buchungen und Aktivitäten auf einen Blick.</p></div><div class="re-panel" id="appointmentsPanel"><h3>Nächste Termine</h3><div id="appointmentList">Termine werden geladen …</div></div><div class="re-panel" id="appointmentForm"><h3>Neuen Termin erstellen</h3><div class="lux-appointment-form"><select id="appointmentCustomer"><option value="">Kunde auswählen</option></select><input type="date" id="appointmentDate"><input type="time" id="appointmentTime"><select id="appointmentService"><option>Haarschnitt</option><option>Haarschnitt & Bart</option><option>Fade Cut</option><option>Bart</option></select><button class="btn" type="button" id="appointmentSave">Termin speichern</button></div><div id="appointmentMsg"></div></div><div class="re-panel" id="activityPanel"><h3>Letzte Aktivitäten</h3><div id="activityList">Aktivitäten werden geladen …</div></div></div>
 <div class="sa-admin-page" data-admin-page="customers"><div class="re-page-heading"><span>02 / KUNDEN</span><h1>Mitglieder</h1><p>Kunden, Treuekarten und Stempel.</p></div><div class="re-panel"><div class="re-panel-top"><h3>Neuen Kunden hinzufügen</h3><button class="re-logout" id="logoutBtn" type="button">Abmelden</button></div><div class="grid"><div class="field"><label>Kundenname</label><input id="customerName" placeholder="Vollständiger Name"></div><div class="field"><label>Telefonnummer (optional)</label><input id="customerPhone" placeholder="+49..."></div></div><div class="actions"><button class="btn" id="createBtn">QR-Karte erstellen</button></div><div id="adminMsg" aria-live="polite"></div></div><div class="re-panel"><h3>Kundenkarten</h3><div class="field"><label>Suche nach Name oder Telefonnummer</label><input id="search" placeholder="Kunden suchen..."></div><div id="customerList" style="margin-top:12px"></div></div></div>
 <div class="sa-admin-page" data-admin-page="messages"><div class="re-page-heading"><span>03 / NACHRICHTEN</span><h1>Nachrichten</h1><p>Erinnerungen und Angebote verschicken.</p></div><div class="re-panel push-broadcast"><h3>Nachricht an alle Kunden senden</h3><div class="actions"><button class="btn secondary" id="pushBtnAdmin" type="button">Benachrichtigungen aktivieren</button><button class="btn secondary" id="testPushBtn" type="button">Test an mich senden</button></div><p class="muted">Nachrichten gehen nur an Geräte, die Benachrichtigungen erlaubt haben.</p><p id="pushAudience" class="muted" aria-live="polite">Abonnenten werden geladen ...</p><div class="field"><label for="broadcastTitle">Titel</label><input id="broadcastTitle" maxlength="80" value="SALON ANAS 1" placeholder="SALON ANAS 1"></div><div class="field"><label for="broadcastMessage">Nachricht (max. 240 Zeichen)</label><textarea id="broadcastMessage" maxlength="240" rows="4" placeholder="Deine Nachricht ..."></textarea></div><div class="actions"><button class="btn" id="sendBroadcastBtn" type="button">An alle senden</button><button class="btn secondary" id="refreshAudienceBtn" type="button">Empfänger aktualisieren</button></div><div id="broadcastMsg" aria-live="polite"></div></div></div>
 <nav class="sa-admin-tabs re-nav" aria-label="Admin Bereiche"><button type="button" class="selected" data-admin-target="overview"><span>⌂</span><small>Start</small></button><button type="button" data-admin-target="appointments"><span>▦</span><small>Termine</small></button><button type="button" data-admin-target="customers"><span>♙</span><small>Kunden</small></button><button type="button" data-admin-target="messages"><span>♧</span><small>News</small></button></nav></section>
