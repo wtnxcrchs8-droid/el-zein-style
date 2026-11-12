@@ -813,6 +813,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <link rel="stylesheet" href="/customer-cards.css?v=2">
 <link rel="stylesheet" href="/appointments-premium.css?v=1">
 <link rel="stylesheet" href="/admin-club.css?v=1">
+<link rel="stylesheet" href="/admin-messages.css?v=1">
 </head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">S</div><div><h1>SALON ANAS 1</h1><small>TREUEPROGRAMM</small></div></div><span class="pill">BLACK · GOLD EDITION</span></header>
@@ -935,14 +936,44 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <div class="sa4-widepanel"><h3>Stempelverteilung</h3><div id="sa4StampChart"></div></div>
 <div class="sa4-widepanel" id="activityPanel"><h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l3-6 4 12 3-6h6"/></svg> Letzte Aktivitäten</h3><div id="activityList">Aktivitäten werden geladen …</div></div>
 </div>
-<div class="sa4-page sa4-pageshell" data-admin-page="messages">
-<div class="sa4-page-title"><small>05 / NACHRICHTEN</small><h2>Nachrichten</h2><p>Push-Angebote und Erinnerungen senden.</p></div>
-<div class="sa4-widepanel push-broadcast"><h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg> Nachricht an alle Kunden senden</h3>
-<div class="actions" style="margin-bottom:16px"><button class="btn secondary" id="pushBtnAdmin" type="button">Benachrichtigungen für mein Gerät aktivieren</button><button class="btn secondary" id="testPushBtn" type="button">Testbenachrichtigung an mich senden</button></div>
-<p class="muted">Eine Push-Nachricht wird nur an Geräte versendet, die den Empfang ausdrücklich erlaubt haben.</p><p id="pushAudience" class="muted" aria-live="polite">Abonnenten werden geladen ...</p>
-<div class="field"><label for="broadcastTitle">Titel</label><input id="broadcastTitle" maxlength="80" value="SALON ANAS 1" placeholder="SALON ANAS 1"></div>
-<div class="field" style="margin-top:12px"><label for="broadcastMessage">Nachricht (max. 240 Zeichen)</label><textarea id="broadcastMessage" maxlength="240" rows="4" placeholder="Zum Beispiel: Diese Woche gibt es ein besonderes Angebot!"></textarea></div>
-<div class="actions"><button class="btn" id="sendBroadcastBtn" type="button">An alle senden</button><button class="btn secondary" id="refreshAudienceBtn" type="button">Empfänger aktualisieren</button></div><div id="broadcastMsg" aria-live="polite"></div></div>
+<div class="sa4-page sa8-messages" data-admin-page="messages">
+<header class="sa8-banner">
+ <div class="sa8-brand"><b>♛ SA Club Admin</b><small><i></i>SALON ANAS 1<i></i></small></div>
+ <span class="sa8-banner-label">05 / NACHRICHTEN</span><h2>Nachrichten</h2><p>Push-Angebote und Erinnerungen senden.</p>
+</header>
+<section class="sa4-widepanel push-broadcast sa8-shell" aria-labelledby="sa8Title">
+ <div class="sa8-head"><span class="sa8-head-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M21 11a8 8 0 0 1-8 8H6l-4 3v-7a8 8 0 1 1 19-4Z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></svg></span><div><h3 id="sa8Title">Nachricht an Kunden senden</h3><p>Direkt auf die Geräte deiner Mitglieder</p></div></div>
+ <div class="sa8-segments" role="tablist" aria-label="Empfänger auswählen">
+  <button type="button" role="tab" data-sa8-mode="all" aria-selected="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2H3ZM16 5a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 5v1h-3"/></svg> Alle</button>
+  <button type="button" role="tab" data-sa8-mode="recent" aria-selected="false"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></svg> Aktive</button>
+  <button type="button" role="tab" data-sa8-mode="test" aria-selected="false"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M9 2h6M10 2v7l-6 9a3 3 0 0 0 3 4h10a3 3 0 0 0 3-4l-6-9V2M8 16h8"/></svg> Test</button>
+ </div>
+ <div class="sa8-device-actions">
+  <button type="button" id="pushBtnAdmin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg> <span>Benachrichtigungen für mein Gerät aktivieren</span></button>
+  <button type="button" id="testPushBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M9 2h6M10 2v7l-6 9a3 3 0 0 0 3 4h10a3 3 0 0 0 3-4l-6-9V2M8 16h8"/></svg> <span>Testbenachrichtigung an mich senden</span></button>
+ </div>
+ <div class="sa8-counts" aria-live="polite">
+  <div class="sa8-count"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></svg> <span><b id="sa8ReadyCount">—</b> empfangsbereite Kundengeräte</span></div>
+  <div class="sa8-count"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="m12 3 10 18H2L12 3ZM12 10v4m0 3h.01"/></svg> <span><b id="sa8PendingCount">—</b> Geräte brauchen neue Einwilligung</span></div>
+ </div>
+ <div class="sa8-details" id="sa8RecentDetails" hidden><strong><span id="sa8RecentCount">—</span> kürzlich aktive Geräte</strong><p>Aktiv bedeutet: Push-Anmeldung in den letzten 30 Tagen aktualisiert und Werbeeinwilligung erteilt. Nur diese Geräte erhalten die Nachricht in diesem Modus.</p></div>
+ <p class="sa8-explanation">Nachrichten werden ausschließlich an Kundengeräte mit ausdrücklicher Werbeeinwilligung gesendet.</p>
+ <div class="sa8-composer" id="sa8Composer">
+  <div class="sa8-field"><label for="broadcastTitle">Titel</label><input id="broadcastTitle" type="text" maxlength="80" value="SALON ANAS 1" placeholder="SALON ANAS 1" autocomplete="off"></div>
+  <div class="sa8-field"><label for="broadcastMessage">Nachricht (max. 240 Zeichen)</label><textarea id="broadcastMessage" maxlength="240" rows="3" placeholder="Zum Beispiel: Diese Woche gibt es ein besonderes Angebot!"></textarea><div class="sa8-textcount" id="sa8CharCount">0/240</div></div>
+  <div class="sa8-footer-actions">
+   <button class="sa8-send" id="sendBroadcastBtn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4L22 2ZM11 13 22 2"/></svg> <span id="sa8SendLabel">An alle senden</span></button>
+   <button class="sa8-refresh" id="refreshAudienceBtn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2 6M20 4v7h-7"/></svg> Empfänger aktualisieren</button>
+  </div>
+ </div>
+ <div class="sa8-testpanel" id="sa8TestPanel" hidden>
+  <h4>Test an dein Gerät senden</h4>
+  <p>Hier wird nur die Testbenachrichtigung an das angemeldete Admin-Gerät gesendet – keine Nachricht an deine Kunden.</p>
+  <button id="sa8DoTest" type="button">Testnachricht senden</button>
+ </div>
+ <p id="pushAudience" aria-live="polite">Empfänger werden geladen …</p>
+ <div id="broadcastMsg" aria-live="polite"></div>
+</section>
 </div>
 
 <nav class="sa4-bottomnav" aria-label="Admin Navigation"><button type="button" data-admin-target="overview" aria-current="page"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3V10ZM9 20v-7h6v7"/></svg><span>Übersicht</span></button><button type="button" data-admin-target="appointments" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3"/></svg><span>Termine</span></button><button type="button" data-admin-target="customers" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2H3ZM16 5a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 5v1h-3"/></svg><span>Kunden</span></button><button type="button" data-admin-target="rewards" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M3 13h18M12 9v12M12 9C6 9 5 3 8 3c3 0 4 6 4 6Zm0 0c6 0 7-6 4-6-3 0-4 6-4 6Z"/></svg><span>Prämien</span></button><button type="button" data-admin-target="stats" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="13" width="4" height="8" rx="1"/><rect x="10" y="8" width="4" height="13" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg><span>Statistik</span></button></nav>
@@ -1240,4 +1271,4 @@ document.querySelectorAll('#adminView .sa-admin-tabs [data-admin-target]').forEa
 saAdminGo('overview');const saDate=document.getElementById('saAdminDate');if(saDate)saDate.textContent=new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'short'}).format(new Date());
 
 (async()=>{const token=new URLSearchParams(location.search).get('card');if(token){await loadPublic(token);return}const {data}=await db.auth.getSession();if(data.session){const {data:a}=await db.from('admins').select('user_id').eq('user_id',data.session.user.id).maybeSingle();if(a){show('adminView');await refresh();await refreshAudience();return}}show('loginView')})();
-</script><script src="/admin-premium.js?v=11"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script></body></html>
+</script><script src="/admin-premium.js?v=11"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=1"></script></body></html>
