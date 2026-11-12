@@ -105,3 +105,10 @@
 #adminView .sa4-bottomnav button span{font-size:clamp(8px,2.25vw,10px)!important;letter-spacing:-.15px!important}
 #adminView .sa4-bottomnav button svg{width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important}
 #adminView .sa4-bottomnav button[data-admin-target="hair"][aria-current="page"]{box-shadow:0 0 15px #ddad56aa!important}
+
+#adminView .ki-topbell{position:absolute;right:14px;top:14px;z-index:6}
+#adminView .ki-topbell button{display:grid;place-items:center;width:43px;height:43px;border:1px solid #c79b52;border-radius:14px;background:#0e0907ca;color:#f1ca73}
+#adminView .ki-topbell svg{height:22px!important;width:22px!important;max-height:22px!important;max-width:22px!important}
+#adminView .ki-hero-demo{position:absolute;right:3px;bottom:5px;z-index:4;font-size:7px;letter-spacing:.7px;color:#e8d9bb;background:#0009;border-radius:7px;padding:3px 4px}
+#adminView .sa4-promo-image:nth-child(1){background-image:url("https://images.pexels.com/photos/6487911/pexels-photo-6487911.jpeg?auto=compress&cs=tinysrgb&w=380&h=450&fit=crop")!important}
+#adminView .sa4-promo-image:nth-child(2){background-image:url("https://images.pexels.com/photos/12706272/pexels-photo-12706272.jpeg?auto=compress&cs=tinysrgb&w=380&h=450&fit=crop")!important}
