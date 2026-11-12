@@ -819,6 +819,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <link rel="stylesheet" href="/salon-home.css?v=2">
 <link rel="stylesheet" href="/salon-home-compact.css?v=1">
 <link rel="stylesheet" href="/salon-gold-only.css?v=1">
+<link rel="stylesheet" href="/salon-tabs-fix.css?v=1">
 </head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">S</div><div><h1>SALON ANAS 1</h1><small>TREUEPROGRAMM</small></div></div><span class="pill">BLACK · GOLD EDITION</span></header>
@@ -1347,7 +1348,7 @@ $('appointmentSave').onclick=async()=>{const card=(window.cards||[]).find(c=>c.i
 function vipSetupTabs(){
 const root=$('publicView');if(root.dataset.tabsReady)return;root.dataset.tabsReady='1';
 const nav=root.querySelector('.vip-bottom');
-const pages={};for(const key of ['start','karte','termine','angebote','profil']){const el=document.createElement('div');el.id='vipPage_'+key;el.className='vip-page';el.dataset.page=key;el.hidden=key!=='start';root.insertBefore(el,nav);pages[key]=el}
+const pages={};for(const key of ['start','karte','termine','angebote','profil']){const el=document.createElement('div');el.id='vipPage_'+key;el.className='vip-page'+(key==='start'?' vip-current':'');el.dataset.page=key;el.hidden=key!=='start';root.insertBefore(el,nav);pages[key]=el}
 const put=(sel,page)=>{const el=root.querySelector(sel);if(el)pages[page].append(el)};
 put('.vip-head','start');put('.vip-stamp-panel','start');put('.vip-quick','start');put('.sa-home-details','start');put('.sa-home-tools','start');put('.vip-appointment','start');
 put('.vip-member','karte');put('#vipBookingPanel','termine');put('#vipOffers','angebote');put('#vipHistory','profil');put('.vip-ai-teaser','profil');put('#vipAiPanel','profil');
@@ -1371,11 +1372,37 @@ vipShowTab('start');
 }
 function vipShowTab(page){
 const root=$('publicView');if(!root.dataset.tabsReady)vipSetupTabs();
-root.querySelectorAll('.vip-page').forEach(el=>{const off=el.dataset.page!==page;el.classList.toggle('hidden',off);el.hidden=off;});
-root.querySelectorAll('[data-vip-tab]').forEach(btn=>{const active=btn.dataset.vipTab===page;btn.classList.toggle('vip-active',active);btn.setAttribute('aria-current',active?'page':'false')});
+const validPages=new Set(['start','karte','termine','angebote','profil']);
+if(!validPages.has(page))page='start';
+// iOS Safari can preserve a long page's scroll position when its contents
+// are replaced with a short tab, leaving a large black region. Reset first.
+const oldFocused=document.activeElement;
+if(oldFocused && root.contains(oldFocused) && /^(INPUT|TEXTAREA|SELECT)$/.test(oldFocused.tagName))oldFocused.blur();
+function resetPublicScroll(){
+  window.scrollTo(0,0);
+  if(document.scrollingElement)document.scrollingElement.scrollTop=0;
+  document.documentElement.scrollTop=0;
+  document.body.scrollTop=0;
+}
+resetPublicScroll();
+root.querySelectorAll('.vip-page').forEach(el=>{
+  const active=el.dataset.page===page;
+  el.hidden=!active;
+  el.classList.toggle('hidden',!active);
+  el.classList.toggle('vip-current',active);
+  el.setAttribute('aria-hidden',String(!active));
+});
+root.querySelectorAll('[data-vip-tab]').forEach(btn=>{
+ const active=btn.dataset.vipTab===page;
+ btn.classList.toggle('vip-active',active);
+ btn.setAttribute('aria-current',active?'page':'false');
+});
 if(page==='start'){const name=$('pubName');const clone=root.querySelector('#vipPage_start .vip-member-info strong');if(name&&clone)clone.textContent=name.textContent;const qr=$('pubQr');const cloneQr=root.querySelector('#vipPage_start .vip-qr img');if(qr&&cloneQr)cloneQr.src=qr.src}
 if(page==='profil')$('vipProfileName').textContent=$('pubName').textContent;
-window.scrollTo({top:0,behavior:'instant'});
+// Repeat after WebKit recalculates the visible tab's height. Both scroll
+// positions and active section must settle within the same render cycle.
+resetPublicScroll();
+requestAnimationFrame(()=>{resetPublicScroll();requestAnimationFrame(resetPublicScroll)});
 }
 function vipRenderStamps(count,goal){const el=$('pubStamps');el.replaceChildren();for(let i=0;i<Math.min(30,Math.max(1,Number(goal)||6));i++){const x=document.createElement('div');x.className='vip-stamp'+(i<count?' on':'');x.innerHTML='<span aria-hidden="true">✂︎</span>';el.append(x)}}
 $('vipPushShortcut').onclick=async()=>{const btn=$('vipPushShortcut');if(btn.disabled)return;btn.disabled=true;try{if(!('serviceWorker' in navigator)||!('PushManager' in window)||!('Notification' in window)){alert('Auf dem iPhone: Bitte zuerst in Safari zum Home-Bildschirm hinzufügen und von dort öffnen.');return}const reg=await navigator.serviceWorker.ready;const sub=await reg.pushManager.getSubscription();if(sub){await deactivateCustomerPush();return}if(!confirm('Möchtest du freiwillig Angebote und Neuigkeiten von SALON ANAS 1 als Push-Nachrichten erhalten? Du kannst sie jederzeit deaktivieren.'))return;$('pushConsentPublic').checked=true;await activateCustomerPush()}finally{btn.disabled=false;vipRefreshPushShortcut()}};
