@@ -95,3 +95,13 @@
 #adminView .ki-upload{grid-template-columns:125px 1fr}
 #adminView .ki-upload-photo{height:132px;width:115px}
 }
+
+/* Avoid inherited admin SVG sizing bug; six easy-access tabs */
+#adminView .ki-studio svg{display:inline-block!important;width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important;vertical-align:-4px!important;overflow:visible!important}
+#adminView .ki-studio .ki-hero-content h1 svg{width:24px!important;height:24px!important;max-width:24px!important;max-height:24px!important;vertical-align:-3px!important;color:#ffca65}
+#adminView .ki-studio .ki-result-title h2 svg{width:20px!important;height:20px!important}
+#adminView .sa4-bottomnav{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:2px!important}
+#adminView .sa4-bottomnav button{min-width:0!important;padding:4px 1px!important}
+#adminView .sa4-bottomnav button span{font-size:clamp(8px,2.25vw,10px)!important;letter-spacing:-.15px!important}
+#adminView .sa4-bottomnav button svg{width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important}
+#adminView .sa4-bottomnav button[data-admin-target="hair"][aria-current="page"]{box-shadow:0 0 15px #ddad56aa!important}
