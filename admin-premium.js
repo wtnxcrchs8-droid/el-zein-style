@@ -16,6 +16,7 @@ function go(page,focusId){
   });
   closeMenu();closeQr();
   if(page==="appointments")window.sa6ShowAppointmentTab?.(focusId==="appointmentForm"?"new":"upcoming");
+  if(page==="messages")window.sa8LoadStatus?.();
   if(page==="rewards"||page==="stats")renderExtras();
   if(focusId){
     if(focusId==="customerName")window.sa5OpenForm?.();
