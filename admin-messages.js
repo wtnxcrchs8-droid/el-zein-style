@@ -120,8 +120,18 @@ async function loadCustomerStates(){
    const result=await pushRequest("recipients_status");
    if(!Array.isArray(result.customers))throw Error("Ungültige Antwort des Push-Dienstes.");
    customerStates=result.customers;
+   // Count actual customers, NOT old device subscriptions. One customer can
+   // have many push endpoints; only one active opt-in is needed to count as enabled.
+   const enabledCustomers=customerStates.filter(item=>item.status==="enabled").length;
+   const withoutActiveConsent=customerStates.length-enabledCustomers;
+   const okCount=el("sa8ReadyCount"),needsCount=el("sa8PendingCount");
+   if(okCount)okCount.textContent=String(enabledCustomers);
+   if(needsCount)needsCount.textContent=String(withoutActiveConsent);
    renderMembers();
   }catch(error){
+   // Unknown is preferable to reporting historic subscriptions as real customers.
+   if(el("sa8ReadyCount"))el("sa8ReadyCount").textContent="—";
+   if(el("sa8PendingCount"))el("sa8PendingCount").textContent="—";
    if(recipientsList){
     recipientsList.replaceChildren();
     const failure=document.createElement("div");failure.className="sa8-member-empty";
