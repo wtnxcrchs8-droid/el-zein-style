@@ -58,15 +58,15 @@ function statusDescription(item){
  const awaiting=Number(item.awaiting_consent_devices)||0;
  const disabled=Number(item.disabled_devices)||0;
  const parts=[];
- if(enabled)parts.push(enabled+" "+(enabled===1?"Gerät empfangsbereit":"Geräte empfangsbereit"));
- if(awaiting)parts.push(awaiting+" ohne neue Einwilligung");
- if(disabled)parts.push(disabled+" deaktiviert");
- if(!parts.length)parts.push("Noch kein Gerät registriert");
+ if(enabled)parts.push(enabled+" "+(enabled===1?"Push-Anmeldung mit Einwilligung":"Push-Anmeldungen mit Einwilligung"));
+ if(awaiting)parts.push(awaiting+" Push-Anmeldungen ohne Einwilligung");
+ if(disabled)parts.push(disabled+" deaktivierte Push-Anmeldungen");
+ if(!parts.length)parts.push("Keine gespeicherte Push-Anmeldung");
  return parts.join(" · ");
 }
 const statusLabels={
  enabled:"✓ Aktiviert",
- needs_consent:"Freigabe nötig",
+ needs_consent:"Ohne Einwilligung",
  disabled:"Deaktiviert",
  not_registered:"Nicht aktiviert"
 };
