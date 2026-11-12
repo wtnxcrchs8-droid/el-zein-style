@@ -953,8 +953,8 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
   <button type="button" id="testPushBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M9 2h6M10 2v7l-6 9a3 3 0 0 0 3 4h10a3 3 0 0 0 3-4l-6-9V2M8 16h8"/></svg> <span>Testbenachrichtigung an mich senden</span></button>
  </div>
  <div class="sa8-counts" aria-live="polite">
-  <div class="sa8-count"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></svg> <span><b id="sa8ReadyCount">—</b> Push-Anmeldungen mit Einwilligung</span></div>
-  <div class="sa8-count"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="m12 3 10 18H2L12 3ZM12 10v4m0 3h.01"/></svg> <span><b id="sa8PendingCount">—</b> Push-Anmeldungen ohne Einwilligung</span></div>
+  <div class="sa8-count"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></svg> <span><b id="sa8ReadyCount">—</b> Kunden mit aktivierten Nachrichten</span></div>
+  <div class="sa8-count"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="m12 3 10 18H2L12 3ZM12 10v4m0 3h.01"/></svg> <span><b id="sa8PendingCount">—</b> Kunden ohne aktive Freigabe</span></div>
  </div>
  <section class="sa8-members" id="sa8MemberStatus" aria-labelledby="sa8MemberTitle">
   <div class="sa8-members-head">
@@ -1190,9 +1190,7 @@ async function refreshAudience(){
     audienceCount=Number(info.subscribed_devices)||0;
     recentAudienceCount=Number(info.recent_devices)||0;
     audienceReady=Boolean(info.ready);
-    const pending=Number(info.awaiting_consent_devices)||0;
-    $('sa8ReadyCount').textContent=audienceCount;
-    $('sa8PendingCount').textContent=pending;
+    // Customer counts are rendered from recipients_status, not stored push-subscription rows.
     $('sa8RecentCount').textContent=recentAudienceCount;
     const selectedCount=window.sa8AudienceMode==='recent'?recentAudienceCount:audienceCount;
     $('sendBroadcastBtn').disabled=selectedCount<1||!audienceReady;
@@ -1201,8 +1199,7 @@ async function refreshAudience(){
     window.sa8UpdateControls?.();
   }catch(err){
     audienceCount=0;recentAudienceCount=0;audienceReady=false;
-    $('sa8ReadyCount').textContent='—';
-    $('sa8PendingCount').textContent='—';
+    // Do not overwrite the separately loaded per-customer counts on push stats failures.
     $('sa8RecentCount').textContent='—';
     $('sendBroadcastBtn').disabled=true;
     $('pushAudience').textContent='Empfänger konnten nicht geladen werden: '+err.message;
@@ -1299,4 +1296,4 @@ document.querySelectorAll('#adminView .sa-admin-tabs [data-admin-target]').forEa
 saAdminGo('overview');const saDate=document.getElementById('saAdminDate');if(saDate)saDate.textContent=new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'short'}).format(new Date());
 
 (async()=>{const token=new URLSearchParams(location.search).get('card');if(token){await loadPublic(token);return}const {data}=await db.auth.getSession();if(data.session){const {data:a}=await db.from('admins').select('user_id').eq('user_id',data.session.user.id).maybeSingle();if(a){show('adminView');await refresh();await refreshAudience();return}}show('loginView')})();
-</script><script src="/admin-premium.js?v=12"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=5"></script></body></html>
+</script><script src="/admin-premium.js?v=12"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=6"></script></body></html>
