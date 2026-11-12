@@ -814,6 +814,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <link rel="stylesheet" href="/appointments-premium.css?v=1">
 <link rel="stylesheet" href="/admin-club.css?v=1">
 <link rel="stylesheet" href="/admin-messages.css?v=3">
+<link rel="stylesheet" href="/appointments-v3.css?v=1">
 </head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">S</div><div><h1>SALON ANAS 1</h1><small>TREUEPROGRAMM</small></div></div><span class="pill">BLACK · GOLD EDITION</span></header>
@@ -883,27 +884,38 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 </section>
 
 </div>
-<div class="sa4-page sa4-pageshell sa6-appointments" data-admin-page="appointments">
-<header class="sa6-heading"><div><small>SA CLUB · TERMINPLANER</small><h2>Termine</h2><p>Alle Termine auf einen Blick.</p></div><div class="sa6-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3"/></svg></div></header>
-<div class="sa6-segments" role="tablist" aria-label="Terminverwaltung">
-<button type="button" id="sa6TabUpcoming" data-sa6-tab="upcoming" role="tab" aria-selected="true" aria-controls="appointmentsPanel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3"/></svg> Anstehend</button>
-<button type="button" id="sa6TabNew" data-sa6-tab="new" role="tab" aria-selected="false" aria-controls="appointmentForm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Neuer Termin</button></div>
-<section class="sa4-widepanel sa6-panel" id="appointmentsPanel" role="tabpanel" aria-labelledby="sa6TabUpcoming">
-<div class="sa6-panel-heading"><div class="sa6-panel-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3"/></svg></div><div class="sa6-panel-heading-copy"><h3>Nächste Termine</h3><p>Anstehende Salonbuchungen</p></div><button type="button" id="sa6NewFromList" class="sa6-header-action">+ Neu</button></div>
-<div id="appointmentList" class="sa6-entries">Termine werden geladen …</div>
-<p class="sa6-list-footer">Neue Termine kannst du über „Neuer Termin“ erstellen.</p>
-</section>
-<section class="sa4-widepanel sa6-panel" id="appointmentForm" role="tabpanel" aria-labelledby="sa6TabNew" hidden>
-<div class="sa6-panel-heading"><div class="sa6-panel-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></div><div class="sa6-panel-heading-copy"><h3>Termin erstellen</h3><p>Wähle Kunde, Datum, Uhrzeit und Service.</p></div></div>
-<div class="lux-appointment-form sa6-create-form">
-<div class="sa6-field"><label for="appointmentCustomer">Kunde</label><select id="appointmentCustomer"><option value="">Kunde auswählen</option></select></div>
-<div class="sa6-field"><label for="appointmentService">Service</label><select id="appointmentService"><option>Haarschnitt</option><option>Haarschnitt & Bart</option><option>Fade Cut</option><option>Bart</option></select></div>
-<div class="sa6-field"><label for="appointmentDate">Datum</label><input id="appointmentDate" type="date" /></div>
-<div class="sa6-field"><label for="appointmentTime">Uhrzeit</label><input id="appointmentTime" type="time" step="1800" /></div>
-<button class="btn sa6-save" type="button" id="appointmentSave">Termin speichern</button>
+<div class="sa4-page sa6-appointments sa10-appointments" data-admin-page="appointments">
+<header class="sa10-title"><div class="sa10-title-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg></div><div class="sa10-title-info"><small>SA CLUB · TERMINPLANER</small><h2>Termine</h2><p>Alle Termine auf einen Blick.</p></div></header>
+<div class="sa6-segments sa10-tabs" role="tablist" aria-label="Terminverwaltung">
+<button type="button" id="sa6TabUpcoming" data-sa6-tab="upcoming" role="tab" aria-selected="true" aria-controls="appointmentsPanel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg> Anstehend</button>
+<button type="button" id="sa6TabNew" data-sa6-tab="new" role="tab" aria-selected="false" aria-controls="appointmentForm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Neuer Termin</button>
 </div>
-<div id="appointmentMsg" aria-live="polite"></div>
-<p class="sa6-note">✦ Termin wird in der Salonverwaltung gespeichert.</p>
+<section class="sa4-widepanel sa6-panel sa10-list-panel" id="appointmentsPanel" role="tabpanel" aria-labelledby="sa6TabUpcoming">
+<div class="sa10-panel-head"><span class="sa10-square"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg></span><div><h3>Nächste Termine</h3><p>Deine anstehenden Salonbuchungen</p></div><button id="sa6NewFromList" type="button" class="sa10-head-add">+ Neu</button></div>
+<div id="appointmentList" class="sa6-entries sa10-entries">Termine werden geladen …</div>
+</section>
+<section class="sa4-widepanel sa6-panel sa10-form-panel" id="appointmentForm" role="tabpanel" aria-labelledby="sa6TabNew" hidden>
+<div class="sa10-panel-head"><span class="sa10-square"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div><h3>Termin erstellen</h3><p>Wähle Kunde, Datum, Uhrzeit und Service.</p></div></div>
+<div class="sa10-form">
+<div class="sa10-customer"><label for="appointmentCustomer">Kunde</label><select id="appointmentCustomer" aria-label="Kunde auswählen"><option value="">Kunde auswählen</option></select></div>
+<div class="sa10-section-title"><strong><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg> Datum wählen</strong><span>Mo–Sa geöffnet · <em>So geschlossen</em></span></div>
+<input id="appointmentDate" type="date" class="sa10-native" tabindex="-1" aria-hidden="true">
+<div id="sa10Calendar" class="sa10-calendar" aria-label="Termin-Datum auswählen">
+<div class="sa10-calendar-bar"><button type="button" id="sa10PrevMonth" aria-label="Vorheriger Monat">‹</button><strong id="sa10MonthTitle">Monat</strong><button type="button" id="sa10NextMonth" aria-label="Nächster Monat">›</button></div>
+<div class="sa10-weekdays" aria-hidden="true"><span>Mo</span><span>Di</span><span>Mi</span><span>Do</span><span>Fr</span><span>Sa</span><span>So</span></div>
+<div id="sa10CalendarDays" class="sa10-days" role="group" aria-label="Tag wählen"></div></div>
+<div class="sa10-section-title sa10-time-heading"><strong><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg> Uhrzeit wählen</strong><span>09:30–18:30</span></div>
+<input id="appointmentTime" class="sa10-native" type="time" step="1800" tabindex="-1" aria-hidden="true">
+<div id="sa10Times" class="sa10-times" role="group" aria-label="Uhrzeit auswählen"></div>
+<div class="sa10-section-title sa10-service-heading"><strong><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8 8 21 21M8 16 21 3"/></svg> Service wählen</strong></div>
+<select id="appointmentService" class="sa10-native" tabindex="-1" aria-hidden="true"><option>Haarschnitt</option><option>Haarschnitt & Bart</option><option>Fade Cut</option><option>Bart</option></select>
+<div id="sa10Services" class="sa10-services" role="group" aria-label="Dienstleistung wählen"><button type="button" class="sa10-style selected" data-sa10-service="Haarschnitt" aria-pressed="true"><img src="https://images.pexels.com/photos/6487911/pexels-photo-6487911.jpeg?auto=compress&cs=tinysrgb&w=320&h=240&fit=crop" alt="Haarschnitt" loading="lazy"><b>Haarschnitt</b><span class="sa10-style-check" aria-hidden="true">✓</span></button>
+<button type="button" class="sa10-style " data-sa10-service="Haarschnitt & Bart" aria-pressed="false"><img src="https://images.pexels.com/photos/4422102/pexels-photo-4422102.jpeg?auto=compress&cs=tinysrgb&w=320&h=240&fit=crop" alt="Haarschnitt & Bart" loading="lazy"><b>Haarschnitt & Bart</b><span class="sa10-style-check" aria-hidden="true">○</span></button>
+<button type="button" class="sa10-style " data-sa10-service="Fade Cut" aria-pressed="false"><img src="https://images.pexels.com/photos/12706272/pexels-photo-12706272.jpeg?auto=compress&cs=tinysrgb&w=320&h=240&fit=crop" alt="Fade Cut" loading="lazy"><b>Fade Cut</b><span class="sa10-style-check" aria-hidden="true">○</span></button>
+<button type="button" class="sa10-style " data-sa10-service="Bart" aria-pressed="false"><img src="https://images.pexels.com/photos/7518745/pexels-photo-7518745.jpeg?auto=compress&cs=tinysrgb&w=320&h=240&fit=crop" alt="Bart" loading="lazy"><b>Bart</b><span class="sa10-style-check" aria-hidden="true">○</span></button></div>
+<button type="button" class="sa10-save btn" id="appointmentSave"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg> Termin speichern</button>
+<div id="appointmentMsg" role="status" aria-live="polite"></div>
+</div>
 </section>
 </div>
 <div class="sa4-page sa4-pageshell sa5-customer-page" data-admin-page="customers">
@@ -1296,4 +1308,4 @@ document.querySelectorAll('#adminView .sa-admin-tabs [data-admin-target]').forEa
 saAdminGo('overview');const saDate=document.getElementById('saAdminDate');if(saDate)saDate.textContent=new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'short'}).format(new Date());
 
 (async()=>{const token=new URLSearchParams(location.search).get('card');if(token){await loadPublic(token);return}const {data}=await db.auth.getSession();if(data.session){const {data:a}=await db.from('admins').select('user_id').eq('user_id',data.session.user.id).maybeSingle();if(a){show('adminView');await refresh();await refreshAudience();return}}show('loginView')})();
-</script><script src="/admin-premium.js?v=12"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=6"></script></body></html>
+</script><script src="/admin-premium.js?v=12"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=6"></script><script src="/appointments-v3.js?v=1"></script></body></html>
