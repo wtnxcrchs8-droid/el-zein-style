@@ -816,7 +816,8 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <link rel="stylesheet" href="/admin-messages.css?v=3">
 <link rel="stylesheet" href="/appointments-v3.css?v=1">
 <link rel="stylesheet" href="/push-confirm.css?v=1">
-<link rel="stylesheet" href="/salon-home.css?v=1">
+<link rel="stylesheet" href="/salon-home.css?v=2">
+<link rel="stylesheet" href="/salon-home-compact.css?v=1">
 </head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">S</div><div><h1>SALON ANAS 1</h1><small>TREUEPROGRAMM</small></div></div><span class="pill">BLACK · GOLD EDITION</span></header>
@@ -826,9 +827,8 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <div class="vip-panel vip-stamp-panel"><div class="vip-panel-title"><h2>♙ Meine Stempel</h2><strong id="pubCount">0/6</strong></div><div class="vip-stamps" id="pubStamps"></div><div class="vip-progress-line"><div class="vip-progress"><div id="pubProgressFill"></div></div><strong id="vipPercent">0 %</strong></div><div class="vip-reward"><span aria-hidden="true" class="vip-gift-icon">♔</span> <b>Belohnung:</b> <span id="pubReward">Kostenloser Haarschnitt</span></div><div class="vip-remaining hidden">Noch <b id="pubLeft">6</b> Stempel bis zur Belohnung</div></div>
 
 <div class="vip-quick sa-home-actions" aria-label="Schnellzugriff">
-  <button type="button" id="vipBookTile"><span aria-hidden="true">▦</span><b>Termin<br>buchen</b></button>
   <button type="button" id="vipPriceTile"><span aria-hidden="true">✂</span><b>Preisliste</b><small>Unsere Preise</small></button>
-  <button type="button" id="vipContactTile"><span aria-hidden="true">♧</span><b>Kontakt</b><small>Kontaktiere uns</small></button>
+  <button type="button" id="vipContactTile"><span aria-hidden="true">☎</span><b>Kontakt</b><small>Kontaktiere uns</small></button>
   <button type="button" id="vipBenefitsShortcut"><span aria-hidden="true">♛</span><b>Prämien</b><small>Deine Vorteile</small></button>
 </div>
 <div class="sa-home-details vip-panel">
@@ -1346,7 +1346,7 @@ $('appointmentSave').onclick=async()=>{const card=(window.cards||[]).find(c=>c.i
 function vipSetupTabs(){
 const root=$('publicView');if(root.dataset.tabsReady)return;root.dataset.tabsReady='1';
 const nav=root.querySelector('.vip-bottom');
-const pages={};for(const key of ['start','karte','termine','angebote','profil']){const el=document.createElement('div');el.id='vipPage_'+key;el.className='vip-page';el.dataset.page=key;root.insertBefore(el,nav);pages[key]=el}
+const pages={};for(const key of ['start','karte','termine','angebote','profil']){const el=document.createElement('div');el.id='vipPage_'+key;el.className='vip-page';el.dataset.page=key;el.hidden=key!=='start';root.insertBefore(el,nav);pages[key]=el}
 const put=(sel,page)=>{const el=root.querySelector(sel);if(el)pages[page].append(el)};
 put('.vip-head','start');put('.vip-stamp-panel','start');put('.vip-quick','start');put('.sa-home-details','start');put('.sa-home-tools','start');put('.vip-appointment','start');
 put('.vip-member','karte');put('#vipBookingPanel','termine');put('#vipOffers','angebote');put('#vipHistory','profil');put('.vip-ai-teaser','profil');put('#vipAiPanel','profil');
@@ -1370,7 +1370,7 @@ vipShowTab('start');
 }
 function vipShowTab(page){
 const root=$('publicView');if(!root.dataset.tabsReady)vipSetupTabs();
-root.querySelectorAll('.vip-page').forEach(el=>el.classList.toggle('hidden',el.dataset.page!==page));
+root.querySelectorAll('.vip-page').forEach(el=>{const off=el.dataset.page!==page;el.classList.toggle('hidden',off);el.hidden=off;});
 root.querySelectorAll('[data-vip-tab]').forEach(btn=>{const active=btn.dataset.vipTab===page;btn.classList.toggle('vip-active',active);btn.setAttribute('aria-current',active?'page':'false')});
 if(page==='start'){const name=$('pubName');const clone=root.querySelector('#vipPage_start .vip-member-info strong');if(name&&clone)clone.textContent=name.textContent;const qr=$('pubQr');const cloneQr=root.querySelector('#vipPage_start .vip-qr img');if(qr&&cloneQr)cloneQr.src=qr.src}
 if(page==='profil')$('vipProfileName').textContent=$('pubName').textContent;
@@ -1409,4 +1409,4 @@ document.querySelectorAll('#adminView .sa-admin-tabs [data-admin-target]').forEa
 saAdminGo('overview');const saDate=document.getElementById('saAdminDate');if(saDate)saDate.textContent=new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'short'}).format(new Date());
 
 (async()=>{const token=new URLSearchParams(location.search).get('card');if(token){await loadPublic(token);return}const {data}=await db.auth.getSession();if(data.session){const {data:a}=await db.from('admins').select('user_id').eq('user_id',data.session.user.id).maybeSingle();if(a){show('adminView');await refresh();await refreshAudience();return}}show('loginView')})();
-</script><script src="/admin-premium.js?v=12"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=6"></script><script src="/appointments-v3.js?v=1"></script><script src="/salon-home.js?v=1"></script></body></html>
+</script><script src="/admin-premium.js?v=12"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=6"></script><script src="/appointments-v3.js?v=1"></script><script src="/salon-home.js?v=2"></script></body></html>
