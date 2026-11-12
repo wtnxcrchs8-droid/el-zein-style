@@ -112,3 +112,24 @@
 #adminView .ki-hero-demo{position:absolute;right:3px;bottom:5px;z-index:4;font-size:7px;letter-spacing:.7px;color:#e8d9bb;background:#0009;border-radius:7px;padding:3px 4px}
 #adminView .sa4-promo-image:nth-child(1){background-image:url("https://images.pexels.com/photos/6487911/pexels-photo-6487911.jpeg?auto=compress&cs=tinysrgb&w=380&h=450&fit=crop")!important}
 #adminView .sa4-promo-image:nth-child(2){background-image:url("https://images.pexels.com/photos/12706272/pexels-photo-12706272.jpeg?auto=compress&cs=tinysrgb&w=380&h=450&fit=crop")!important}
+
+/* KI Studio v4: secure setup guidance + iPhone PWA safe areas */
+#adminView .ki-setup[hidden]{display:none!important}
+#adminView .ki-setup{flex-basis:100%;width:100%;margin:4px 0 2px;padding:13px 12px;background:linear-gradient(135deg,#322112,#171008);border:1px solid #be9050;border-radius:14px;color:#f9e7c6}
+#adminView .ki-setup strong{display:block;font:700 18px Georgia,serif;color:#ffda94;margin-bottom:6px}
+#adminView .ki-setup p{font-size:11px;line-height:1.48;color:#ddc9a7;margin:6px 0 10px}
+#adminView .ki-setup .ki-setup-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+#adminView .ki-setup .ki-setup-actions a{display:grid;place-items:center;text-align:center;min-height:41px;padding:7px 5px;color:#231505;text-decoration:none;background:linear-gradient(120deg,#ffe5a4,#c9933e);border:1px solid #f3d087;border-radius:11px;font-size:11px;font-weight:800;line-height:1.2}
+#adminView .ki-setup .ki-setup-actions a:last-child{background:#271c0f;color:#f7d498}
+#adminView .ki-setup .ki-setup-steps{font-size:11px;color:#dac5a0}
+#adminView .ki-setup code{display:inline-block;background:#090806;border:1px solid #7e5b29;padding:2px 4px;border-radius:5px;color:#ffdb90;font-size:10px}
+#adminView .ki-setup button{display:block;width:100%;min-height:43px;margin-top:9px;border:1px solid #c79e5c;background:#171007;color:#f5d69c;border-radius:10px;font-weight:800}
+#adminView .ki-setup button:disabled{opacity:.65}
+#adminView .ki-panel{scroll-margin-top:75px!important;scroll-margin-bottom:95px!important}
+#adminView .ki-studio{padding-bottom:calc(105px + env(safe-area-inset-bottom,0px))!important}
+@media (display-mode:standalone){
+ body:has(#adminView:not(.hidden)) main.wrap{padding-top:max(48px,env(safe-area-inset-top,0px))!important}
+ #adminView:not(.hidden)::before{content:"";position:fixed;top:0;left:0;right:0;height:max(48px,env(safe-area-inset-top,0px));background:#050403;z-index:1250;pointer-events:none}
+ #adminView .ki-result-title{scroll-margin-top:75px!important}
+}
+@media(max-width:390px){#adminView .ki-setup{padding:11px 9px}#adminView .ki-setup .ki-setup-actions a{font-size:10px}}
