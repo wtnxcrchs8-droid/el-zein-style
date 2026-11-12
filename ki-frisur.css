@@ -1,0 +1,97 @@
+/* KI-FRISUR STUDIO | SA Club | premium black & gold 2026 */
+#adminView:has(.ki-studio.sa4-active) .sa4-hero{display:none!important}
+#adminView:has(.ki-studio.sa4-active){background:#070503!important;padding-left:10px!important;padding-right:10px!important}
+#adminView .ki-studio{min-height:100dvh;padding:0 0 25px!important;color:#f6e5c3;font-family:system-ui,-apple-system,sans-serif}
+#adminView .ki-studio *{box-sizing:border-box}
+#adminView .ki-hero{position:relative;isolation:isolate;overflow:hidden;min-height:275px;margin:0 -10px 14px;padding:9px 15px 19px;border-bottom:2px solid #d2a148;background:linear-gradient(92deg,#090604f0,#100903be 55%,#0c08064a),url('https://images.pexels.com/photos/3993296/pexels-photo-3993296.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover no-repeat,#110906}
+#adminView .ki-hero:before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(ellipse at 85% 55%,#ad773228,transparent 55%),linear-gradient(0deg,#090504e8,transparent 52%)}
+#adminView .ki-logo{display:flex;align-items:center;flex-direction:column;gap:0;margin:0 auto;text-align:center;position:relative;z-index:4;max-width:80%}
+#adminView .ki-crown{font:24px Georgia,serif;line-height:22px;color:#efc26a;text-shadow:0 0 12px #dfa653}
+#adminView .ki-logo strong{font:700 clamp(34px,9vw,48px) Georgia,serif;line-height:1.03;color:#f8d486;text-shadow:0 0 14px #c18b4188}
+#adminView .ki-logo small{font:700 13px Georgia,serif;color:#faf3e7}
+#adminView .ki-topmenu{position:absolute;top:14px;left:14px;z-index:6}
+#adminView .ki-topmenu button{display:grid;place-items:center;width:43px;height:43px;border:1px solid #c79b52;border-radius:14px;background:#0e0907ca;color:#f1ca73}
+#adminView .ki-topmenu svg{width:23px;height:23px;max-width:23px;max-height:23px}
+#adminView .ki-hero-content{position:relative;z-index:3;margin-top:47px;max-width:67%;text-shadow:0 2px 5px #000}
+#adminView .ki-hero-content h1{font:700 clamp(26px,7vw,43px) Georgia,serif!important;color:#f9d98d!important;margin:0 0 8px!important;line-height:1.06!important}
+#adminView .ki-hero-content h1 span{color:#f4bd56}
+#adminView .ki-hero-content p{font-size:clamp(10px,2.7vw,14px);line-height:1.3;color:#f2e8d8;margin:0!important}
+#adminView .ki-hero-photos{position:absolute;right:3%;bottom:0;width:42%;height:60%;display:flex;align-items:stretch;z-index:2;mask-image:linear-gradient(0deg,#000 75%,#000 80%,transparent 100%)}
+#adminView .ki-hero-photos img{width:57%;min-width:0;height:100%;object-fit:cover;object-position:center 28%;border-radius:47% 47% 0 0;border:1px solid #ba8233;box-shadow:0 0 9px #b58a3866;filter:saturate(.77)}
+#adminView .ki-hero-photos img+img{margin-left:-21%;transform:translateY(9px);border:1px solid #f4c567;filter:saturate(.95)}
+#adminView .ki-hero-photos i{position:absolute;left:43%;top:32%;font:700 29px Georgia,serif;color:#ffdb81;text-shadow:0 0 10px #000;font-style:normal}
+#adminView .ki-panel{border:1.4px solid #ab7b35;border-radius:18px;background:radial-gradient(ellipse at 95% 5%,#6a43181a,transparent 50%),linear-gradient(145deg,#21160c,#0c0906 70%);padding:13px 12px;margin:0 0 12px;box-shadow:inset 0 1px #edc57730,0 5px 20px #0008}
+#adminView .ki-stephead{display:flex;align-items:flex-start;gap:10px;margin-bottom:13px}
+#adminView .ki-stepicon{display:grid;place-items:center;flex:0 0 39px;height:39px;border:1px solid #bd8936;border-radius:12px;background:#3f2810;color:#f5cf77}
+#adminView .ki-stepicon svg{width:22px;height:22px;max-width:22px;max-height:22px}
+#adminView .ki-stephead-copy{min-width:0;flex:1}
+#adminView .ki-stephead h2{font:700 clamp(18px,5vw,25px) Georgia,serif!important;color:#f8d48a!important;line-height:1.08!important;margin:0 0 4px!important}
+#adminView .ki-stephead p{font-size:11px;color:#cfbaa0;margin:0;line-height:1.34}
+#adminView .ki-upload{display:grid;grid-template-columns:90px minmax(0,1fr);gap:12px;align-items:center;min-height:115px}
+#adminView .ki-upload-photo{height:112px;width:90px;border:1.5px solid #c69b4f;border-radius:14px;background:repeating-linear-gradient(135deg,#20170e 0 13px,#352415 14px 15px,#17100a 16px 29px);overflow:hidden;display:grid;place-items:center;color:#e6bd73;position:relative}
+#adminView .ki-upload-photo>img{width:100%;height:100%;object-fit:cover;display:none}
+#adminView .ki-upload-photo.has-photo img{display:block}
+#adminView .ki-upload-photo.has-photo>svg{display:none}
+#adminView .ki-upload-photo>svg{width:32px;height:32px}
+#adminView .ki-upload-info{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0}
+#adminView .ki-upload-info strong{font-size:13px;color:#f5e0bc;font-weight:750}
+#adminView .ki-upload-info small{font-size:11px;color:#ceb793;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#adminView .ki-outline{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:8px 12px;min-height:39px;border:1px solid #d7a44a;border-radius:12px;background:#17100b;color:#f9d48b;font-size:12px;font-weight:750;box-shadow:0 0 8px #ad7c3022}
+#adminView .ki-outline svg{width:17px;height:17px}
+#adminView .ki-privacy{display:flex;align-items:flex-start;gap:8px;margin-top:12px;color:#bba990;font-size:10px;line-height:1.4}
+#adminView .ki-privacy input{accent-color:#e6ba64;width:16px;height:16px;flex:none;margin-top:0}
+#adminView .ki-styles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+#adminView .ki-style{min-width:0;overflow:hidden;position:relative;border:1px solid #8e6734;border-radius:13px;background:#100c09;display:flex;flex-direction:column;color:#f9e4b8;text-align:center;padding:0 0 7px;min-height:124px}
+#adminView .ki-style[aria-pressed="true"]{border:2px solid #ffe08d;box-shadow:0 0 13px #efb34785,inset 0 0 8px #f7be4940;background:#33200e}
+#adminView .ki-style img{display:block;width:100%;height:87px;object-fit:cover;object-position:center 28%;filter:brightness(.82) saturate(.75)}
+#adminView .ki-style[aria-pressed="true"] img{filter:brightness(1) saturate(.95)}
+#adminView .ki-style b{display:flex;flex:1;align-items:center;justify-content:center;min-height:30px;padding:6px 2px 0;font-size:clamp(9px,2.35vw,12px);line-height:1.1;font-weight:750}
+#adminView .ki-style .ki-check{position:absolute;right:3px;top:3px;width:19px;height:19px;border-radius:50%;display:none;place-items:center;background:#f5c864;color:#271604;border:1px solid #fbe1a1;font-size:13px;font-weight:800}
+#adminView .ki-style[aria-pressed="true"] .ki-check{display:grid}
+#adminView .ki-generate-panel{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+#adminView .ki-generate-panel .ki-stephead{flex:1 1 170px;margin:0}
+#adminView .ki-generate{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-width:0;min-height:46px;border-radius:28px;border:1px solid #f6d688;background:linear-gradient(120deg,#ffe7a5,#c99136);color:#1d1405;padding:9px 16px;font-size:13px;font-weight:850;box-shadow:0 0 15px #eeb45260}
+#adminView .ki-generate svg{width:18px;height:18px}
+#adminView .ki-generate:disabled{opacity:.62;filter:grayscale(.4);cursor:not-allowed}
+#adminView .ki-status{min-height:0;margin:8px 0 0;font-size:11px;line-height:1.35;color:#dac49e}
+#adminView .ki-status[data-status="error"]{color:#ffb2a4}
+#adminView .ki-status[data-status="success"]{color:#bde8af}
+#adminView .ki-result-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+#adminView .ki-result-title h2{font:700 21px Georgia,serif!important;margin:0!important;color:#ffdb8c!important}
+#adminView .ki-result-title small{font-size:10px;color:#c1a77b;border:1px solid #886837;border-radius:30px;padding:5px 7px;white-space:nowrap}
+#adminView .ki-result-title small.ready{color:#c5eeab;border-color:#668449}
+#adminView .ki-before-after{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+#adminView .ki-preview{position:relative;overflow:hidden;aspect-ratio:4/4.7;border:1px solid #9b743d;border-radius:15px;background:linear-gradient(140deg,#21160b,#0b0906);display:grid;place-items:center}
+#adminView .ki-preview img{width:100%;height:100%;display:none;object-fit:cover}
+#adminView .ki-preview img.has-photo{display:block}
+#adminView .ki-preview>span{position:absolute;top:8px;left:8px;z-index:2;border:1px solid #bba276;border-radius:20px;padding:4px 8px;background:#0d0b08dd;color:#eee0c7;font-size:10px}
+#adminView .ki-preview:last-child>span{background:linear-gradient(115deg,#ffe4a1,#ca963d);color:#2a1604;border-color:#ffda86;font-weight:750}
+#adminView .ki-placeholder{text-align:center;padding:9px;max-width:100%;color:#baa585;font-size:11px;line-height:1.4}
+#adminView .ki-placeholder svg{display:block;margin:0 auto 8px;width:30px;height:30px;color:#b78d4b}
+#adminView .ki-preview img.has-photo~.ki-placeholder{display:none}
+#adminView .ki-result-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:11px}
+#adminView .ki-result-actions button{display:flex;align-items:center;justify-content:center;gap:7px;min-height:42px;border:1px solid #d8a54f;border-radius:14px;background:#161008;color:#f5d49b;font-size:clamp(10px,2.75vw,13px);font-weight:750;padding:9px 6px}
+#adminView .ki-result-actions button.primary{border-color:#ffe2a2;background:linear-gradient(115deg,#ffdfa1,#cb953d);color:#1d1204}
+#adminView .ki-result-actions button:disabled{opacity:.4;cursor:not-allowed}
+#adminView .ki-result-actions button svg{width:17px;height:17px;flex:none}
+#adminView .ki-tiny-note{margin:11px 0 0;font-size:10px;color:#a99478;line-height:1.4}
+#adminView .ki-file{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
+@media(max-width:380px){
+#adminView .ki-panel{padding:11px 9px}
+#adminView .ki-hero{min-height:255px}
+#adminView .ki-hero-content{margin-top:36px}
+#adminView .ki-styles{gap:4px}
+#adminView .ki-style img{height:72px}
+#adminView .ki-style{min-height:114px}
+#adminView .ki-style b{font-size:9px}
+#adminView .ki-generate{width:100%}
+}
+@media(min-width:670px){
+#adminView .ki-hero{min-height:350px;border-radius:0 0 22px 22px}
+#adminView .ki-hero-content{margin-top:95px}
+#adminView .ki-panel{padding:20px}
+#adminView .ki-style img{height:160px}
+#adminView .ki-before-after .ki-preview{aspect-ratio:4/3.8}
+#adminView .ki-upload{grid-template-columns:125px 1fr}
+#adminView .ki-upload-photo{height:132px;width:115px}
+}
