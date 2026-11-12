@@ -1,5 +1,5 @@
-const CACHE_NAME = 'salon-anas-push-v13';
-const APP_SHELL = ['/', '/index.html', '/manifest.json', '/icon-192.png', '/icon-512.png', '/icon-180.png', '/admin-premium.css', '/admin-premium.js', '/customer-cards.css', '/customer-cards.js', '/appointments-premium.css', '/appointments-premium.js'];
+const CACHE_NAME = 'salon-anas-push-v14';
+const APP_SHELL = ['/', '/index.html', '/manifest.json', '/icon-192.png', '/icon-512.png', '/icon-180.png', '/admin-premium.css', '/admin-premium.js', '/customer-cards.css', '/customer-cards.js', '/appointments-premium.css', '/appointments-premium.js', '/admin-club.css', '/admin-club.js'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)));
   self.skipWaiting();
