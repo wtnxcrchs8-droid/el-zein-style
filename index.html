@@ -813,7 +813,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <link rel="stylesheet" href="/customer-cards.css?v=2">
 <link rel="stylesheet" href="/appointments-premium.css?v=1">
 <link rel="stylesheet" href="/admin-club.css?v=1">
-<link rel="stylesheet" href="/admin-messages.css?v=2">
+<link rel="stylesheet" href="/admin-messages.css?v=3">
 </head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">S</div><div><h1>SALON ANAS 1</h1><small>TREUEPROGRAMM</small></div></div><span class="pill">BLACK · GOLD EDITION</span></header>
@@ -1299,4 +1299,4 @@ document.querySelectorAll('#adminView .sa-admin-tabs [data-admin-target]').forEa
 saAdminGo('overview');const saDate=document.getElementById('saAdminDate');if(saDate)saDate.textContent=new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'short'}).format(new Date());
 
 (async()=>{const token=new URLSearchParams(location.search).get('card');if(token){await loadPublic(token);return}const {data}=await db.auth.getSession();if(data.session){const {data:a}=await db.from('admins').select('user_id').eq('user_id',data.session.user.id).maybeSingle();if(a){show('adminView');await refresh();await refreshAudience();return}}show('loginView')})();
-</script><script src="/admin-premium.js?v=11"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=3"></script></body></html>
+</script><script src="/admin-premium.js?v=12"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=4"></script></body></html>
