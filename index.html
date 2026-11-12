@@ -815,6 +815,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <link rel="stylesheet" href="/admin-club.css?v=1">
 <link rel="stylesheet" href="/admin-messages.css?v=3">
 <link rel="stylesheet" href="/appointments-v3.css?v=1">
+<link rel="stylesheet" href="/push-confirm.css?v=1">
 </head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">S</div><div><h1>SALON ANAS 1</h1><small>TREUEPROGRAMM</small></div></div><span class="pill">BLACK · GOLD EDITION</span></header>
@@ -831,6 +832,16 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <div class="vip-panel vip-push hidden" id="vipPushPanel"><button type="button" id="vipPushClose" class="vip-close" aria-label="Schließen">×</button><h3>♧ Benachrichtigungen</h3><p>Erhalte Angebote und Neuigkeiten von SALON ANAS 1. Auf dem iPhone füge die Karte zuerst zum Home-Bildschirm hinzu und öffne sie von dort.</p><label class="push-consent" for="pushConsentPublic"><input type="checkbox" id="pushConsentPublic"><span>Ich möchte freiwillig Push-Nachrichten mit Angeboten und Neuigkeiten erhalten. Ich kann meine Einwilligung jederzeit widerrufen.</span></label><div class="actions"><button class="btn" id="pushBtnPublic" type="button">Benachrichtigungen aktivieren</button><button class="btn secondary hidden" id="pushOffBtnPublic" type="button">Benachrichtigungen deaktivieren</button></div><p class="muted" id="pushStatusPublic" aria-live="polite">Die Aktivierung ist freiwillig.</p><button type="button" id="vipInstallShortcut" class="vip-gold-btn">Zum Home-Bildschirm hinzufügen</button></div>
 <div class="vip-bottom"><button type="button" data-vip-tab="start">⌂<small>Start</small></button><button type="button" data-vip-tab="karte">▤<small>Karte</small></button><button type="button" data-vip-tab="termine">▦<small>Termine</small></button><button type="button" data-vip-tab="angebote">◇<small>Angebote</small></button><button type="button" data-vip-tab="profil">♙<small>Profil</small></button></div>
 <button id="installCardBtn" type="button" class="vip-install hidden">＋ Zum Home-Bildschirm hinzufügen</button>
+<dialog id="pushDisableConfirm" class="vip-push-confirm" aria-labelledby="pushDisableTitle" aria-describedby="pushDisableDescription">
+  <div class="vip-push-confirm-icon" aria-hidden="true">!</div>
+  <h2 id="pushDisableTitle">Benachrichtigungen ausschalten?</h2>
+  <p id="pushDisableDescription">Achtung: Wenn du die Benachrichtigungen deaktivierst, erhältst du auf diesem Gerät keine Angebote, Erinnerungen oder Neuigkeiten von SALON ANAS 1 mehr.</p>
+  <p class="vip-push-confirm-question">Möchtest du sie wirklich deaktivieren?</p>
+  <div class="vip-push-confirm-actions">
+    <button type="button" id="pushKeepEnabled" class="vip-push-keep">Abbrechen · Aktiviert lassen</button>
+    <button type="button" id="pushConfirmDisable" class="vip-push-disable">Ja, deaktivieren</button>
+  </div>
+</dialog>
 </section>
 <section id="loginView" class="hidden"><div class="hero"><div style="font-size:44px;color:#eac271">✂</div><h2>SA Club Admin</h2><p>SALON ANAS 1 · Verwaltung der Treuekarten</p></div><div class="section" style="max-width:460px;margin:0 auto"><h3>Administrator-Login</h3><div class="field"><label>E-Mail-Adresse</label><input id="email" type="email" autocomplete="username" placeholder="admin@example.com"></div><div class="field" style="margin-top:12px"><label>Passwort</label><input id="password" type="password" autocomplete="current-password" placeholder="••••••••"></div><div class="actions"><button class="btn" id="loginBtn">Anmelden</button></div><div id="loginMsg" class="muted" aria-live="polite"></div></div></section>
 
@@ -1151,20 +1162,60 @@ async function activateCustomerPush(){
   }catch(err){alert('Aktivierung fehlgeschlagen: '+err.message)}
   finally{button.disabled=false}
 }
+function confirmCustomerPushDisable(){
+  const dialog=$('pushDisableConfirm');
+  if(!dialog || typeof dialog.showModal!=='function'){
+    return Promise.resolve(window.confirm('Achtung! Ohne Benachrichtigungen erhältst du keine Angebote, Erinnerungen oder Neuigkeiten mehr. Möchtest du sie wirklich deaktivieren?'));
+  }
+  if(dialog.open)return Promise.resolve(false);
+  return new Promise(resolve=>{
+    dialog.returnValue='';
+    const keep=$('pushKeepEnabled'),disable=$('pushConfirmDisable');
+    const cancel=()=>dialog.close('keep');
+    const accept=()=>dialog.close('disable');
+    const onClose=()=>{
+      keep.removeEventListener('click',cancel);
+      disable.removeEventListener('click',accept);
+      resolve(dialog.returnValue==='disable');
+    };
+    keep.addEventListener('click',cancel);
+    disable.addEventListener('click',accept);
+    dialog.addEventListener('close',onClose,{once:true});
+    try{dialog.showModal();keep.focus()}
+    catch(e){
+      keep.removeEventListener('click',cancel);
+      disable.removeEventListener('click',accept);
+      dialog.removeEventListener('close',onClose);
+      resolve(window.confirm('Möchtest du Benachrichtigungen wirklich deaktivieren?'));
+    }
+  });
+}
+let disablingCustomerPush=false;
 async function deactivateCustomerPush(){
   const token=new URLSearchParams(location.search).get('card');
-  if(!token) return;
+  if(!token || disablingCustomerPush)return false;
   try{
     const reg=await navigator.serviceWorker.ready;
     const sub=await reg.pushManager.getSubscription();
-    if(!sub){$('pushOffBtnPublic').classList.add('hidden');return}
-    await pushRequest('unsubscribe',{card_token:token,endpoint:sub.endpoint});
-    await sub.unsubscribe();
-    $('pushConsentPublic').checked=false;
-    $('pushOffBtnPublic').classList.add('hidden');
-    $('pushStatusPublic').textContent='Benachrichtigungen deaktiviert.';
-    alert('Benachrichtigungen deaktiviert.');
-  }catch(err){alert('Deaktivierung fehlgeschlagen: '+err.message)}
+    if(!sub){$('pushOffBtnPublic').classList.add('hidden');return false}
+    // Every path (the main shortcut and the settings off button) must confirm first.
+    const approved=await confirmCustomerPushDisable();
+    if(!approved)return false;
+    disablingCustomerPush=true;
+    $('pushOffBtnPublic').disabled=true;
+    try{
+      await pushRequest('unsubscribe',{card_token:token,endpoint:sub.endpoint});
+      await sub.unsubscribe();
+      $('pushConsentPublic').checked=false;
+      $('pushOffBtnPublic').classList.add('hidden');
+      $('pushStatusPublic').textContent='Benachrichtigungen deaktiviert.';
+      alert('Benachrichtigungen deaktiviert.');
+      return true;
+    }finally{
+      disablingCustomerPush=false;
+      $('pushOffBtnPublic').disabled=false;
+    }
+  }catch(err){alert('Deaktivierung fehlgeschlagen: '+err.message);return false}
 }
 async function activateAdminPush(){
   if(!('serviceWorker' in navigator)||!('PushManager' in window)||!('Notification' in window)){
@@ -1276,7 +1327,7 @@ if(page==='profil')$('vipProfileName').textContent=$('pubName').textContent;
 window.scrollTo({top:0,behavior:'instant'});
 }
 function vipRenderStamps(count,goal){const el=$('pubStamps');el.replaceChildren();for(let i=0;i<Math.min(30,Math.max(1,Number(goal)||6));i++){const x=document.createElement('div');x.className='vip-stamp'+(i<count?' on':'');x.innerHTML='<span aria-hidden="true">✂︎</span>';el.append(x)}}
-$('vipPushShortcut').onclick=async()=>{const btn=$('vipPushShortcut');if(btn.disabled)return;btn.disabled=true;try{if(!('serviceWorker' in navigator)||!('PushManager' in window)||!('Notification' in window)){alert('Auf dem iPhone: Bitte zuerst in Safari zum Home-Bildschirm hinzufügen und von dort öffnen.');return}const reg=await navigator.serviceWorker.ready;const sub=await reg.pushManager.getSubscription();if(sub){if(confirm('Benachrichtigungen für dieses Gerät deaktivieren?'))await deactivateCustomerPush();return}if(!confirm('Möchtest du freiwillig Angebote und Neuigkeiten von SALON ANAS 1 als Push-Nachrichten erhalten? Du kannst sie jederzeit deaktivieren.'))return;$('pushConsentPublic').checked=true;await activateCustomerPush()}finally{btn.disabled=false;vipRefreshPushShortcut()}};
+$('vipPushShortcut').onclick=async()=>{const btn=$('vipPushShortcut');if(btn.disabled)return;btn.disabled=true;try{if(!('serviceWorker' in navigator)||!('PushManager' in window)||!('Notification' in window)){alert('Auf dem iPhone: Bitte zuerst in Safari zum Home-Bildschirm hinzufügen und von dort öffnen.');return}const reg=await navigator.serviceWorker.ready;const sub=await reg.pushManager.getSubscription();if(sub){await deactivateCustomerPush();return}if(!confirm('Möchtest du freiwillig Angebote und Neuigkeiten von SALON ANAS 1 als Push-Nachrichten erhalten? Du kannst sie jederzeit deaktivieren.'))return;$('pushConsentPublic').checked=true;await activateCustomerPush()}finally{btn.disabled=false;vipRefreshPushShortcut()}};
 $('vipHistoryShortcut').onclick=()=>vipShowTab('profil');
 $('vipOffersShortcut').onclick=$('vipBenefitsShortcut').onclick=()=>vipShowTab('angebote');
 $('vipAiOpen').onclick=()=>{vipShowTab('profil');$('vipAiPanel').classList.remove('hidden')};$('vipAiPhoto').onchange=()=>{const file=$('vipAiPhoto').files[0];if(!file)return;if(window.vipAiObjectUrl)URL.revokeObjectURL(window.vipAiObjectUrl);window.vipAiObjectUrl=URL.createObjectURL(file);$('vipAiPreview').src=window.vipAiObjectUrl;$('vipAiPreview').classList.remove('hidden')};$('vipBookingCopy').onclick=async()=>{const date=$('vipBookingDate').value,time=$('vipBookingTime').value;if(!date||!time){$('vipBookingStatus').textContent='Bitte Datum und Uhrzeit auswählen.';return}if(new Date(date+'T12:00:00').getDay()===0){$('vipBookingStatus').textContent='Sonntag ist Ruhetag. Bitte Montag bis Samstag wählen.';return}if(time<'09:30'||time>'18:30'){$('vipBookingStatus').textContent='Termine nur zwischen 09:30 und 18:30.';return}const t='SALON ANAS 1 – Terminanfrage: '+$('vipBookingService').value+' am '+date+' um '+time+'. Bitte Termin bestätigen.';try{await navigator.clipboard.writeText(t);$('vipBookingStatus').textContent='Anfrage kopiert. Bitte an den Salon senden.'}catch{$('vipBookingStatus').textContent=t}};$('vipAppointmentLink').onclick=e=>{e.preventDefault();vipShowTab('termine')};$('vipPushClose').onclick=()=>$('vipPushPanel').classList.add('hidden');$('vipMenuBtn').onclick=()=>vipShowTab('profil');$('vipBellBtn').onclick=()=>$('vipPushShortcut').click();$('vipInstallShortcut').onclick=()=>$('installCardBtn').click();
