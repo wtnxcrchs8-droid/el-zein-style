@@ -812,6 +812,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <link rel="stylesheet" href="/admin-premium.css?v=6">
 <link rel="stylesheet" href="/customer-cards.css?v=1">
 <link rel="stylesheet" href="/appointments-premium.css?v=1">
+<link rel="stylesheet" href="/admin-club.css?v=1">
 </head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">S</div><div><h1>SALON ANAS 1</h1><small>TREUEPROGRAMM</small></div></div><span class="pill">BLACK · GOLD EDITION</span></header>
@@ -863,6 +864,23 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
  </div>
  <div class="sa4-home-lists"><section class="sa4-panel"><div class="sa4-panel-head"><h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3"/></svg> Nächste Termine</h3><button type="button" data-sa4-go="appointments" data-sa4-focus="appointmentList">Alle ›</button></div><div class="sa4-rows" id="sa4HomeAppointments">Termine werden geladen …</div></section>
  <section class="sa4-panel"><div class="sa4-panel-head"><h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l3-6 4 12 3-6h6"/></svg> Letzte Aktivitäten</h3><button type="button" data-sa4-go="stats" data-sa4-focus="activityList">Alle ›</button></div><div class="sa4-rows" id="sa4HomeActivity">Aktivitäten werden geladen …</div></section></div>
+<section class="sa7-club" id="sa7Club" aria-labelledby="sa7Heading">
+  <div class="sa7-header">
+    <div class="sa7-title"><div class="sa7-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 10h18M7 15h5"/></svg></div><div><h3 id="sa7Heading">Dein Treueprogramm</h3><small>SA CLUB · MITGLIEDER</small></div></div>
+    <span class="sa7-status" id="sa7ClubStatus">0 KARTEN</span>
+  </div>
+  <div class="sa7-feature">
+    <div class="sa7-feature-text"><span class="sa7-eyebrow">✦ GOLD MEMBER CLUB</span><strong>Jeder Besuch zählt.</strong><p>6 Stempel sammeln und einen kostenlosen Haarschnitt erhalten.</p></div>
+    <div class="sa7-seal"><b id="sa7CardTotal">0</b><span>KARTEN</span></div>
+  </div>
+  <div class="sa7-list-header"><strong>Aktuelle Kundenkarten</strong><button type="button" id="sa7AllCards">Alle ansehen ›</button></div>
+  <div class="sa7-member-list" id="sa7MemberList"><div class="sa7-empty">Kundenkarten werden geladen …</div></div>
+  <div class="sa7-bottom">
+    <button type="button" id="sa7CreateCard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Neue Karte</button>
+    <button type="button" id="sa7StampCard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 21h10M6 17h12v4H6zM9 13l-1-5a4 4 0 1 1 8 0l-1 5 3 3H6z"/></svg> Stempel geben</button>
+  </div>
+</section>
+
 </div>
 <div class="sa4-page sa4-pageshell sa6-appointments" data-admin-page="appointments">
 <header class="sa6-heading"><div><small>SA CLUB · TERMINPLANER</small><h2>Termine</h2><p>Alle Termine auf einen Blick.</p></div><div class="sa6-mini-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3"/></svg></div></header>
@@ -1222,4 +1240,4 @@ document.querySelectorAll('#adminView .sa-admin-tabs [data-admin-target]').forEa
 saAdminGo('overview');const saDate=document.getElementById('saAdminDate');if(saDate)saDate.textContent=new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'short'}).format(new Date());
 
 (async()=>{const token=new URLSearchParams(location.search).get('card');if(token){await loadPublic(token);return}const {data}=await db.auth.getSession();if(data.session){const {data:a}=await db.from('admins').select('user_id').eq('user_id',data.session.user.id).maybeSingle();if(a){show('adminView');await refresh();await refreshAudience();return}}show('loginView')})();
-</script><script src="/admin-premium.js?v=11"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script></body></html>
+</script><script src="/admin-premium.js?v=11"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script></body></html>
