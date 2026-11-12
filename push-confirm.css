@@ -1,0 +1,71 @@
+/* SA CLUB – customer notification opt-out warning; confirmation required */
+#pushDisableConfirm{
+  position:fixed;
+  width:min(92vw,405px);
+  max-width:405px;
+  max-height:calc(100dvh - 35px);
+  box-sizing:border-box;
+  overflow:auto;
+  border:1.5px solid #d1a65c;
+  border-radius:22px;
+  padding:24px 19px 20px;
+  margin:auto;
+  background:radial-gradient(ellipse at 60% 0%,#70451955,transparent 70%),linear-gradient(145deg,#27180c,#0e0b08 80%);
+  box-shadow:0 0 32px #b8813870,0 20px 60px #000e,inset 0 1px #ffe4a45b;
+  color:#fce1a9;
+  text-align:center;
+  z-index:10000;
+  -webkit-font-smoothing:antialiased;
+}
+#pushDisableConfirm:not([open]){display:none!important}
+#pushDisableConfirm::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+#pushDisableConfirm .vip-push-confirm-icon{
+  display:grid;
+  place-items:center;
+  margin:0 auto 12px;
+  width:48px;
+  height:48px;
+  border:2px solid #dbb66e;
+  border-radius:50%;
+  background:linear-gradient(125deg,#593515,#261508);
+  box-shadow:0 0 18px #dbad6170;
+  color:#ffe5a5;
+  font:800 29px Georgia,serif;
+}
+#pushDisableConfirm h2{
+  color:#ffda91!important;
+  font:700 clamp(21px,6vw,27px) Georgia,serif!important;
+  line-height:1.15!important;
+  margin:0 0 12px!important;
+}
+#pushDisableConfirm p{
+  font:500 13px/1.55 system-ui,-apple-system,sans-serif;
+  color:#e0cbab;
+  margin:0 0 11px;
+}
+#pushDisableConfirm .vip-push-confirm-question{font-weight:800;color:#f7daab;margin:12px 0 17px}
+#pushDisableConfirm .vip-push-confirm-actions{display:flex;flex-direction:column;gap:9px}
+#pushDisableConfirm .vip-push-confirm-actions button{
+  box-sizing:border-box;
+  width:100%;
+  min-height:48px;
+  padding:11px 10px;
+  border-radius:13px;
+  font-size:14px;
+  font-weight:800;
+  line-height:1.2;
+  cursor:pointer;
+}
+#pushDisableConfirm .vip-push-keep{
+  background:linear-gradient(110deg,#ffecb6,#d2a04a);
+  border:1px solid #ffe3a0;
+  box-shadow:0 0 12px #cca2576b;
+  color:#291808;
+}
+#pushDisableConfirm .vip-push-disable{
+  background:#241711;
+  color:#e4b4ab;
+  border:1px solid #9b5846;
+}
+#pushDisableConfirm button:focus-visible{outline:3px solid #ffe6a5;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){#pushDisableConfirm{scroll-behavior:auto}}
