@@ -4,7 +4,7 @@
 const root=document.getElementById("adminView");
 if(!root)return;
 const byId=id=>document.getElementById(id);
-const pages=["overview","appointments","customers","rewards","stats","messages"];
+const pages=["overview","appointments","customers","rewards","stats","messages","management"];
 const menu=byId("sa4Menu");
 function closeMenu(){if(menu){menu.hidden=true;byId("sa4MenuToggle")?.setAttribute("aria-expanded","false")}}
 function go(page,focusId){
@@ -17,6 +17,7 @@ function go(page,focusId){
   closeMenu();closeQr();
   if(page==="appointments")window.sa6ShowAppointmentTab?.(focusId==="appointmentForm"?"new":"upcoming");
   if(page==="messages")window.sa8LoadStatus?.();
+  if(page==="management")window.sa9LoadManagement?.();
   if(page==="rewards"||page==="stats")renderExtras();
   if(focusId){
     if(focusId==="customerName")window.sa5OpenForm?.();
