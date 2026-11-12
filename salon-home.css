@@ -1,0 +1,105 @@
+/* SA Club 2026 customer home · faithful black & gold reference, real UI */
+body:has(#publicView:not(.hidden)) {background:#050402!important;color:#f8e9c9}
+#publicView #vipPage_start{display:flex!important;flex-direction:column!important;gap:10px!important;min-height:0!important;padding-bottom:8px}
+#publicView #vipPage_start>.vip-head{height:clamp(100px,16dvh,145px)!important;min-height:0!important;margin:0 -10px!important;padding:4px 0 8px!important;background:linear-gradient(90deg,#050403ea,#221405a3 52%,#050403ed),radial-gradient(ellipse at 49% 12%,#d79d4a46,transparent 60%),repeating-linear-gradient(90deg,#090705 0 50px,#30200d 51px 53px,#080604 54px 112px)!important;box-shadow:inset 0 -19px 22px #0008!important;border-bottom:0!important;border-radius:0!important;justify-content:center!important}
+#publicView #vipPage_start>.vip-head:after{display:none!important}
+#publicView #vipPage_start .vip-head h1{font:700 clamp(39px,10vw,63px) Georgia,serif!important;color:#ffdf91!important;text-shadow:0 0 12px #d89c41aa!important}
+#publicView #vipPage_start .vip-head strong{font:700 clamp(12px,3.6vw,17px) Georgia,serif!important;letter-spacing:2px!important;color:#f8e7c1!important}
+#publicView #vipPage_start .vip-head .vip-crown{font-size:clamp(15px,4.8vw,25px)!important;line-height:1!important}
+#publicView #vipPage_start .vip-head p{display:none!important}
+#publicView #vipPage_start .vip-head .vip-stars{display:none!important}
+#publicView #vipPage_start .vip-header-menu,#publicView #vipPage_start .vip-header-bell{top:7px!important;width:38px!important;height:39px!important;border:1.5px solid #e6b35a!important;border-radius:12px!important;background:#0e0908e0!important;color:#f6d17f!important;box-shadow:0 0 8px #d3a85a4a!important}
+#publicView .sa-home-loyalty{margin:0!important;border:1.7px solid #f3c46a;border-radius:20px;padding:9px 10px 11px;background:radial-gradient(ellipse at 50% 0%,#50301144,transparent 55%),linear-gradient(125deg,#0e0a07,#040403 76%);box-shadow:0 0 14px #b27d2d73,inset 0 0 12px #f4c27129}
+#publicView #vipPage_start .sa-home-loyalty>.vip-member{display:grid!important;grid-template-columns:23% minmax(0,1fr) 23%!important;gap:8px!important;align-items:center!important;min-height:100px!important;height:auto!important;padding:0 0 9px!important;margin:0!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;border-radius:0!important}
+#publicView .sa-home-loyalty .vip-emblem{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:86px!important;height:86px!important;padding:5px 0!important;border:1.3px solid #c9a154!important;border-radius:50%!important;background:radial-gradient(circle,#4f3417 0%,#0b0805 72%)!important;box-shadow:0 0 10px #d7a0454d!important}
+#publicView .sa-home-loyalty .vip-monogram{font:700 clamp(26px,8vw,40px) Georgia,serif!important;color:#ffd88b;text-shadow:0 0 12px #b88432}
+#publicView .sa-home-loyalty .vip-emblem span{font-size:clamp(6px,1.8vw,8px)!important;text-align:center;line-height:1.2}
+#publicView .sa-home-loyalty .vip-emblem small{font-size:6px!important}
+#publicView .sa-home-loyalty .vip-member-info{min-width:0;padding-left:8px!important;border-left:1px solid #c59b51!important}
+#publicView .sa-home-loyalty .vip-member-info h2{font:800 clamp(12px,3.7vw,19px) system-ui,sans-serif!important;line-height:1.12!important;color:#ffe3a1!important;letter-spacing:.1px;margin:0 0 5px!important;overflow-wrap:anywhere}
+#publicView .sa-home-loyalty .sa-home-card-lead{font-size:clamp(9px,2.7vw,12px)!important;line-height:1.23!important;color:#e9dcc7!important;margin:0 0 5px!important}
+#publicView .sa-home-loyalty .vip-member-info strong{font-size:clamp(10px,2.9vw,14px)!important;font-weight:800!important;line-height:1.12!important;color:#f8d599!important}
+#publicView .sa-home-loyalty .vip-member-info small{display:none!important}
+#publicView .sa-home-loyalty .vip-tier{display:none!important}
+#publicView .sa-home-loyalty .vip-qr{padding:4px!important;border:1.5px solid #d6a64b!important;border-radius:10px!important;background:#fff!important;box-shadow:0 0 10px #ffcd7080!important;min-width:0!important}
+#publicView .sa-home-loyalty .vip-qr img{width:100%!important;height:auto!important;aspect-ratio:1!important;object-fit:contain}
+#publicView #vipPage_start .sa-home-loyalty>.vip-stamp-panel{margin:0!important;padding:8px 2px 0!important;background:transparent!important;box-shadow:none!important;border:0!important;border-top:1px solid #805a31!important;border-radius:0!important}
+#publicView .sa-home-loyalty .vip-panel-title{display:flex!important;align-items:center!important;justify-content:space-between!important;margin:0 0 5px!important}
+#publicView .sa-home-loyalty .vip-panel-title h2{font:700 clamp(12px,3.4vw,16px) Georgia,serif!important;color:#f8d799!important}
+#publicView .sa-home-loyalty .vip-panel-title strong{font:700 14px Georgia,serif!important;color:#f6d68b!important}
+#publicView .sa-home-loyalty .vip-stamps{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:clamp(4px,1.3vw,9px)!important;margin:5px 0!important}
+#publicView .sa-home-loyalty .vip-stamp{width:100%!important;height:auto!important;aspect-ratio:1!important;min-width:0!important;min-height:0!important;border:1.4px solid #756b61!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:radial-gradient(circle,#181718,#050506)!important;color:#777!important;box-shadow:none!important}
+#publicView .sa-home-loyalty .vip-stamp.on{background:radial-gradient(circle at 30% 20%,#fff0b8,#eabb54 58%,#b97715)!important;border-color:#ffdc81!important;color:#251304!important;box-shadow:0 0 11px #f0bc57b1!important}
+#publicView .sa-home-loyalty .vip-stamp span{font-size:clamp(16px,4.8vw,29px)!important;color:inherit!important}
+#publicView .sa-home-loyalty .vip-progress-line{margin:4px 0 5px!important}
+#publicView .sa-home-loyalty .vip-reward{font-size:clamp(10px,2.8vw,13px)!important;min-height:31px!important;padding:5px 6px!important;color:#ffe8ad!important;border:1px solid #c99c3e!important;border-radius:20px!important;max-width:100%;box-shadow:0 0 8px #bd893b34}
+#publicView .sa-home-loyalty .vip-remaining{display:none!important}
+#publicView .sa-home-actions{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important;margin:0!important}
+#publicView .sa-home-actions button{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;min-width:0!important;min-height:87px!important;height:auto!important;gap:2px!important;padding:7px 2px!important;border:1.5px solid #c79843!important;border-radius:15px!important;background:linear-gradient(135deg,#35220e,#090807 75%)!important;color:#f8e9cc!important;box-shadow:inset 0 1px #ffe0a44a,0 0 9px #c08b3f35!important;line-height:1.1!important}
+#publicView .sa-home-actions button span{font-size:clamp(26px,7vw,36px)!important;line-height:1!important;color:#f0bc59!important;margin:0 0 3px!important}
+#publicView .sa-home-actions button b{display:block;font-size:clamp(10px,2.9vw,14px)!important;line-height:1.1!important;font-weight:850!important;color:#f5e7d4!important}
+#publicView .sa-home-actions button small{display:block;font-size:clamp(8px,2vw,11px)!important;color:#d9c5a4!important;line-height:1.1!important;margin-top:1px!important}
+#publicView .sa-home-details{display:grid!important;grid-template-columns:1fr 1fr!important;gap:0!important;min-height:93px!important;margin:0!important;padding:11px 7px!important;border:1.5px solid #f0c66e!important;border-radius:17px!important;background:linear-gradient(130deg,#281905,#090806 58%,#1a1107)!important;box-shadow:0 0 12px #ba8a395e,inset 0 1px #f4c47d44!important}
+#publicView .sa-home-address,#publicView .sa-home-opening{display:flex;gap:5px;min-width:0!important;align-items:flex-start!important;padding:0 5px}
+#publicView .sa-home-opening{border-left:1px solid #a98345!important}
+#publicView .sa-home-details .sa-home-symbol{color:#f5c76d;font-size:clamp(19px,5.5vw,28px);line-height:1.1;flex:none}
+#publicView .sa-home-details strong{display:block;color:#fff0d4;font-size:clamp(10px,2.75vw,14px);font-weight:850;line-height:1.14}
+#publicView .sa-home-details span:not(.sa-home-symbol){display:block;color:#ede0c6;font-size:clamp(10px,2.6vw,13px);line-height:1.2}
+#publicView .sa-home-address a{display:inline-flex;align-items:center;justify-content:center;padding:5px 8px;margin-top:6px;border:1px solid #e3b452;border-radius:14px;text-decoration:none;color:#ffe1a0;font-size:clamp(8px,2.3vw,11px);font-weight:800;line-height:1.2;white-space:nowrap}
+#publicView .sa-home-opening p{display:flex;align-items:center;justify-content:space-between;gap:4px;margin:4px 0 0!important;color:#efdfc9;font-size:clamp(9px,2.55vw,12px)!important;line-height:1.15!important;white-space:nowrap}
+#publicView .sa-home-opening p b{font-size:inherit;color:#fff0cc}
+#publicView .sa-home-opening p .sa-home-closed{padding:3px 5px;background:#542118;border-radius:8px;color:#ffd3bb}
+#publicView .sa-home-tools{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;min-width:0!important;margin:0!important}
+#publicView .sa-home-tools button{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-height:59px!important;padding:8px!important;border:1.5px solid #efc56c!important;border-radius:16px!important;background:linear-gradient(135deg,#533815,#120c07 75%)!important;box-shadow:0 0 13px #ca914854,inset 0 1px #fff1ac4a!important;color:#fbe7bb!important}
+#publicView .sa-home-tools button>span{font-size:clamp(24px,6vw,34px)!important;color:#f4c56e!important;line-height:1!important;flex:none}
+#publicView .sa-home-tools button>b{font-size:clamp(10px,2.85vw,14px)!important;line-height:1.2!important;text-align:left!important;overflow-wrap:anywhere}
+#publicView #vipPage_start>.vip-appointment{min-height:clamp(142px,23dvh,230px)!important;height:clamp(142px,23dvh,230px)!important;margin:0!important;padding:18px 13px!important;overflow:hidden!important;border:0!important;border-radius:15px!important;position:relative!important;background:linear-gradient(90deg,#0b0705f5 5%,#160d06ba 52%,#0c080675),url('https://images.pexels.com/photos/3993296/pexels-photo-3993296.jpeg?auto=compress&cs=tinysrgb&w=900&h=520') center/cover no-repeat,#160b07!important;box-shadow:inset 0 0 18px #000!important}
+#publicView #vipPage_start .vip-appointment-copy{position:relative;z-index:3;max-width:64%}
+#publicView #vipPage_start .vip-appointment h3{font:italic 700 clamp(25px,7.2vw,42px) Georgia,serif!important;line-height:1.06!important;color:#ffe2a0!important;margin:0 0 8px!important;text-shadow:0 2px 9px #000!important}
+#publicView #vipPage_start .vip-appointment p{font-size:clamp(11px,3.05vw,16px)!important;color:white!important;line-height:1.3!important;margin:0 0 9px!important}
+#publicView #vipPage_start .vip-appointment .vip-gold-btn{display:inline-flex;align-items:center;justify-content:center;gap:3px;max-width:100%;border:1px solid #fff0bc!important;border-radius:22px!important;padding:9px 11px!important;font-size:clamp(10px,2.75vw,14px)!important;font-weight:850!important;white-space:nowrap!important;background:linear-gradient(115deg,#ffe7a4,#dea439)!important;box-shadow:0 0 13px #e5aa4f8a!important}
+#publicView #vipPage_start .vip-chair-art{opacity:.52!important;right:-4%!important;pointer-events:none!important}
+#publicView #vipPage_start>.vip-home-install{display:none!important}
+#publicView .sa-home-legacy-shortcuts{display:none!important}
+#publicView .vip-bottom{border:1.3px solid #e8bc66!important;box-shadow:0 0 9px #d7a15365!important;background:#110d09eb!important}
+#publicView #vipPage_start .sa-home-actions button:focus-visible,#publicView .sa-home-tools button:focus-visible{outline:3px solid #ffe29b;outline-offset:2px}
+/* Premium functional bottom-sheet style dialogs */
+#publicView .sa-home-dialog{position:fixed;box-sizing:border-box;width:min(93vw,455px);max-width:455px;max-height:min(85dvh,740px);overflow:auto;margin:auto;border:1.5px solid #e6bc6e;border-radius:22px;padding:16px 15px 18px;background:radial-gradient(ellipse at 85% 5%,#78501d5a,transparent 53%),linear-gradient(145deg,#211609,#070604 75%);color:#f7e3c4;box-shadow:0 0 28px #e1ae5e66,0 22px 50px #000e;text-align:left}
+#publicView .sa-home-dialog:not([open]){display:none!important}
+#publicView .sa-home-dialog::backdrop{background:#000d;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+#publicView .sa-dialog-head{display:flex;align-items:center;gap:11px;margin-bottom:13px;padding-bottom:12px;border-bottom:1px solid #805e36}
+#publicView .sa-dialog-head>span{display:grid;place-items:center;width:38px;height:38px;flex:none;background:#422a10;border:1px solid #af8445;border-radius:10px;color:#ffd48d;font-size:24px}
+#publicView .sa-dialog-head>div{flex:1;min-width:0}
+#publicView .sa-dialog-head small{display:block;color:#e0be80;font-size:9px;letter-spacing:1.3px}
+#publicView .sa-dialog-head h2{font:700 clamp(22px,6vw,27px) Georgia,serif;color:#ffe0a5;margin:3px 0 0}
+#publicView .sa-dialog-head button{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;background:#2e1d0d;border:1px solid #a67e42;border-radius:11px;color:#ffdb97;font-size:17px}
+#publicView .sa-price-list{display:flex;flex-direction:column;gap:4px}
+#publicView .sa-price-list>div{display:flex;justify-content:space-between;align-items:center;gap:9px;border-bottom:1px solid #5d462e;padding:9px 5px;font-size:14px;color:#e9d9c1}
+#publicView .sa-price-list strong{color:#ffda8d;font-weight:900;white-space:nowrap}
+#publicView .sa-dialog-footnote{font-size:11px;color:#c1a781;line-height:1.4;margin:11px 2px}
+#publicView .sa-dialog-book{display:block;width:100%;min-height:44px;padding:9px;background:linear-gradient(110deg,#ffe6a3,#cc933c);border:1px solid #fff0b6;color:#23170a;border-radius:17px;font-size:15px;font-weight:850}
+#publicView .sa-contact-label{font-size:12px;color:#cfb892;margin:0 0 12px;line-height:1.35}
+#publicView .sa-contact-links{display:grid;gap:8px}
+#publicView .sa-contact-links a{display:flex;align-items:center;gap:12px;min-height:49px;padding:8px 12px;background:linear-gradient(110deg,#2c1c0c,#100c09);border:1px solid #866537;border-radius:12px;text-decoration:none;color:#f6d394;font-size:21px;font-weight:850}
+#publicView .sa-contact-links a>span{color:#f9e3be;display:flex;flex-direction:column;gap:2px;font-size:13px}
+#publicView .sa-contact-links a small{font-size:11px;color:#ccb288;font-weight:500}
+#publicView .sa-home-dialog button:focus-visible,#publicView .sa-home-dialog a:focus-visible{outline:3px solid #fadd93;outline-offset:2px}
+@media(max-width:375px){
+ #publicView .sa-home-loyalty{padding:7px 7px 9px}
+ #publicView #vipPage_start .sa-home-loyalty>.vip-member{grid-template-columns:23% minmax(0,1fr) 24%!important;gap:5px!important}
+ #publicView .sa-home-loyalty .vip-emblem{height:72px!important;min-height:72px!important}
+ #publicView .sa-home-actions{gap:4px!important}
+ #publicView .sa-home-actions button{min-height:79px!important}
+ #publicView .sa-home-tools{gap:5px!important}
+ #publicView .sa-home-tools button{padding:5px!important;gap:5px!important}
+ #publicView .sa-home-details{padding:9px 4px!important}
+ #publicView .sa-home-address,#publicView .sa-home-opening{padding:0 3px}
+}
+@media(min-width:600px){
+ #publicView #vipPage_start>.vip-head{height:155px!important}
+ #publicView .sa-home-loyalty{padding:16px 18px}
+ #publicView #vipPage_start .sa-home-loyalty>.vip-member{min-height:130px!important}
+ #publicView .sa-home-loyalty .vip-emblem{height:100px!important;min-height:100px!important}
+ #publicView .sa-home-actions button{min-height:112px!important}
+ #publicView #vipPage_start>.vip-appointment{height:245px!important}
+}
