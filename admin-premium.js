@@ -49,8 +49,8 @@ function copyEntries(sourceId,targetId,limit){
   else {const empty=document.createElement("p");empty.className="sa4-empty";empty.textContent=from.textContent.trim()||"Keine Einträge.";to.appendChild(empty)}
 }
 function syncLists(){
-  copyEntries("appointmentList","sa4HomeAppointments",3);
-  copyEntries("activityList","sa4HomeActivity",3);
+  copyEntries("appointmentList","sa4HomeAppointments",1);
+  copyEntries("activityList","sa4HomeActivity",1);
 }
 ["appointmentList","activityList"].forEach(id=>{
   const el=byId(id);
