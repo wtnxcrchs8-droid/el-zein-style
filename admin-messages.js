@@ -47,6 +47,97 @@ el('sa8DoTest')?.addEventListener('click',()=>el('testPushBtn')?.click());
 window.sa8AudienceMode="all";
 tabs.forEach(tab=>{const active=tab.dataset.sa8Mode==="all";tab.setAttribute("aria-selected",String(active));tab.tabIndex=active?0:-1});
 el('sendBroadcastBtn').disabled=true;
-// Ensure the button is re-enabled from fresh counts even if login loaded earlier.
+// Read-only list of recipients; names are shown only after admin authentication.
+const recipientsList=el('sa8MemberList');
+const filterButtons=[...root.querySelectorAll('[data-sa8-filter]')];
+let currentCustomerFilter="all";
+let customerStates=[];
+let statusInFlight=null;
+function statusDescription(item){
+ const enabled=Number(item.enabled_devices)||0;
+ const awaiting=Number(item.awaiting_consent_devices)||0;
+ const disabled=Number(item.disabled_devices)||0;
+ const parts=[];
+ if(enabled)parts.push(enabled+" "+(enabled===1?"Gerät empfangsbereit":"Geräte empfangsbereit"));
+ if(awaiting)parts.push(awaiting+" ohne neue Einwilligung");
+ if(disabled)parts.push(disabled+" deaktiviert");
+ if(!parts.length)parts.push("Noch kein Gerät registriert");
+ return parts.join(" · ");
+}
+const statusLabels={
+ enabled:"✓ Aktiviert",
+ needs_consent:"Freigabe nötig",
+ disabled:"Deaktiviert",
+ not_registered:"Nicht aktiviert"
+};
+function renderMembers(){
+ if(!recipientsList)return;
+ recipientsList.replaceChildren();
+ const visible=customerStates.filter(item=>currentCustomerFilter==="all"||
+  (currentCustomerFilter==="off"?["disabled","not_registered"].includes(item.status):item.status===currentCustomerFilter));
+ if(!visible.length){
+  const empty=document.createElement("div");empty.className="sa8-member-empty";
+  empty.textContent=customerStates.length?"Keine Kunden mit diesem Status.":"Noch keine Kundenkarten vorhanden.";
+  recipientsList.append(empty);
+  return;
+ }
+ visible.forEach(item=>{
+  const row=document.createElement("div");row.className="sa8-member";row.setAttribute("role","listitem");
+  const avatar=document.createElement("span");avatar.className="sa8-member-icon";
+  avatar.textContent=String(item.name||"K").trim().charAt(0).toLocaleUpperCase("de");
+  const info=document.createElement("div");info.className="sa8-member-text";
+  const name=document.createElement("strong");name.className="sa8-member-name";
+  name.textContent=String(item.name||"Kunde");
+  const detail=document.createElement("small");detail.className="sa8-member-sub";
+  detail.textContent=statusDescription(item);
+  info.append(name,detail);
+  const state=document.createElement("span");state.className="sa8-member-state";
+  state.dataset.state=item.status;
+  state.textContent=statusLabels[item.status]||"Nicht bekannt";
+  row.append(avatar,info,state);
+  recipientsList.append(row);
+ });
+}
+function useCustomerFilter(filter){
+ if(!["all","enabled","needs_consent","off"].includes(filter))return;
+ currentCustomerFilter=filter;
+ filterButtons.forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.sa8Filter===filter)));
+ renderMembers();
+}
+filterButtons.forEach(btn=>btn.addEventListener("click",()=>useCustomerFilter(btn.dataset.sa8Filter)));
+async function loadCustomerStates(){
+ if(statusInFlight)return statusInFlight;
+ const reload=el("sa8ReloadMembers");
+ if(reload)reload.disabled=true;
+ if(recipientsList){
+  recipientsList.replaceChildren();
+  const loading=document.createElement("div");loading.className="sa8-member-empty";
+  loading.textContent="Kundenstatus wird geladen …";recipientsList.append(loading);
+ }
+ statusInFlight=(async()=>{
+  try{
+   if(typeof pushRequest!=="function")throw Error("Push-Dienst nicht erreichbar.");
+   const result=await pushRequest("recipients_status");
+   if(!Array.isArray(result.customers))throw Error("Ungültige Antwort des Push-Dienstes.");
+   customerStates=result.customers;
+   renderMembers();
+  }catch(error){
+   if(recipientsList){
+    recipientsList.replaceChildren();
+    const failure=document.createElement("div");failure.className="sa8-member-empty";
+    failure.textContent="Kundenstatus konnte nicht geladen werden: "+(error?.message||"Unbekannter Fehler");
+    recipientsList.append(failure);
+   }
+  }finally{
+   if(reload)reload.disabled=false;
+   statusInFlight=null;
+  }
+ })();
+ return statusInFlight;
+}
+window.sa8LoadStatus=loadCustomerStates;
+el("sa8ReloadMembers")?.addEventListener("click",loadCustomerStates);
+el("refreshAudienceBtn")?.addEventListener("click",loadCustomerStates);
+// The general audience counter is refreshed by the existing admin handlers.
 if(typeof window.refreshAudience==="function")window.refreshAudience();
 })();
