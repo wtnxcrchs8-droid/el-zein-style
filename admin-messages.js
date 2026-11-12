@@ -47,4 +47,6 @@ el('sa8DoTest')?.addEventListener('click',()=>el('testPushBtn')?.click());
 window.sa8AudienceMode="all";
 tabs.forEach(tab=>{const active=tab.dataset.sa8Mode==="all";tab.setAttribute("aria-selected",String(active));tab.tabIndex=active?0:-1});
 el('sendBroadcastBtn').disabled=true;
+// Ensure the button is re-enabled from fresh counts even if login loaded earlier.
+if(typeof window.refreshAudience==="function")window.refreshAudience();
 })();
