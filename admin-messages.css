@@ -68,3 +68,32 @@
  #adminView .sa8-count{padding:7px;gap:5px}
  #adminView .sa8-count b{font-size:18px}
 }
+
+/* Nachrichten: readable per-customer device permission states */
+#adminView .sa8-members{margin:12px 0 14px;padding:12px 10px;border:1px solid #8f6a39;border-radius:15px;background:linear-gradient(130deg,#261a0d,#100d09 86%);color:#f9e3bd;box-shadow:inset 0 1px #ffe8ba1e}
+#adminView .sa8-members-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px}
+#adminView .sa8-members-head h4{font:700 clamp(15px,4vw,19px) Georgia,serif!important;line-height:1.12;color:#f8d495;margin:0 0 5px!important}
+#adminView .sa8-members-head p{font-size:10px;line-height:1.35;color:#c8b08b;margin:0}
+#adminView .sa8-members-head button{flex:0 0 37px;display:grid;place-items:center;width:37px;height:37px;border:1px solid #b2864a;border-radius:11px;background:#21160b;color:#f9d79b;font-size:24px;line-height:1}
+#adminView .sa8-members-head button:disabled{opacity:.5}
+#adminView .sa8-member-filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:4px;margin-bottom:10px;border-radius:12px;background:#0f0b08;border:1px solid #655033}
+#adminView .sa8-member-filters button{min-width:0;min-height:34px;border:1px solid transparent;border-radius:9px;padding:5px 2px;background:transparent;color:#d8bf98;text-align:center;font-size:clamp(9px,2.25vw,11px);font-weight:750;line-height:1.1}
+#adminView .sa8-member-filters button[aria-pressed="true"]{background:linear-gradient(115deg,#f9dc99,#c18b35);border-color:#ffe1a1;color:#281705}
+#adminView .sa8-member-list{display:flex;flex-direction:column;gap:7px;max-height:290px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#866337 #181108}
+#adminView .sa8-member{display:flex;align-items:center;gap:9px;min-width:0;min-height:61px;padding:10px 9px;border:1px solid #5b462e;border-radius:12px;background:linear-gradient(125deg,#21170f,#0d0b09)}
+#adminView .sa8-member-icon{flex:0 0 32px;width:32px;height:32px;display:grid;place-items:center;border:1px solid #846334;border-radius:10px;background:#4a2e13;color:#f9d28a;font:700 17px Georgia,serif}
+#adminView .sa8-member-text{display:flex;flex-direction:column;gap:5px;flex:1;min-width:0}
+#adminView .sa8-member-name{color:#fae4b9;font-size:12px;font-weight:800;line-height:1.14;overflow-wrap:anywhere}
+#adminView .sa8-member-sub{color:#baa486;font-size:10px;line-height:1.22}
+#adminView .sa8-member-state{max-width:118px;flex:0 0 auto;padding:6px 7px;border:1px solid #796c4a;border-radius:11px;background:#292117;color:#dfc7a0;text-align:center;font-size:10px;font-weight:800;line-height:1.14}
+#adminView .sa8-member-state[data-state="enabled"]{background:#1c3020;color:#c5e6b8;border-color:#688854}
+#adminView .sa8-member-state[data-state="needs_consent"]{background:#382611;color:#ffdfa0;border-color:#bb8640}
+#adminView .sa8-member-state[data-state="disabled"],#adminView .sa8-member-state[data-state="not_registered"]{background:#29231e;color:#c4b5a0;border-color:#695748}
+#adminView .sa8-member-empty{padding:13px;text-align:center;border:1px dashed #8a6938;border-radius:11px;color:#d7be99;font-size:11px;line-height:1.4}
+#adminView .sa8-members-note{font-size:10px;color:#a9987f;line-height:1.45;margin:11px 2px 0}
+@media(max-width:350px){
+#adminView .sa8-members{padding:10px 7px}
+#adminView .sa8-member{gap:6px;padding:8px 6px}
+#adminView .sa8-member-icon{width:27px;height:27px;flex-basis:27px}
+#adminView .sa8-member-state{max-width:91px;padding:5px;font-size:9px}
+}
