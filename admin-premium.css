@@ -116,3 +116,67 @@ body:has(#adminView:not(.hidden)) .foot{display:none!important}
 @media(max-width:370px){#adminView .sa4-stats{gap:6px}#adminView .sa4-stat{padding:9px 6px;gap:6px}.sa4-stat-icon{width:31px!important;height:31px!important;flex-basis:31px!important}#adminView .sa4-actions{gap:5px}#adminView .sa4-action{min-height:90px}#adminView .sa4-hero{min-height:194px}#adminView .sa4-welcome{margin-top:15px}}
 @media(min-width:650px){#adminView .sa4-hero{border-radius:0 0 22px 22px;height:250px}#adminView .sa4-brand h1{font-size:52px!important}#adminView .sa4-welcome{margin-top:36px}#adminView .sa4-stats{gap:13px}#adminView .sa4-promo{min-height:185px}#adminView .sa4-action{min-height:120px}}
 @media(prefers-reduced-motion:reduce){#adminView *{scroll-behavior:auto!important}}
+
+
+/* Compact iPhone dashboard v5: the home overview fits above its persistent navigation */
+@media(max-width:650px){
+ #adminView{padding:0 9px 81px!important}
+ #adminView .sa4-hero{height:146px!important;min-height:146px!important;margin:0 -9px 8px!important;border-bottom-width:2px!important}
+ #adminView .sa4-top{grid-template-columns:37px 1fr 37px!important;gap:4px!important;padding:7px 10px 0!important}
+ #adminView .sa4-square{width:37px!important;height:38px!important;border-radius:11px!important}
+ #adminView .sa4-square svg{width:20px!important;height:20px!important}
+ #adminView .sa4-brand-mark{height:15px!important;line-height:15px!important;font-size:17px!important}
+ #adminView .sa4-brand h1{font-size:clamp(25px,6.8vw,33px)!important;line-height:1.04!important;margin:1px 0!important}
+ #adminView .sa4-brand p{font-size:12px!important;line-height:1.1!important}
+ #adminView .sa4-brand-line{width:16px!important;margin:0 5px 3px!important}
+ #adminView .sa4-welcome{margin:9px 10px 5px 12px!important;padding-left:8px!important;max-width:78%!important}
+ #adminView .sa4-welcome h2{font-size:clamp(16px,4.2vw,19px)!important;line-height:1.08!important;margin:0 0 4px!important}
+ #adminView .sa4-welcome p{font-size:10px!important;line-height:1.2!important;max-width:260px}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-stats{gap:7px!important;margin-bottom:7px!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-stat{min-height:60px!important;padding:6px 7px!important;gap:6px!important;border-radius:13px!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-stat-icon{width:31px!important;height:31px!important;flex-basis:31px!important;border-radius:9px!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-stat-icon svg{width:20px!important;height:20px!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-stat-copy{font-size:clamp(9px,2.5vw,11px)!important;line-height:1.18!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-stat-value strong{font-size:clamp(21px,6vw,26px)!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-stat-value small{font-size:7px!important;letter-spacing:0!important}
+ #adminView .sa4-headrow{margin:8px 2px 6px!important}
+ #adminView .sa4-headrow h3{font-size:18px!important}
+ #adminView .sa4-headrow h3 svg{width:17px!important;height:17px!important}
+ #adminView .sa4-headrow button{font-size:10px!important}
+ #adminView .sa4-actions{gap:6px!important;margin-bottom:8px!important}
+ #adminView .sa4-action{min-height:71px!important;padding:6px 2px!important;gap:4px!important;border-radius:12px!important;font-size:clamp(9px,2.4vw,11px)!important}
+ #adminView .sa4-action svg{width:24px!important;height:24px!important}
+ #adminView .sa4-promo{min-height:0!important;height:91px!important;max-height:91px!important;border-radius:14px!important;margin-bottom:9px!important}
+ #adminView .sa4-promo-copy{padding:8px 4px 7px 10px!important;flex-basis:57%!important}
+ #adminView .sa4-promo h3{font-size:clamp(15px,4vw,18px)!important;margin:0 0 4px!important}
+ #adminView .sa4-promo h3 svg{width:15px!important;height:15px!important}
+ #adminView .sa4-promo p{font-size:9px!important;line-height:1.14!important;margin:0 0 5px!important;max-width:185px!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+ #adminView .sa4-promo button{min-height:22px!important;padding:4px 9px!important;font-size:9px!important}
+ #adminView .sa4-promo-images{width:45%!important}
+ #adminView .sa4-promo-image span{font-size:7px!important;padding:2px 4px!important}
+ #adminView .sa4-home-lists{gap:7px!important;margin-bottom:0!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-panel{padding:8px!important;border-radius:13px!important;min-width:0!important}
+ #adminView .sa4-panel-head{padding-bottom:6px!important}
+ #adminView .sa4-panel-head h3{font-size:clamp(10px,2.8vw,12px)!important;line-height:1.1!important;white-space:normal!important}
+ #adminView .sa4-panel-head h3 svg{width:14px!important;height:14px!important;flex:none!important}
+ #adminView .sa4-panel-head button{font-size:9px!important}
+ #adminView .sa4-rows{min-height:34px!important;font-size:10px!important;max-height:40px!important;overflow:hidden!important}
+ #adminView .sa4-rows .lux-entry{min-height:34px!important;padding:5px 0!important}
+ #adminView .sa4-rows .lux-entry b{font-size:10px!important}
+ #adminView .sa4-rows .lux-entry small{font-size:9px!important}
+ #adminView .sa4-rows .lux-entry em{font-size:9px!important;padding:3px!important}
+ #adminView .sa4-rows .sa4-empty{margin:7px 0!important;font-size:10px!important}
+ #adminView .sa4-bottomnav{bottom:calc(5px + env(safe-area-inset-bottom,0px))!important;width:calc(100% - 20px)!important;padding:4px!important;border-radius:21px!important}
+ #adminView .sa4-bottomnav button{min-height:46px!important;gap:2px!important;padding:3px 1px!important;border-radius:16px!important}
+ #adminView .sa4-bottomnav svg{width:20px!important;height:20px!important}
+ #adminView .sa4-bottomnav button span{font-size:9px!important}
+}
+@media(max-width:650px) and (max-height:700px){
+ #adminView .sa4-hero{height:130px!important;min-height:130px!important}
+ #adminView .sa4-welcome{margin-top:4px!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-stat{min-height:55px!important}
+ #adminView .sa4-action{min-height:65px!important}
+ #adminView .sa4-promo{height:75px!important;max-height:75px!important}
+ #adminView .sa4-promo p{display:none!important}
+ #adminView .sa4-headrow{margin-top:7px!important}
+}
