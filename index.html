@@ -750,6 +750,64 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 #adminView .sa-admin-tabs button.selected{background:linear-gradient(150deg,#ffe7a6,#c18b2f)!important}
 #adminView .sa-admin-page[data-admin-page="appointments"] .lux-panel h3,#adminView .sa-admin-page[data-admin-page="customers"] h3,#adminView .sa-admin-page[data-admin-page="messages"] h3{font-family:Georgia,serif!important;font-size:21px!important}
 @media(max-width:375px){#adminView .sa-admin-member{grid-template-columns:29% minmax(0,1fr) 42px!important;gap:6px!important}#adminView .sa-admin-member-info strong{font-size:18px!important}#adminView .sa-admin-monogram strong{font-size:40px!important}}
+
+/* NOVA MANAGER v1 — rebuilt admin layout, independent of customer-facing visuals */
+body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{background:#101519!important;color:#f5f0e6!important}
+#adminView{--nova:#11191d;--nova-card:#1c2529;--nova-line:#344146;--nova-cream:#f3eadb;--nova-lime:#d4e7aa;--nova-orange:#e4ad75;max-width:800px!important;padding:0 12px 110px!important;background:#101519!important;color:var(--nova-cream)!important;font-family:system-ui,-apple-system,Arial,sans-serif!important}
+#adminView .lux-menu{position:absolute!important;z-index:40!important}
+#adminView .nova-header{display:flex;align-items:center;gap:12px;padding:16px 2px 18px;border-bottom:1px solid #344046}
+#adminView .nova-logo{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:#d5e7aa;color:#182b28;font:900 21px Arial,sans-serif;letter-spacing:-2px;position:relative}
+#adminView .nova-logo span{position:absolute;right:3px;top:1px;font-size:10px;color:#486c4d}
+#adminView .nova-brand{display:flex;flex-direction:column;gap:3px;flex:1}
+#adminView .nova-brand strong{font-size:15px;letter-spacing:1.2px;color:#f7f1e7}
+#adminView .nova-brand small{font-size:9px;letter-spacing:1.8px;color:#91a3a5}
+#adminView .nova-header-action{width:44px;height:44px;border:1px solid #435056;border-radius:14px;background:#202b2f;color:#d5e7aa;font-size:24px}
+#adminView .sa-admin-page{padding-top:0}
+#adminView .nova-hero{position:relative;overflow:hidden;margin:17px 0 20px;padding:19px 19px 14px;border-radius:23px;background:#d4e7aa;color:#18272a;box-shadow:0 12px 25px #0003}
+#adminView .nova-overline{display:flex;align-items:center;gap:7px;font-size:10px;letter-spacing:1.1px;font-weight:800;color:#536b59}
+#adminView .nova-overline #saAdminDate{margin-left:auto;letter-spacing:0;color:#486253}
+#adminView .nova-status-dot{width:7px;height:7px;background:#497a57;border-radius:50%}
+#adminView .nova-hero-main{display:flex;justify-content:space-between;align-items:center;min-height:117px}
+#adminView .nova-hero h1{font-size:clamp(30px,8vw,47px);letter-spacing:-1.7px;line-height:1.08;font-weight:800;color:#182a2c;margin:15px 0 8px}
+#adminView .nova-hero h1 span{color:#6b9375}
+#adminView .nova-hero p{font-size:12px;color:#4b6662;margin:0}
+#adminView .nova-hero-mark{font-size:70px;line-height:1;color:#73958155;transform:rotate(-17deg)}
+#adminView .nova-hero-bottom{display:flex;justify-content:space-between;border-top:1px solid #9bb991;padding-top:10px;font-size:9px;letter-spacing:1.1px;font-weight:800;color:#54705b}
+#adminView .nova-section-title{display:flex;align-items:baseline;justify-content:space-between;margin:23px 2px 12px}
+#adminView .nova-section-title h2{font-size:21px;letter-spacing:-.5px;margin:0;color:#f3f0e9}
+#adminView .nova-section-title span{font-size:9px;letter-spacing:1.5px;color:#8d9fa1}
+#adminView .lux-stats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:11px!important}
+#adminView .lux-stat,#adminView .lux-stat:nth-child(n){position:relative;display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:8px!important;min-height:128px!important;padding:16px!important;border:1px solid #354449!important;border-radius:19px!important;background:#1c272b!important;box-shadow:none!important}
+#adminView .lux-stat:before{display:none!important}
+#adminView .lux-stat:nth-child(1){background:#253936!important;border-color:#46635a!important}
+#adminView .lux-stat:nth-child(4){background:#322b28!important;border-color:#59433a!important}
+#adminView .lux-stat-icon,#adminView .lux-stat:nth-child(n) .lux-stat-icon{position:absolute!important;top:12px!important;right:12px!important;width:34px!important;height:34px!important;border:0!important;border-radius:11px!important;background:#ffffff13!important;color:#d4e7aa!important;font-size:20px!important}
+#adminView .lux-stat-label{order:1;font-size:12px!important;font-weight:600!important;line-height:1.3!important;color:#b0bec0!important;max-width:75%}
+#adminView .lux-stat-label br{display:none}
+#adminView .lux-stat strong{order:2;font:800 clamp(35px,10vw,48px) system-ui,sans-serif!important;line-height:1!important;letter-spacing:-2px!important;color:#f6f1e6!important;margin-top:15px!important}
+#adminView .lux-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:11px!important}
+#adminView .lux-actions button,#adminView .lux-actions button.active,#adminView .lux-actions button:nth-child(n){display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:space-between!important;gap:14px!important;min-height:120px!important;padding:15px!important;border:1px solid #3b4a4e!important;border-radius:19px!important;background:#202c30!important;color:#f4eee5!important;box-shadow:none!important;font-size:13px!important;font-weight:700!important}
+#adminView .lux-actions button:first-child{background:#e4ad75!important;color:#222622!important;border-color:#e4ad75!important}
+#adminView .lux-actions span,#adminView .lux-actions button:nth-child(n) span{display:grid!important;place-items:center!important;width:39px!important;height:39px!important;border-radius:12px!important;border:0!important;background:#ffffff16!important;color:#d4e7aa!important;font-size:23px!important}
+#adminView .lux-actions button:first-child span{background:#00000015!important;color:#26322c!important}
+#adminView .lux-actions button:after,#adminView .lux-actions button:nth-child(n):after{content:"↗";top:13px;right:14px;color:inherit!important;font-size:18px}
+#adminView .nova-page-title{padding:25px 3px 17px}
+#adminView .nova-page-title span{font-size:10px;letter-spacing:1.8px;color:#d4e7aa;font-weight:800}
+#adminView .nova-page-title h2{font-size:32px;letter-spacing:-1px;color:#f5f0e6;margin:8px 0 5px}
+#adminView .nova-page-title p{font-size:13px;color:#a7b6b7;margin:0}
+#adminView .sa-admin-page .lux-panel,#adminView .sa-admin-page .section{background:#1b2529!important;border:1px solid #38474a!important;border-radius:20px!important;box-shadow:none!important;color:#f5f0e6!important}
+#adminView .sa-admin-page h3{font:700 19px system-ui,sans-serif!important;color:#f5f0e6!important}
+#adminView .sa-admin-page .hero{display:none!important}
+#adminView .sa-admin-page label,#adminView .sa-admin-page .muted{color:#b0c0c0!important}
+#adminView .sa-admin-page input,#adminView .sa-admin-page textarea,#adminView .sa-admin-page select{background:#111a1e!important;color:#f5f0e6!important;border:1px solid #435459!important;border-radius:12px!important}
+#adminView .sa-admin-page .btn{background:#d4e7aa!important;color:#182c28!important;border:0!important;border-radius:12px!important;font-weight:800!important}
+#adminView .sa-admin-page .btn.secondary{background:#304044!important;color:#f4eee5!important}
+#adminView .sa-admin-tabs{position:fixed!important;bottom:calc(8px + env(safe-area-inset-bottom,0px))!important;left:50%!important;transform:translateX(-50%)!important;width:min(calc(100% - 24px),740px)!important;display:grid!important;grid-template-columns:repeat(4,1fr)!important;padding:6px!important;gap:4px!important;margin:0!important;border:1px solid #3d4d50!important;border-radius:22px!important;background:#1c292df8!important;box-shadow:0 8px 30px #000a!important;z-index:999!important}
+#adminView .sa-admin-tabs button{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;min-height:57px!important;border:0!important;border-radius:15px!important;background:transparent!important;color:#9faeb0!important;font-size:21px!important}
+#adminView .sa-admin-tabs button.selected{background:#d4e7aa!important;color:#1b3030!important;border:0!important;box-shadow:none!important}
+#adminView .sa-admin-tabs button small{font-size:10px!important;font-weight:700!important}
+#adminView .sa-admin-tabs button span{line-height:1.1}
+@media(max-width:380px){#adminView .nova-hero{padding:16px}#adminView .lux-stat{min-height:118px!important;padding:12px!important}#adminView .lux-actions button{min-height:108px!important}}
 </style>
 </head>
 <body><main class="wrap">
@@ -769,25 +827,23 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <button id="installCardBtn" type="button" class="vip-install hidden">＋ Zum Home-Bildschirm hinzufügen</button>
 </section>
 <section id="loginView" class="hidden"><div class="hero"><div style="font-size:44px;color:#eac271">✂</div><h2>SA Club Admin</h2><p>SALON ANAS 1 · Verwaltung der Treuekarten</p></div><div class="section" style="max-width:460px;margin:0 auto"><h3>Administrator-Login</h3><div class="field"><label>E-Mail-Adresse</label><input id="email" type="email" autocomplete="username" placeholder="admin@example.com"></div><div class="field" style="margin-top:12px"><label>Passwort</label><input id="password" type="password" autocomplete="current-password" placeholder="••••••••"></div><div class="actions"><button class="btn" id="loginBtn">Anmelden</button></div><div id="loginMsg" class="muted" aria-live="polite"></div></div></section>
-<section id="adminView" class="hidden"><div class="lux-top"><button class="lux-icon" type="button" onclick="document.getElementById('luxMenu').classList.toggle('hidden')" aria-label="Menü">☰</button><div class="lux-brand"><div class="lux-scissors">♛</div><div class="lux-name"><span class="sa-gold-ornament">❧</span>SA Club<span class="sa-gold-ornament">❧</span></div><div class="lux-sub">Salon Anas 1</div><div class="sa-admin-subtitle">Dein Management</div><div class="sa-admin-stars">★★★★★</div></div><button class="lux-icon" type="button" onclick="saAdminGo('messages','broadcastTitle')" aria-label="Benachrichtigungen">♧<i></i></button></div>
-<div id="luxMenu" class="lux-menu hidden"><button onclick="saAdminGo('customers','customerList')">Kunden verwalten</button><button onclick="saAdminGo('messages','broadcastTitle')">Benachrichtigungen</button></div>
-<div class="sa-admin-page" data-admin-page="overview"><div class="sa-admin-member"><div class="sa-admin-monogram"><span>♛</span><strong>SA</strong><small>SALON ANAS 1<br>BARBERSHOP</small><span>✂</span></div><div class="sa-admin-member-info"><span class="sa-member-kicker">EXCLUSIVE ACCESS</span><strong>SA Club<br>Manager</strong><span>Salon Anas 1</span><em>♛ GOLD ADMIN</em></div><div class="sa-admin-member-seal">♛<small>ADMIN</small></div></div><div class="lux-welcome"><div class="sa-admin-eyebrow">✦ DEIN SALON AUF EINEN BLICK <span class="sa-admin-date" id="saAdminDate"></span></div><h2>Dein Club. <span>✦</span></h2><p>Alle Zahlen. Alle Termine. Ein Ort.</p></div>
-<div class="lux-stats"><div class="lux-stat"><div class="lux-stat-icon">◷</div><div class="lux-stat-label">Heutige<br>Termine</div><strong id="saTodayAppointments">—</strong></div>
+<section id="adminView" class="hidden"><header class="nova-header"><div class="nova-logo">SA<span>✦</span></div><div class="nova-brand"><strong>SALON ANAS 1</strong><small>MANAGEMENT STUDIO</small></div><button type="button" class="nova-header-action" onclick="saAdminGo('messages','broadcastTitle')" aria-label="Nachrichten">♧</button></header><div id="luxMenu" class="lux-menu hidden"><button onclick="saAdminGo('customers','customerList')">Kunden verwalten</button><button onclick="saAdminGo('messages','broadcastTitle')">Benachrichtigungen</button></div>
+<div class="sa-admin-page" data-admin-page="overview"><div class="nova-hero"><div class="nova-overline"><span class="nova-status-dot"></span> DEIN SALON · LIVE <span id="saAdminDate"></span></div><div class="nova-hero-main"><div><h1>Guten Morgen<span>.</span></h1><p>Alles im Blick. Alles im Griff.</p></div><div class="nova-hero-mark">✂</div></div><div class="nova-hero-bottom"><span>SA CLUB / DASHBOARD</span><span>✦ PREMIUM</span></div></div><div class="nova-section-title"><h2>Deine Zahlen</h2><span>ÜBERBLICK</span></div><div class="lux-stats"><div class="lux-stat"><div class="lux-stat-icon">◷</div><div class="lux-stat-label">Heutige<br>Termine</div><strong id="saTodayAppointments">—</strong></div>
 <div class="lux-stat"><div class="lux-stat-icon">♙</div><div class="lux-stat-label">Kunden<br>gesamt</div><strong id="saCustomers">—</strong></div>
 <div class="lux-stat"><div class="lux-stat-icon">✂</div><div class="lux-stat-label">Stempel<br>gesamt</div><strong id="saStamps">—</strong></div>
 <div class="lux-stat"><div class="lux-stat-icon">✧</div><div class="lux-stat-label">Belohnungen<br>bereit</div><strong id="saRewards">—</strong></div>
 
 </div>
-<div class="lux-section-heading"><h3>Schnellzugriff</h3><span>ALLE AKTIONEN</span></div>
+<div class="nova-section-title"><h2>Schnellaktionen</h2><span>VERWALTEN</span></div>
 <div class="lux-actions">
 <button class="active" onclick="saAdminGo('customers','search')"><span>♙</span>Stempel hinzufügen</button>
 <button onclick="saAdminGo('customers','customerName')"><span>▤</span>Karte erstellen</button>
 <button onclick="saAdminGo('customers','search')"><span>▦</span>Kunden suchen</button>
 <button onclick="saAdminGo('messages','broadcastTitle')"><span>♧</span>Nachricht senden</button>
 </div>
-</div><div class="sa-admin-page" data-admin-page="appointments"><div class="lux-two"><div class="lux-panel" id="appointmentsPanel"><h3>▦ Nächste Termine</h3><div id="appointmentList">Termine werden geladen …</div></div><div class="lux-panel" id="activityPanel"><h3>ϟ Letzte Aktivitäten</h3><div id="activityList">Aktivitäten werden geladen …</div></div></div><div class="lux-panel" id="appointmentForm"><h3>▦ Neuen Termin erstellen</h3><div class="lux-appointment-form"><select id="appointmentCustomer"><option value="">Kunde auswählen</option></select><input type="date" id="appointmentDate"><input type="time" id="appointmentTime"><select id="appointmentService"><option>Haarschnitt</option><option>Haarschnitt & Bart</option><option>Fade Cut</option><option>Bart</option></select><button class="btn" type="button" id="appointmentSave">Termin speichern</button></div><div id="appointmentMsg"></div></div></div><div class="sa-admin-page" data-admin-page="customers"><div class="lux-section-heading"><h3>✧ Club-Verwaltung</h3></div>
-<div class="hero"><h2>✦ Kundenverwaltung</h2><p>Kunden, Besuche und Belohnungen verwalten</p></div><div class="section"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h3>Neuen Kunden hinzufügen</h3><button class="btn secondary" id="logoutBtn">Abmelden</button></div><div class="grid"><div class="field"><label>Kundenname</label><input id="customerName" placeholder="Vollständiger Name"></div><div class="field"><label>Telefonnummer (optional)</label><input id="customerPhone" placeholder="+49..."></div></div><div class="actions"><button class="btn" id="createBtn">QR-Karte erstellen</button></div><div id="adminMsg" aria-live="polite"></div></div><div class="section"><h3>Kundenkarten</h3><div class="field"><label>Suche nach Name oder Telefonnummer</label><input id="search" placeholder="Suchen..."></div><div id="customerList" style="margin-top:12px"></div></div>
-</div><div class="sa-admin-page" data-admin-page="messages"><div class="section push-broadcast">
+</div><div class="sa-admin-page" data-admin-page="appointments"><div class="nova-page-title"><span>01 / TERMINE</span><h2>Termine</h2><p>Alle Buchungen übersichtlich verwalten.</p></div><div class="lux-two"><div class="lux-panel" id="appointmentsPanel"><h3>▦ Nächste Termine</h3><div id="appointmentList">Termine werden geladen …</div></div><div class="lux-panel" id="activityPanel"><h3>ϟ Letzte Aktivitäten</h3><div id="activityList">Aktivitäten werden geladen …</div></div></div><div class="lux-panel" id="appointmentForm"><h3>▦ Neuen Termin erstellen</h3><div class="lux-appointment-form"><select id="appointmentCustomer"><option value="">Kunde auswählen</option></select><input type="date" id="appointmentDate"><input type="time" id="appointmentTime"><select id="appointmentService"><option>Haarschnitt</option><option>Haarschnitt & Bart</option><option>Fade Cut</option><option>Bart</option></select><button class="btn" type="button" id="appointmentSave">Termin speichern</button></div><div id="appointmentMsg"></div></div></div><div class="sa-admin-page" data-admin-page="customers"><div class="nova-page-title"><span>02 / KUNDEN</span><h2>Kunden & Karten</h2><p>Mitglieder, Treuepunkte und Belohnungen.</p></div>
+<div class="section"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h3>Neuen Kunden hinzufügen</h3><button class="btn secondary" id="logoutBtn">Abmelden</button></div><div class="grid"><div class="field"><label>Kundenname</label><input id="customerName" placeholder="Vollständiger Name"></div><div class="field"><label>Telefonnummer (optional)</label><input id="customerPhone" placeholder="+49..."></div></div><div class="actions"><button class="btn" id="createBtn">QR-Karte erstellen</button></div><div id="adminMsg" aria-live="polite"></div></div><div class="section"><h3>Kundenkarten</h3><div class="field"><label>Suche nach Name oder Telefonnummer</label><input id="search" placeholder="Suchen..."></div><div id="customerList" style="margin-top:12px"></div></div>
+</div><div class="sa-admin-page" data-admin-page="messages"><div class="nova-page-title"><span>03 / NACHRICHTEN</span><h2>Nachrichten</h2><p>Bleib mit deinen Kunden in Kontakt.</p></div><div class="section push-broadcast">
 <h3>🔔 Nachricht an alle Kunden senden</h3>
 <div class="actions" style="margin-bottom:16px"><button class="btn secondary" id="pushBtnAdmin" type="button">🔔 Benachrichtigungen für mein Gerät aktivieren</button><button class="btn secondary" id="testPushBtn" type="button">Testbenachrichtigung an mich senden</button></div>
 <p class="muted">Eine Push-Nachricht wird nur an Geräte versendet, die den Empfang von Angeboten ausdrücklich erlaubt haben.</p>
@@ -796,7 +852,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <div class="field" style="margin-top:12px"><label for="broadcastMessage">Nachricht (max. 240 Zeichen)</label><textarea id="broadcastMessage" maxlength="240" rows="4" placeholder="Zum Beispiel: Diese Woche gibt es ein besonderes Angebot!"></textarea></div>
 <div class="actions"><button class="btn" id="sendBroadcastBtn" type="button">🔔 An alle senden</button><button class="btn secondary" id="refreshAudienceBtn" type="button">Empfänger aktualisieren</button></div>
 <div id="broadcastMsg" aria-live="polite"></div>
-</div></div><nav class="sa-nav sa-admin-tabs" aria-label="Admin Bereiche"><button type="button" class="selected" data-admin-target="overview">⌂<small>Übersicht</small></button><button type="button" data-admin-target="appointments">▦<small>Termine</small></button><button type="button" data-admin-target="customers">♙<small>Kunden</small></button><button type="button" data-admin-target="messages">♧<small>Nachrichten</small></button></nav></section>
+</div></div><nav class="sa-nav sa-admin-tabs" aria-label="Admin Bereiche"><button type="button" class="selected" data-admin-target="overview"><span>⌂</span><small>Start</small></button><button type="button" data-admin-target="appointments"><span>▦</span><small>Termine</small></button><button type="button" data-admin-target="customers"><span>♙</span><small>Kunden</small></button><button type="button" data-admin-target="messages"><span>♧</span><small>News</small></button></nav></section>
 <div id="globalMsg" aria-live="polite"></div><footer class="foot">SALON ANAS 1 · DIGITALES TREUEPROGRAMM</footer>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
