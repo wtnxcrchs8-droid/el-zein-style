@@ -820,6 +820,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <link rel="stylesheet" href="/salon-home-compact.css?v=1">
 <link rel="stylesheet" href="/salon-gold-only.css?v=1">
 <link rel="stylesheet" href="/salon-tabs-fix.css?v=1">
+<link rel="stylesheet" href="/salon-management.css?v=1">
 </head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">S</div><div><h1>SALON ANAS 1</h1><small>TREUEPROGRAMM</small></div></div><span class="pill">BLACK · GOLD EDITION</span></header>
@@ -846,7 +847,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 
 
 <div id="vipBookingPanel" class="vip-panel hidden"><label for="vipBookingDate">▣ Datum wählen <small>Mo – Sa geöffnet · <span style="color:#f7ce78">So geschlossen</span></small></label><input id="vipBookingDate" type="date" required class="vip-date-source"><div id="vipCalendar" class="vip-calendar"></div><label for="vipBookingTime">◷ Uhrzeit wählen</label><select id="vipBookingTime" class="vip-time-source" required><option value="">Uhrzeit wählen</option><option value="09:30">09:30</option><option value="10:00">10:00</option><option value="10:30">10:30</option><option value="11:00">11:00</option><option value="11:30">11:30</option><option value="12:00">12:00</option><option value="12:30">12:30</option><option value="13:00">13:00</option><option value="13:30">13:30</option><option value="14:00">14:00</option><option value="14:30">14:30</option><option value="15:00">15:00</option><option value="15:30">15:30</option><option value="16:00">16:00</option><option value="16:30">16:30</option><option value="17:00">17:00</option><option value="17:30">17:30</option><option value="18:00">18:00</option><option value="18:30">18:30</option></select><div id="vipTimeSlots" class="vip-time-slots" role="group" aria-label="Uhrzeit wählen"><button type="button" data-time="09:30" aria-pressed="false">09:30</button><button type="button" data-time="10:00" aria-pressed="false">10:00</button><button type="button" data-time="10:30" aria-pressed="false">10:30</button><button type="button" data-time="11:00" aria-pressed="false">11:00</button><button type="button" data-time="11:30" aria-pressed="false">11:30</button><button type="button" data-time="12:00" aria-pressed="false">12:00</button><button type="button" data-time="12:30" aria-pressed="false">12:30</button><button type="button" data-time="13:00" aria-pressed="false">13:00</button><button type="button" data-time="13:30" aria-pressed="false">13:30</button><button type="button" data-time="14:00" aria-pressed="false">14:00</button><button type="button" data-time="14:30" aria-pressed="false">14:30</button><button type="button" data-time="15:00" aria-pressed="false">15:00</button><button type="button" data-time="15:30" aria-pressed="false">15:30</button><button type="button" data-time="16:00" aria-pressed="false">16:00</button><button type="button" data-time="16:30" aria-pressed="false">16:30</button><button type="button" data-time="17:00" aria-pressed="false">17:00</button><button type="button" data-time="17:30" aria-pressed="false">17:30</button><button type="button" data-time="18:00" aria-pressed="false">18:00</button><button type="button" data-time="18:30" aria-pressed="false">18:30</button></div><label for="vipBookingService">✂ Service wählen</label><select id="vipBookingService" class="vip-service-source" aria-label="Service"><option>Haarschnitt</option><option>Haarschnitt & Bart</option><option>Fade Cut</option><option>Bart</option></select><div id="vipServiceCards" class="vip-service-cards" role="group" aria-label="Service wählen"><button type="button" data-service="Haarschnitt" class="chosen" aria-pressed="true"><span class="vip-service-art">✂</span><strong>Haarschnitt</strong><span class="vip-service-check">✓</span></button><button type="button" data-service="Haarschnitt & Bart" aria-pressed="false"><span class="vip-service-art">♛</span><strong>Haarschnitt<br>& Bart</strong><span class="vip-service-check">○</span></button><button type="button" data-service="Fade Cut" aria-pressed="false"><span class="vip-service-art">✦</span><strong>Fade Cut</strong><span class="vip-service-check">○</span></button><button type="button" data-service="Bart" aria-pressed="false"><span class="vip-service-art">♧</span><strong>Bart</strong><span class="vip-service-check">○</span></button></div><button type="button" class="vip-gold-btn" id="vipBookingCopy">▦ Terminanfrage vorbereiten</button><p id="vipBookingStatus" aria-live="polite"></p><div class="vip-booking-features"><span>♧<small>Bestätigung<br>vom Salon</small></span><span>▦<small>Einfache<br>Anfrage</small></span><span>◷<small>Schnell &<br>unkompliziert</small></span></div></div><div id="vipAiPanel" class="vip-panel hidden"><h3>✦ KI Style Studio</h3><p>Frisurenberatung mit KI ist noch in Vorbereitung. Hier kannst du schon dein Foto ansehen und einen Stil wählen; es wird noch kein KI-Bild erzeugt.</p><label for="vipAiPhoto">Dein Foto (bleibt auf deinem Gerät)</label><input id="vipAiPhoto" type="file" accept="image/*"><img id="vipAiPreview" alt="Dein ausgewähltes Foto" class="hidden"><select id="vipAiStyle"><option>Fade Cut</option><option>Classic Cut</option><option>Buzz Cut</option><option>Pompadour</option></select><p id="vipAiStyleNote">Stil auswählen und beim Salon beraten lassen.</p></div><div id="vipHistory" class="vip-panel hidden"><h3>Mein Verlauf</h3><p>Dein aktueller Stempelstand: <span id="vipHistoryCount">—</span>. Für eine vollständige Besuchshistorie ist eine sichere Kundenanmeldung erforderlich.</p></div>
-<div id="vipOffers" class="vip-panel hidden"><h3>Angebote & Vorteile</h3><p>Deine aktuelle Treueprämie: <span id="vipOffersReward">—</span></p></div>
+<div id="vipOffers" class="vip-panel hidden"><h3>Angebote & Vorteile</h3><p>Deine aktuelle Treueprämie: <span id="vipOffersReward">—</span></p><h3 class="sa9-public-heading">Aktuelle Aktionen</h3><div id="sa9PublicOffers" class="sa9-public-offers">Angebote werden geladen …</div></div>
 <div class="vip-panel vip-push hidden" id="vipPushPanel"><button type="button" id="vipPushClose" class="vip-close" aria-label="Schließen">×</button><h3>♧ Benachrichtigungen</h3><p>Erhalte Angebote und Neuigkeiten von SALON ANAS 1. Auf dem iPhone füge die Karte zuerst zum Home-Bildschirm hinzu und öffne sie von dort.</p><label class="push-consent" for="pushConsentPublic"><input type="checkbox" id="pushConsentPublic"><span>Ich möchte freiwillig Push-Nachrichten mit Angeboten und Neuigkeiten erhalten. Ich kann meine Einwilligung jederzeit widerrufen.</span></label><div class="actions"><button class="btn" id="pushBtnPublic" type="button">Benachrichtigungen aktivieren</button><button class="btn secondary hidden" id="pushOffBtnPublic" type="button">Benachrichtigungen deaktivieren</button></div><p class="muted" id="pushStatusPublic" aria-live="polite">Die Aktivierung ist freiwillig.</p><button type="button" id="vipInstallShortcut" class="vip-gold-btn">Zum Home-Bildschirm hinzufügen</button></div>
 <div class="vip-bottom"><button type="button" data-vip-tab="start">⌂<small>Start</small></button><button type="button" data-vip-tab="karte">▤<small>Karte</small></button><button type="button" data-vip-tab="termine">▦<small>Termine</small></button><button type="button" data-vip-tab="angebote">◇<small>Angebote</small></button><button type="button" data-vip-tab="profil">♙<small>Profil</small></button></div>
 <button id="installCardBtn" type="button" class="vip-install hidden">＋ Zum Home-Bildschirm hinzufügen</button>
@@ -862,7 +863,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 </dialog>
 <dialog id="saPriceDialog" class="sa-home-dialog" aria-labelledby="saPriceHeading">
  <div class="sa-dialog-head"><span>✂</span><div><small>SA CLUB · SALON ANAS 1</small><h2 id="saPriceHeading">Unsere Preisliste</h2></div><button type="button" data-sa-dialog-close aria-label="Preisliste schließen">✕</button></div>
- <div class="sa-price-list">
+ <div class="sa-price-list" id="sa9PublicPrices">
   <div><span>Haarschnitt</span><strong>19 €</strong></div>
   <div><span>Bartrasur</span><strong>12 €</strong></div>
   <div><span>Kinder</span><strong>ab 14 €</strong></div>
@@ -903,6 +904,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
   <button type="button" data-sa4-go="appointments">Termine</button>
   <button type="button" data-sa4-go="customers">Kunden & Karten</button>
   <button type="button" data-sa4-go="messages">Benachrichtigungen</button>
+  <button type="button" data-sa4-go="management">✦ Preise & Angebote</button>
   <button type="button" id="sa4LogoutMenu">Abmelden</button>
  </nav>
  <div class="sa4-welcome"><h2>Willkommen, Manager!</h2><p>Hier ist dein aktueller Überblick über deinen SA Club in Salon Anas 1.</p></div>
@@ -921,7 +923,8 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
  <button class="sa4-action" type="button" id="sa4OpenQr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M16 14h-2v2h2v-2Zm2 0v3h3M14 20h3m3-1v2"/></svg><span>QR<br>scannen</span></button>
  <button class="sa4-action" type="button" data-sa4-go="messages" data-sa4-focus="broadcastTitle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span>Erinnerung<br>senden</span></button>
  </div>
- <div class="sa4-home-lists"><section class="sa4-panel"><div class="sa4-panel-head"><h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3"/></svg> Nächste Termine</h3><button type="button" data-sa4-go="appointments" data-sa4-focus="appointmentList">Alle ›</button></div><div class="sa4-rows" id="sa4HomeAppointments">Termine werden geladen …</div></section>
+ <button type="button" class="sa9-management-cta" data-sa4-go="management"><span class="sa9-cta-icon" aria-hidden="true">✦</span><span><strong>Preise & Angebote</strong><small>Preise ändern · Aktionen veröffentlichen</small></span><span aria-hidden="true">›</span></button>
+<div class="sa4-home-lists"><section class="sa4-panel"><div class="sa4-panel-head"><h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3"/></svg> Nächste Termine</h3><button type="button" data-sa4-go="appointments" data-sa4-focus="appointmentList">Alle ›</button></div><div class="sa4-rows" id="sa4HomeAppointments">Termine werden geladen …</div></section>
  <section class="sa4-panel"><div class="sa4-panel-head"><h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l3-6 4 12 3-6h6"/></svg> Letzte Aktivitäten</h3><button type="button" data-sa4-go="stats" data-sa4-focus="activityList">Alle ›</button></div><div class="sa4-rows" id="sa4HomeActivity">Aktivitäten werden geladen …</div></section></div>
 <section class="sa7-club" id="sa7Club" aria-labelledby="sa7Heading">
   <div class="sa7-header">
@@ -995,6 +998,38 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 <h3 id="sa5QrHeading">Kundenkarte</h3><p id="sa5QrName"></p><img id="sa5QrImage" alt="QR-Code der Kundenkarte"/>
 <small class="sa5-qr-url" id="sa5QrUrl"></small><a id="sa5QrLink" class="sa5-qr-link" target="_blank" rel="noopener noreferrer" href="#">Karte öffnen</a>
 </div></div>
+
+<div class="sa4-page sa4-pageshell sa9-management" data-admin-page="management">
+ <div class="sa9-page-title"><small>SA CLUB · SALONVERWALTUNG</small><h2>Preise & Angebote</h2><p>Dein Salon, deine Preise. Änderungen erscheinen auf allen Kundenkarten.</p></div>
+ <div class="sa9-manager-tabs" role="tablist" aria-label="Preise und Angebote verwalten">
+  <button type="button" id="sa9TabPrices" data-sa9-tab="prices" role="tab" aria-selected="true">✂ Preise</button>
+  <button type="button" id="sa9TabOffers" data-sa9-tab="offers" role="tab" aria-selected="false">✦ Angebote</button>
+ </div>
+ <section id="sa9PricesPane" class="sa9-panel" role="tabpanel" aria-labelledby="sa9TabPrices">
+  <div class="sa9-panel-head"><h3>Aktuelle Preisliste</h3><small>Preis pro Leistung in €</small></div>
+  <p class="sa9-description">Tippe auf einen Preis, ändere ihn und speichere. „Ab-Preis“ bedeutet: ab diesem Betrag.</p>
+  <div id="sa9ServiceList" class="sa9-service-list">Preisliste wird geladen …</div>
+  <button type="button" id="sa9Refresh" class="sa9-muted-btn">↻ Preise aktualisieren</button>
+ </section>
+ <section id="sa9OffersPane" class="sa9-panel" role="tabpanel" aria-labelledby="sa9TabOffers" hidden>
+  <div class="sa9-panel-head"><h3>Aktionen verwalten</h3><small>Live auf der Kundenkarte</small></div>
+  <div class="sa9-offer-form" id="sa9OfferForm">
+   <h4 id="sa9OfferHeading">Neues Angebot erstellen</h4>
+   <label for="sa9OfferTitle">Titel *</label><input type="text" id="sa9OfferTitle" maxlength="100" placeholder="z. B. 20 % auf Haarschnitt">
+   <label for="sa9OfferDescription">Beschreibung</label><textarea id="sa9OfferDescription" maxlength="500" rows="2" placeholder="Details zum Angebot"></textarea>
+   <label for="sa9OfferPrice">Aktionspreis oder Vorteil (optional)</label><input type="text" id="sa9OfferPrice" maxlength="45" placeholder="z. B. 15 € oder -20 %">
+   <div class="sa9-dates">
+    <div><label for="sa9OfferFrom">Startdatum (optional)</label><input type="date" id="sa9OfferFrom"></div>
+    <div><label for="sa9OfferUntil">Enddatum (optional)</label><input type="date" id="sa9OfferUntil"></div>
+   </div>
+   <label class="sa9-check"><input type="checkbox" id="sa9OfferActive" checked><span>Jetzt veröffentlichen (im Zeitraum sichtbar)</span></label>
+   <div class="sa9-form-buttons"><button id="sa9OfferSave" class="sa9-primary" type="button">✦ Angebot speichern</button><button id="sa9OfferCancel" class="sa9-muted-btn" type="button" hidden>Abbrechen</button></div>
+  </div>
+  <div class="sa9-panel-head sa9-offers-list-head"><h3>Gespeicherte Angebote</h3><small id="sa9OfferTotal">0 Aktionen</small></div>
+  <div id="sa9OfferList" class="sa9-offers-list">Angebote werden geladen …</div>
+ </section>
+ <p class="sa9-info" id="sa9Info" role="status" aria-live="polite"></p>
+</div>
 <div class="sa4-page sa4-pageshell" data-admin-page="rewards">
 <div class="sa4-page-title"><small>03 / BELOHNUNGEN</small><h2>Belohnungen</h2><p>Alle Karten mit einlösbaren Prämien.</p></div>
 <div class="sa4-widepanel"><h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M3 13h18M12 9v12M12 9C6 9 5 3 8 3c3 0 4 6 4 6Zm0 0c6 0 7-6 4-6-3 0-4 6-4 6Z"/></svg> Bereit zum Einlösen</h3><div id="sa4RewardsList"></div></div>
@@ -1437,4 +1472,4 @@ document.querySelectorAll('#adminView .sa-admin-tabs [data-admin-target]').forEa
 saAdminGo('overview');const saDate=document.getElementById('saAdminDate');if(saDate)saDate.textContent=new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'short'}).format(new Date());
 
 (async()=>{const token=new URLSearchParams(location.search).get('card');if(token){await loadPublic(token);return}const {data}=await db.auth.getSession();if(data.session){const {data:a}=await db.from('admins').select('user_id').eq('user_id',data.session.user.id).maybeSingle();if(a){show('adminView');await refresh();await refreshAudience();return}}show('loginView')})();
-</script><script src="/admin-premium.js?v=12"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=6"></script><script src="/appointments-v3.js?v=1"></script><script src="/salon-home.js?v=2"></script></body></html>
+</script><script src="/admin-premium.js?v=12"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=6"></script><script src="/appointments-v3.js?v=1"></script><script src="/salon-home.js?v=2"></script><script src="/salon-management.js?v=1"></script></body></html>
