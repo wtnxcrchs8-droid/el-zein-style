@@ -1169,33 +1169,47 @@ $('testPushBtn').addEventListener('click',async()=>{
 $('pushBtnPublic').addEventListener('click',activateCustomerPush);
 $('pushOffBtnPublic').addEventListener('click',deactivateCustomerPush);
 
-let audienceCount=0;
+let audienceCount=0, recentAudienceCount=0, audienceReady=false;
 async function refreshAudience(){
   try{
     const info=await pushRequest('stats');
-    audienceCount=info.subscribed_devices||0;
-    $('pushAudience').textContent=audienceCount+' empfangsbereite Kundengeräte'+
-      (info.awaiting_consent_devices?' · '+info.awaiting_consent_devices+' ältere Geräte brauchen eine neue Einwilligung.':'')+
-      (!info.ready?' · Der Push-Dienst muss noch konfiguriert werden.':'');
-    $('sendBroadcastBtn').disabled=!audienceCount||!info.ready;
+    audienceCount=Number(info.subscribed_devices)||0;
+    recentAudienceCount=Number(info.recent_devices)||0;
+    audienceReady=Boolean(info.ready);
+    const pending=Number(info.awaiting_consent_devices)||0;
+    $('sa8ReadyCount').textContent=audienceCount;
+    $('sa8PendingCount').textContent=pending;
+    $('sa8RecentCount').textContent=recentAudienceCount;
+    const selectedCount=window.sa8AudienceMode==='recent'?recentAudienceCount:audienceCount;
+    $('sendBroadcastBtn').disabled=selectedCount<1||!audienceReady;
+    $('pushAudience').textContent=(audienceReady?'Push-Dienst bereit.':'Push-Dienst muss noch konfiguriert werden.')+
+      ' Nur Geräte mit Werbeeinwilligung werden benachrichtigt.';
+    window.sa8UpdateControls?.();
   }catch(err){
-    audienceCount=0;
+    audienceCount=0;recentAudienceCount=0;audienceReady=false;
+    $('sa8ReadyCount').textContent='—';
+    $('sa8PendingCount').textContent='—';
+    $('sa8RecentCount').textContent='—';
     $('sendBroadcastBtn').disabled=true;
     $('pushAudience').textContent='Empfänger konnten nicht geladen werden: '+err.message;
+    window.sa8UpdateControls?.();
   }
 }
 async function sendBroadcast(){
   const title=$('broadcastTitle').value.trim();
   const message=$('broadcastMessage').value.trim();
+  const isRecent=window.sa8AudienceMode==='recent';
+  const selectedCount=isRecent?recentAudienceCount:audienceCount;
   if(!title || title.length>80 || !message || message.length>240){msg($('broadcastMsg'),'Bitte gib einen Titel und eine Nachricht mit maximal 240 Zeichen ein.',true);return}
-  if(audienceCount<1){msg($('broadcastMsg'),'Noch keine Kundengeräte mit Werbeeinwilligung vorhanden.',true);return}
-  if(!confirm('Diese Nachricht wirklich an alle '+audienceCount+' angemeldeten Kundengeräte senden?'))return;
+  if(selectedCount<1){msg($('broadcastMsg'),'Keine empfangsbereiten Kundengeräte in dieser Auswahl vorhanden.',true);return}
+  const recipientLabel=isRecent?' kürzlich aktive':' angemeldete';
+  if(!confirm('Diese Nachricht wirklich an '+selectedCount+recipientLabel+' Kundengeräte senden?'))return;
   const btn=$('sendBroadcastBtn');btn.disabled=true;
   try{
-    const result=await pushRequest('broadcast',{title,message});
+    const result=await pushRequest('broadcast',{title,message,audience:isRecent?'recent':'all'});
     const sent=result.sent||0, failed=result.failed||0;
     msg($('broadcastMsg'),'Versand abgeschlossen: '+sent+' Geräte erfolgreich, '+failed+' fehlgeschlagen.',failed>0);
-    if(sent>0) $('broadcastMessage').value='';
+    if(sent>0){$('broadcastMessage').value='';$('broadcastMessage').dispatchEvent(new Event('input',{bubbles:true}))}
   }catch(err){msg($('broadcastMsg'),'Senden fehlgeschlagen: '+err.message,true)}
   finally{await refreshAudience()}
 }
