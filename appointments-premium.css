@@ -1,0 +1,63 @@
+
+/* SALON ANAS 1 — Mobile-first premium appointments, SA Club Admin */
+#adminView .sa4-widepanel h3 > svg {
+  display:inline-block!important;
+  width:21px!important;
+  height:21px!important;
+  min-width:21px!important;
+  min-height:21px!important;
+  max-width:21px!important;
+  max-height:21px!important;
+  vertical-align:-4px!important;
+  flex:0 0 21px!important;
+  overflow:visible!important;
+}
+#adminView .sa6-appointments {padding-top:10px!important; min-width:0;}
+#adminView .sa6-heading {display:flex;align-items:center;justify-content:space-between;gap:14px;margin:3px 2px 19px;}
+#adminView .sa6-heading small {display:block;font-size:10px;letter-spacing:2px;color:#dbb36b;font-weight:800;margin-bottom:8px;}
+#adminView .sa6-heading h2 {font:700 clamp(32px,8vw,39px) Georgia,serif!important;line-height:1!important;color:#ffe1a2!important;margin:0 0 7px!important;text-shadow:0 0 15px #bc843f4d;}
+#adminView .sa6-heading p {font-size:12px;color:#cdb892;margin:0!important;line-height:1.4;}
+#adminView .sa6-mini-icon {width:51px;height:51px;display:grid;place-items:center;flex:0 0 51px;border:1.5px solid #aa803e;border-radius:15px;background:linear-gradient(135deg,#3c2913,#120d07);color:#f2c674;box-shadow:inset 0 1px #ffe1a032,0 0 13px #bc85333a;}
+#adminView .sa6-mini-icon svg{width:25px!important;height:25px!important;display:block!important;max-width:25px!important;max-height:25px!important;}
+#adminView .sa6-segments{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:14px;padding:5px;background:#16110c;border:1px solid #7e5b32;border-radius:16px;}
+#adminView .sa6-segments button{display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;min-height:43px;padding:8px 5px;background:transparent;border:1px solid transparent;border-radius:12px;color:#c9af82;font-size:clamp(11px,2.9vw,14px);font-weight:700;white-space:nowrap;}
+#adminView .sa6-segments button svg{width:17px!important;height:17px!important;max-width:17px!important;max-height:17px!important;flex:0 0 17px!important;}
+#adminView .sa6-segments button[aria-selected="true"]{background:linear-gradient(120deg,#ffdfa0,#c08a37);color:#211508;border-color:#ffda8d;box-shadow:0 0 10px #ce98484a;}
+#adminView .sa6-panel{min-width:0;padding:15px!important;border:1.4px solid #a47b40!important;border-radius:19px!important;background:radial-gradient(circle at 100% 0%,#4a2c1240,transparent 55%),linear-gradient(135deg,#1d160e,#0b0906)!important;box-shadow:0 8px 23px #0008,inset 0 1px #f1c97a26!important;}
+#adminView .sa6-panel[hidden]{display:none!important;}
+#adminView .sa6-panel-heading{display:flex;gap:9px;align-items:center;margin-bottom:12px;padding-bottom:11px;border-bottom:1px solid #6a4c2b;}
+#adminView .sa6-panel-badge{height:37px;width:37px;flex:0 0 37px;display:grid;place-items:center;background:#35230f;border:1px solid #816032;border-radius:12px;color:#f2c778;}
+#adminView .sa6-panel-badge svg {display:block!important;width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important;}
+#adminView .sa6-panel-heading-copy{flex:1;min-width:0;}
+#adminView .sa6-panel-heading h3 {font:700 clamp(17px,4.2vw,21px) Georgia,serif!important;color:#ffda94!important;margin:0 0 3px!important;}
+#adminView .sa6-panel-heading p {margin:0;font-size:11px;line-height:1.2;color:#c4b091;}
+#adminView .sa6-header-action{display:inline-flex;align-items:center;justify-content:center;gap:3px;min-height:34px;white-space:nowrap;border:1px solid #d5a451;border-radius:11px;background:#2e1f0d;color:#f9d79b;padding:7px 10px;font-size:12px;font-weight:800;}
+#adminView .sa6-empty{padding:18px 12px;border-radius:13px;background:#150f08;border:1px dashed #76572c;color:#d9c5a1;text-align:center;font-size:13px;}
+#adminView .sa6-entries{color:#e9dbc1;font-size:13px;min-width:0;}
+#adminView .sa6-entries .lux-entry{display:flex;align-items:center;gap:9px;padding:12px 4px!important;border-bottom:1px solid #5b4328!important;background:transparent!important;}
+#adminView .sa6-entries .lux-entry:last-child{border-bottom:0!important;}
+#adminView .sa6-entries .lux-entry > div{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;}
+#adminView .sa6-entries .lux-entry b{color:#ffe1a4;font-size:14px;font-weight:750;overflow-wrap:anywhere;}
+#adminView .sa6-entries .lux-entry small{font-size:11px;color:#c9b699;overflow-wrap:anywhere;}
+#adminView .sa6-entries .lux-entry em{font-style:normal;flex:0 0 auto;color:#271806!important;background:linear-gradient(110deg,#ffe7a6,#d2a14c);font-size:12px;font-weight:750;padding:6px 8px;border-radius:10px;}
+#adminView .sa6-create-form{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:13px!important;min-width:0!important;}
+#adminView .sa6-field{display:flex;flex-direction:column;gap:7px;min-width:0;width:100%;}
+#adminView .sa6-field label{font-size:12px!important;font-weight:700!important;color:#efcf93!important;}
+#adminView .sa6-create-form .sa6-field select,
+#adminView .sa6-create-form .sa6-field input{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;min-height:49px!important;height:49px!important;margin:0!important;padding:10px 13px!important;box-sizing:border-box!important;font-family:system-ui,-apple-system,"Segoe UI",sans-serif!important;font-size:16px!important;font-weight:550!important;background:#110e09!important;color:#fff0d3!important;border:1.4px solid #94713f!important;border-radius:13px!important;box-shadow:none!important;}
+#adminView .sa6-create-form .sa6-field input::-webkit-date-and-time-value{text-align:left!important;min-height:1em;}
+#adminView .sa6-create-form .sa6-field input:focus,
+#adminView .sa6-create-form .sa6-field select:focus{outline:2px solid #dbb064!important;outline-offset:2px!important;}
+#adminView .sa6-create-form .sa6-save{display:flex!important;align-items:center;justify-content:center;width:100%!important;min-height:48px!important;padding:12px!important;border:1px solid #ffdc91!important;border-radius:13px!important;background:linear-gradient(110deg,#ffe5a5,#d09b43)!important;color:#211304!important;font-size:15px!important;font-weight:850!important;box-shadow:0 0 12px #cc934744!important;}
+#adminView .sa6-note{display:flex;gap:7px;align-items:flex-start;color:#c7ae82;font-size:11px;line-height:1.3;margin:13px 0 0;}
+#adminView #appointmentMsg{margin-top:10px;}
+#adminView .sa6-list-footer{margin-top:11px;font-size:11px;color:#a99779;line-height:1.35;}
+@media(min-width:700px){
+  #adminView .sa6-create-form{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+  #adminView .sa6-create-form .sa6-save{grid-column:1/-1;}
+}
+@media(max-width:390px){
+  #adminView .sa6-panel{padding:12px!important;}
+  #adminView .sa6-panel-heading h3{font-size:16px!important;}
+  #adminView .sa6-header-action{font-size:11px;padding:7px 8px;}
+}
