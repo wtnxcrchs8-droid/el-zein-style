@@ -1,0 +1,92 @@
+/* SALON ANAS 1 · Termine v3 — compact customer-style appointment manager */
+#adminView .sa10-appointments{padding:3px 1px 96px!important;color:#f8e3bb!important;max-width:100%!important;min-width:0!important}
+#adminView .sa10-appointments *{box-sizing:border-box}
+#adminView .sa10-appointments svg{display:inline-block!important;width:19px!important;height:19px!important;min-width:0!important;min-height:0!important;max-width:19px!important;max-height:19px!important;flex:0 0 19px!important;vertical-align:middle!important;overflow:visible!important}
+#adminView .sa10-title{display:flex;gap:11px;align-items:center;min-width:0;margin:8px 5px 12px}
+#adminView .sa10-title-icon{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border:1px solid #c49a54;border-radius:12px;color:#f6d180;background:linear-gradient(145deg,#4e3212,#140d06);box-shadow:0 0 12px #d19a395b}
+#adminView .sa10-title-icon svg{width:23px!important;height:23px!important;max-width:23px!important;max-height:23px!important}
+#adminView .sa10-title-info{min-width:0}
+#adminView .sa10-title-info small{display:block;font-size:9px;letter-spacing:2px;font-weight:800;color:#d6aa5b;margin-bottom:2px}
+#adminView .sa10-title-info h2{font:700 clamp(26px,6.7vw,33px) Georgia,serif!important;color:#fce1a4!important;line-height:1.05!important;margin:0 0 2px!important;text-shadow:0 0 9px #aa783643}
+#adminView .sa10-title-info p{margin:0!important;font-size:11px;color:#d1b99a}
+#adminView .sa10-tabs{gap:4px!important;margin:0 2px 11px!important;padding:4px!important;border-radius:15px!important;background:#110d09!important;border:1px solid #ad813a!important}
+#adminView .sa10-tabs button{display:flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;min-height:39px!important;padding:7px 4px!important;border-radius:11px!important;font-size:clamp(11px,3vw,14px)!important;font-weight:800!important}
+#adminView .sa10-tabs button svg{width:17px!important;height:17px!important;max-width:17px!important;max-height:17px!important}
+#adminView .sa10-tabs button[aria-selected="true"]{border-color:#ffdf95!important;box-shadow:0 0 11px #d39c4670!important}
+#adminView .sa10-form-panel,#adminView .sa10-list-panel{margin:0 2px 9px!important;padding:12px 12px 13px!important;border:1.4px solid #c2984e!important;border-radius:19px!important;min-width:0!important;background:radial-gradient(ellipse at 95% 0%,#5b36172b,transparent 54%),linear-gradient(135deg,#25170c,#0b0906 72%)!important;box-shadow:0 4px 21px #0009,inset 0 1px #e0b86533!important}
+#adminView .sa10-panel-head{display:flex;align-items:center;gap:9px;min-width:0;padding:0 0 10px;margin:0 0 9px;border-bottom:1px solid #6b4b26}
+#adminView .sa10-square{display:grid;place-items:center;flex:0 0 35px;width:35px;height:35px;border:1px solid #b0823d;border-radius:10px;color:#ffdb86;background:linear-gradient(140deg,#4a2d10,#1a1008)}
+#adminView .sa10-square svg{width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important}
+#adminView .sa10-panel-head>div{flex:1;min-width:0}
+#adminView .sa10-panel-head h3{font:700 clamp(17px,4.9vw,23px) Georgia,serif!important;color:#ffdc93!important;margin:0 0 3px!important;line-height:1.05!important}
+#adminView .sa10-panel-head p{font-size:10px;color:#cbb18e;margin:0!important;line-height:1.25}
+#adminView .sa10-head-add{border:1px solid #bb8e45;background:#39260e;color:#ffe0a3;padding:8px 11px;border-radius:11px;font-size:12px;font-weight:800}
+#adminView .sa10-form{display:flex!important;flex-direction:column!important;gap:0!important;min-width:0}
+#adminView .sa10-customer{min-width:0;margin:1px 0 9px}
+#adminView .sa10-customer label{display:block!important;font-size:12px!important;font-weight:800!important;color:#ffdf9f!important;margin:0 0 5px!important}
+#adminView .sa10-customer select{display:block!important;box-sizing:border-box!important;width:100%!important;max-width:100%!important;min-width:0!important;height:41px!important;min-height:41px!important;margin:0!important;padding:7px 29px 7px 11px!important;background:#100d09!important;color:#ffe5bd!important;font:600 15px system-ui,-apple-system,sans-serif!important;border:1.2px solid #ad833e!important;border-radius:11px!important;box-shadow:none!important;appearance:auto!important}
+#adminView .sa10-native{display:none!important;visibility:hidden!important;width:0!important;height:0!important;min-height:0!important;position:absolute!important;pointer-events:none!important}
+#adminView .sa10-section-title{display:flex;align-items:center;justify-content:space-between;gap:6px;margin:7px 0 6px;min-width:0}
+#adminView .sa10-section-title strong{display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;color:#ffdb93;font-size:clamp(12px,3.6vw,15px);font-weight:850}
+#adminView .sa10-section-title strong svg{color:#f2c05c;width:18px!important;height:18px!important;max-width:18px!important;max-height:18px!important}
+#adminView .sa10-section-title>span{font-size:clamp(8px,2.15vw,10px);line-height:1.2;color:#c2a981;text-align:right;white-space:nowrap}
+#adminView .sa10-section-title em{font-style:normal;color:#dd7c6c}
+#adminView .sa10-calendar{padding:6px 7px 7px;border:1px solid #bb8d42;border-radius:12px;background:linear-gradient(130deg,#1f140a,#0b0906);box-shadow:inset 0 1px 7px #aa6f2e22}
+#adminView .sa10-calendar-bar{display:grid;grid-template-columns:32px 1fr 32px;gap:5px;align-items:center;margin:0 0 5px}
+#adminView .sa10-calendar-bar button{display:grid;place-items:center;width:32px;height:29px;border:1px solid #85632d;border-radius:9px;background:#271907;color:#fcd785;font-size:23px;font-weight:600}
+#adminView .sa10-calendar-bar button:disabled{opacity:.25;cursor:not-allowed}
+#adminView .sa10-calendar-bar strong{font:700 14px Georgia,serif;color:#ffda89;text-align:center;text-transform:capitalize}
+#adminView .sa10-weekdays,#adminView .sa10-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px 4px;min-width:0}
+#adminView .sa10-weekdays{margin-bottom:4px}
+#adminView .sa10-weekdays span{text-align:center;color:#cfb791;font-size:10px;font-weight:750;line-height:17px}
+#adminView .sa10-weekdays span:last-child{color:#eb8270}
+#adminView .sa10-day-empty{display:block;min-height:24px}
+#adminView .sa10-days button{display:grid;place-items:center;min-width:0;height:24px;border:1px solid #a47931;border-radius:19px;background:linear-gradient(120deg,#231809,#080705);color:#f6dfb4;font-size:12px;font-weight:800;line-height:1;box-shadow:inset 0 1px #f4c97f15;padding:0}
+#adminView .sa10-days button[aria-pressed="true"]{background:linear-gradient(145deg,#fff3b8,#e6ad34 70%,#a97620)!important;color:#221301!important;border-color:#ffdf7d!important;box-shadow:0 0 10px #e9b64dba!important}
+#adminView .sa10-days button:disabled{opacity:.28;cursor:not-allowed}
+#adminView .sa10-days button.sa10-sunday{border-color:#8e4032!important;color:#fa766d!important;background:#220d0a!important}
+#adminView .sa10-days button.sa10-sunday:disabled{opacity:.75}
+#adminView .sa10-cal-toggle{display:block;width:100%;border:0!important;padding:5px 2px 0!important;background:none!important;font-size:10px!important;color:#d6b77f!important;text-align:center;text-decoration:underline;text-underline-offset:3px}
+#adminView .sa10-time-heading{margin-top:10px}
+#adminView .sa10-times{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px 5px;min-width:0}
+#adminView .sa10-times button{min-width:0;height:29px;display:grid;place-items:center;background:linear-gradient(110deg,#221608,#090706);color:#fbe0ad;border:1px solid #a67b34;border-radius:20px;font-size:clamp(10px,2.8vw,12px);font-weight:800;white-space:nowrap;padding:0}
+#adminView .sa10-times button[aria-pressed="true"]{border-color:#fff0b2!important;background:linear-gradient(130deg,#fff1b0,#e0a73b)!important;color:#1f1205!important;box-shadow:0 0 10px #dba444a6!important}
+#adminView .sa10-times button:disabled{opacity:.25;cursor:not-allowed}
+#adminView .sa10-service-heading{margin-top:11px}
+#adminView .sa10-services{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;min-width:0}
+#adminView .sa10-style{position:relative;display:flex;align-items:center;flex-direction:column;min-width:0;height:99px!important;padding:2px 2px 4px;border:1.2px solid #a47a36;border-radius:12px;background:linear-gradient(145deg,#392510,#090706 70%);color:#f6e2ba;overflow:hidden}
+#adminView .sa10-style img{display:block;width:100%;height:57px;object-fit:cover;object-position:center 35%;border-radius:8px 8px 2px 2px;filter:saturate(.85) brightness(.82)}
+#adminView .sa10-style b{display:flex;align-items:center;justify-content:center;text-align:center;flex:1;font-size:clamp(9px,2.4vw,11px);line-height:1.08;min-height:26px;overflow-wrap:anywhere}
+#adminView .sa10-style-check{position:absolute;top:3px;right:4px;border-radius:50%;background:#0c0907a8;color:#edd8ac;font-weight:900;font-size:12px;line-height:17px;width:17px;height:17px}
+#adminView .sa10-style[aria-pressed="true"]{border:2px solid #ffe18b!important;background:linear-gradient(130deg,#593607,#100a05)!important;box-shadow:0 0 12px #e9ac4980!important}
+#adminView .sa10-style[aria-pressed="true"] img{filter:saturate(.95) brightness(1)}
+#adminView .sa10-style[aria-pressed="true"] .sa10-style-check{background:#ffe296;color:#2b1704}
+#adminView .sa10-save{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;width:100%!important;min-height:43px!important;margin:10px 0 0!important;padding:9px 11px!important;background:linear-gradient(105deg,#ffecaf,#d19a3e)!important;color:#221304!important;border:1px solid #fadd96!important;border-radius:26px!important;box-shadow:0 0 13px #d49b4b70!important;font-size:15px!important;font-weight:850!important}
+#adminView .sa10-save svg{width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important}
+#adminView #appointmentMsg{margin-top:7px!important}
+#adminView .sa10-entries .lux-entry{display:flex;align-items:center;gap:9px;background:transparent!important;padding:10px 3px!important;min-height:47px!important;border-bottom:1px solid #63492d!important}
+#adminView .sa10-entries .lux-entry b{color:#fae0a9;font-size:13px}
+#adminView .sa10-entries .lux-entry small{color:#bba583;font-size:10px}
+#adminView .sa10-entries .lux-entry em{font-size:12px;border:1px solid #bf9147;border-radius:10px;padding:6px 8px;color:#fbd592}
+#adminView .sa10-entries .lux-entry:last-child{border-bottom:0!important}
+#adminView .sa10-appointments:has(#appointmentForm:not([hidden])) .sa10-entries{display:none}
+#adminView .sa10-list-panel[hidden],#adminView .sa10-form-panel[hidden]{display:none!important}
+/* An iPhone should only scroll gently through the booking form; reduce space above it. */
+@media(max-width:700px){
+  #adminView:has(.sa10-appointments.sa4-active) .sa4-hero{height:95px!important;min-height:95px!important;max-height:95px!important;margin-bottom:6px!important;overflow:visible!important}
+  #adminView:has(.sa10-appointments.sa4-active) .sa4-hero .sa4-welcome{display:none!important}
+  #adminView:has(.sa10-appointments.sa4-active) .sa4-hero .sa4-top{padding-top:9px!important;grid-template-columns:38px 1fr 38px!important}
+  #adminView:has(.sa10-appointments.sa4-active) .sa4-hero .sa4-square{height:38px!important;width:38px!important}
+  #adminView:has(.sa10-appointments.sa4-active) .sa4-brand-mark{height:16px!important;line-height:16px!important;font-size:16px!important}
+  #adminView:has(.sa10-appointments.sa4-active) .sa4-brand h1{font-size:clamp(24px,6.5vw,32px)!important}
+  #adminView:has(.sa10-appointments.sa4-active) .sa4-brand p{font-size:12px!important}
+  #adminView .sa10-appointments{padding-bottom:calc(95px + env(safe-area-inset-bottom,0px))!important}
+}
+@media(max-width:370px){
+  #adminView .sa10-form-panel{padding:10px 8px 12px!important}
+  #adminView .sa10-section-title>span{font-size:8px}
+  #adminView .sa10-times{gap:4px}
+  #adminView .sa10-days button{height:23px;font-size:11px}
+  #adminView .sa10-style{height:91px!important}
+  #adminView .sa10-style img{height:50px}
+}
