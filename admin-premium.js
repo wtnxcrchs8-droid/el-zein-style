@@ -4,7 +4,7 @@
 const root=document.getElementById("adminView");
 if(!root)return;
 const byId=id=>document.getElementById(id);
-const pages=["overview","appointments","customers","rewards","stats","messages"];
+const pages=["overview","appointments","customers","rewards","stats","messages","hair"];
 const menu=byId("sa4Menu");
 function closeMenu(){if(menu){menu.hidden=true;byId("sa4MenuToggle")?.setAttribute("aria-expanded","false")}}
 function go(page,focusId){
@@ -16,6 +16,7 @@ function go(page,focusId){
   });
   closeMenu();closeQr();closeAi();
   if(page==="appointments")window.sa6ShowAppointmentTab?.(focusId==="appointmentForm"?"new":"upcoming");
+  if(page==="hair")window.saKiOnOpen?.();
   if(page==="rewards"||page==="stats")renderExtras();
   if(focusId){
     if(focusId==="customerName")window.sa5OpenForm?.();
@@ -40,7 +41,7 @@ root.querySelectorAll("[data-sa4-go]").forEach(btn=>btn.addEventListener("click"
 byId("sa4LogoutMenu")?.addEventListener("click",()=>byId("logoutBtn")?.click());
 const ai=byId("sa4AiOverlay");
 function closeAi(){if(ai)ai.hidden=true}
-byId("sa4OpenAi")?.addEventListener("click",()=>{if(ai)ai.hidden=false});
+byId("sa4OpenAi")?.addEventListener("click",()=>go("hair"));
 byId("sa4CloseAi")?.addEventListener("click",closeAi);
 ai?.addEventListener("click",e=>{if(e.target===ai)closeAi()});
 function copyEntries(sourceId,targetId,limit){
