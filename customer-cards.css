@@ -63,9 +63,14 @@
 #adminView .sa5-qr-dialog .sa5-qr-url{display:block;color:#dfc59c;font-size:10px;overflow-wrap:anywhere;margin-bottom:12px}
 #adminView .sa5-qr-dialog .sa5-qr-close{position:absolute;right:10px;top:9px;border:0;background:#3e2a13;color:#fbe0a7;border-radius:10px;width:34px;height:34px}
 #adminView .sa5-qr-dialog .sa5-qr-link{display:inline-block;text-decoration:none;padding:10px 16px;background:linear-gradient(120deg,#ffe6a5,#cb9138);color:#281702;font-weight:800;border-radius:12px}
-#adminView:has(#search:focus) .sa4-bottomnav,
-#adminView:has(#customerName:focus) .sa4-bottomnav,
-#adminView:has(#customerPhone:focus) .sa4-bottomnav{transform:translate(-50%,160%)!important;pointer-events:none}
+/* The bottom navigation stays visible even when a customer search remains focused.
+   iOS may retain focus after the keyboard is dismissed; hiding on :focus
+   incorrectly made the five navigation tabs permanently disappear. */
+#adminView .sa4-bottomnav{
+  transform:translateX(-50%)!important;
+  pointer-events:auto!important;
+  visibility:visible!important;
+}
 #adminView #search{scroll-margin-top:15px}
 @media(max-width:380px){
  #adminView .sa5-customer-panel{padding:13px 9px!important}
