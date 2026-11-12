@@ -37,7 +37,6 @@
   if(typeof window.vipShowTab==="function")window.vipShowTab("termine");
   else byId("vipAppointmentLink")?.click();
  }
- byId("vipBookTile")?.addEventListener("click",bookAppointment);
  byId("saPriceBook")?.addEventListener("click",bookAppointment);
  byId("vipAddHomeTile")?.addEventListener("click",()=>byId("installCardBtn")?.click());
  // Keep aria-friendly state on the existing push tile. The old handler
