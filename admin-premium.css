@@ -180,3 +180,39 @@ body:has(#adminView:not(.hidden)) .foot{display:none!important}
  #adminView .sa4-promo p{display:none!important}
  #adminView .sa4-headrow{margin-top:7px!important}
 }
+
+/* v6 — gently restore size on normal-height iPhones without the old endless page */
+@media (min-width:371px) and (max-width:650px) and (min-height:701px){
+ #adminView .sa4-hero{height:164px!important;min-height:164px!important;margin-bottom:10px!important}
+ #adminView .sa4-top{padding-top:10px!important}
+ #adminView .sa4-brand h1{font-size:clamp(29px,7.4vw,38px)!important}
+ #adminView .sa4-welcome{margin-top:13px!important}
+ #adminView .sa4-welcome h2{font-size:clamp(19px,4.7vw,23px)!important;margin-bottom:5px!important}
+ #adminView .sa4-welcome p{font-size:11px!important;line-height:1.24!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-stats{gap:8px!important;margin-bottom:10px!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-stat{min-height:73px!important;padding:9px 9px!important;border-radius:15px!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-stat-icon{width:35px!important;height:35px!important;flex-basis:35px!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-stat-icon svg{width:22px!important;height:22px!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-stat-copy{font-size:clamp(11px,2.7vw,12px)!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-stat-value strong{font-size:clamp(24px,6.6vw,30px)!important}
+ #adminView .sa4-headrow{margin:12px 2px 8px!important}
+ #adminView .sa4-headrow h3{font-size:20px!important}
+ #adminView .sa4-actions{margin-bottom:11px!important;gap:8px!important}
+ #adminView .sa4-action{min-height:84px!important;padding:8px 3px!important;font-size:clamp(10px,2.7vw,12px)!important}
+ #adminView .sa4-action svg{width:27px!important;height:27px!important}
+ #adminView .sa4-promo{height:113px!important;max-height:113px!important;margin-bottom:11px!important}
+ #adminView .sa4-promo-copy{padding:11px 5px 8px 12px!important}
+ #adminView .sa4-promo h3{font-size:clamp(17px,4.5vw,21px)!important;margin-bottom:6px!important}
+ #adminView .sa4-promo p{font-size:10px!important;line-height:1.2!important;margin-bottom:7px!important;-webkit-line-clamp:3!important}
+ #adminView .sa4-promo button{min-height:27px!important;font-size:10px!important;padding:5px 11px!important}
+ #adminView .sa4-page[data-admin-page="overview"] .sa4-panel{padding:11px!important;border-radius:15px!important}
+ #adminView .sa4-panel-head h3{font-size:clamp(11px,3vw,14px)!important}
+ #adminView .sa4-panel-head h3 svg{width:16px!important;height:16px!important}
+ #adminView .sa4-rows{min-height:47px!important;max-height:51px!important;font-size:11px!important}
+ #adminView .sa4-rows .lux-entry{min-height:43px!important;padding:7px 0!important}
+ #adminView .sa4-rows .lux-entry b{font-size:11px!important}
+ #adminView .sa4-rows .sa4-empty{font-size:11px!important;margin:10px 0!important}
+ #adminView .sa4-bottomnav button{min-height:51px!important}
+ #adminView .sa4-bottomnav svg{width:22px!important;height:22px!important}
+ #adminView .sa4-bottomnav button span{font-size:10px!important}
+}
