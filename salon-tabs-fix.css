@@ -1,0 +1,50 @@
+/* SA Club customer tab navigation – iPhone Safari/WebKit stability patch.
+   Only the selected tab stays in document layout, regardless of legacy
+   display:flex declarations and restored iOS scroll positions. */
+#publicView{min-height:0!important;height:auto!important;overflow-anchor:none!important}
+#publicView .vip-page{min-height:0!important;height:auto!important;overflow-anchor:none!important}
+#publicView #vipPage_start:not(.vip-current),
+#publicView #vipPage_karte:not(.vip-current),
+#publicView #vipPage_termine:not(.vip-current),
+#publicView #vipPage_angebote:not(.vip-current),
+#publicView #vipPage_profil:not(.vip-current),
+#publicView .vip-page[hidden],
+#publicView .vip-page.hidden{
+  display:none!important;
+  visibility:hidden!important;
+  height:0!important;
+  min-height:0!important;
+  max-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  overflow:hidden!important;
+}
+#publicView #vipPage_start.vip-current:not([hidden]){
+  display:flex!important;
+  flex-direction:column!important;
+  gap:7px!important;
+  visibility:visible!important;
+  height:auto!important;
+  max-height:none!important;
+  min-height:0!important;
+}
+#publicView #vipPage_termine.vip-current:not([hidden]){
+  display:flex!important;
+  flex-direction:column!important;
+  visibility:visible!important;
+  height:auto!important;
+  max-height:none!important;
+  min-height:0!important;
+}
+#publicView #vipPage_karte.vip-current:not([hidden]),
+#publicView #vipPage_angebote.vip-current:not([hidden]),
+#publicView #vipPage_profil.vip-current:not([hidden]){
+  display:block!important;
+  visibility:visible!important;
+  height:auto!important;
+  max-height:none!important;
+  min-height:0!important;
+}
+#publicView .vip-bottom{flex-shrink:0!important}
+/* Preserve the homepage size and the black–gold visual identity. */
