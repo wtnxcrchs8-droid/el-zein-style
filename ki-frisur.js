@@ -7,9 +7,11 @@ const state={photo:null,originalUrl:null,style:"fade",result:null,ready:null,bus
 const imgFile=$("kiPhotoFile"),photo=$("kiInputPreview"),before=$("kiBefore"),after=$("kiAfter");
 const consent=$("kiConsent"),generate=$("kiGenerate"),status=$("kiStatus"),badge=$("kiReadyBadge");
 const opts=[...root.querySelectorAll("[data-ki-style]")];
+const setup=$("kiSetup");
+function showSetup(yes){if(setup)setup.hidden=!yes}
 function message(s,type="info"){status.textContent=s;status.dataset.status=type}
 function updateButton(){
- generate.disabled=state.busy||!state.photo||!consent.checked;
+ generate.disabled=state.busy||!state.photo||!consent.checked||state.ready!==true;
  $("kiRegenerate").disabled=state.busy||!state.photo||!consent.checked;
  $("kiDownload").disabled=!state.result||state.busy;
  $("kiToAppointment").disabled=!state.result||state.busy;
@@ -26,7 +28,7 @@ function chooseStyle(style){
  state.style=style;
  opts.forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.kiStyle===style)));
  clearResult();
- if(state.photo)message("Stil gewählt. Du kannst die Vorschau generieren.");
+ if(state.photo&&state.ready===true)message("Stil gewählt. Du kannst die Vorschau generieren.");
 }
 opts.forEach(btn=>btn.addEventListener("click",()=>chooseStyle(btn.dataset.kiStyle)));
 function imageAsJpeg(file){
@@ -66,7 +68,8 @@ imgFile.addEventListener("change",async()=>{
   $("kiUploadLabel").textContent="✓ Foto hochgeladen";
   $("kiFileName").textContent=file.name;
   clearResult();
-  message("Foto bereit. Bitte Einwilligung bestätigen und Stil wählen.");
+  if(state.ready===false)message("Die KI-Generierung ist noch nicht aktiviert. Bitte die Verbindung im Einstellungsbereich aktivieren.","error");
+  else message("Foto bereit. Bitte Einwilligung bestätigen und Stil wählen.");
  }catch(e){state.photo=null;message(e?.message||"Foto konnte nicht geladen werden.","error")}
  updateButton();
 });
@@ -84,24 +87,31 @@ async function invoke(action,payload={}){
  return json;
 }
 async function checkAvailability(){
+ const retry=$("kiRecheck");
+ if(retry){retry.disabled=true;retry.textContent="Verbindung wird geprüft …";}
  try{
   const r=await invoke("status");
   state.ready=!!r.ready;
-  if(!r.ready)message("KI-Bildgenerierung noch nicht aktiviert: Dem Server fehlt der OpenAI-API-Schlüssel.","error");
-  else if(!state.photo)message("Foto hochladen, Stil wählen und Einwilligung bestätigen.");
-  else message("KI ist einsatzbereit.");
+  showSetup(!r.ready);
+  if(!r.ready)message("Die KI-Vorschau ist noch nicht aktiviert. Bitte den API-Schlüssel sicher in Supabase hinterlegen.","error");
+  else if(!state.photo)message("KI verbunden! Bitte Foto hochladen, Stil wählen und Einwilligung bestätigen.","success");
+  else message("KI ist verbunden. Bereit für deine Frisurenvorschau.","success");
  }catch(e){
   state.ready=null;
-  message("KI-Verbindung nicht verfügbar: "+(e?.message||"Verbindung fehlgeschlagen"),"error");
+  showSetup(false);
+  message("KI-Verbindung fehlgeschlagen: "+(e?.message||"Verbindung nicht verfügbar"),"error");
+ }finally{
+  if(retry){retry.disabled=false;retry.textContent="✓ Verbindung erneut prüfen";}
+  updateButton();
  }
- updateButton();
 }
 window.saKiOnOpen=checkAvailability;
+$("kiRecheck")?.addEventListener("click",checkAvailability);
 async function runGeneration(){
  if(state.busy)return;
  if(!state.photo){message("Bitte zuerst ein Foto hochladen.","error");return}
  if(!consent.checked){message("Bitte die Einwilligung zur Fotoverarbeitung bestätigen.","error");return}
- if(state.ready===false){message("Die KI-Funktion braucht noch einen serverseitigen API-Schlüssel. Ohne ihn wird kein Foto übertragen.","error");return}
+ if(state.ready!==true){message("Bitte zuerst die KI-Verbindung prüfen oder den API-Schlüssel einrichten.","error");return}
  state.busy=true;clearResult();updateButton();
  message("KI analysiert dein Foto und erstellt die Frisur …");
  try{
