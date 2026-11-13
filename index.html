@@ -836,7 +836,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 </div>
 <div class="sa-home-details vip-panel">
   <div class="sa-home-address"><span class="sa-home-symbol" aria-hidden="true">⌖</span><div><strong>Wurzner Straße 48</strong><span>04315 Leipzig</span><a href="https://www.google.com/maps/search/?api=1&amp;query=Wurzner+Stra%C3%9Fe+48%2C+04315+Leipzig" target="_blank" rel="noopener noreferrer">▤ Auf Karte zeigen</a></div></div>
-  <div class="sa-home-opening"><span class="sa-home-symbol" aria-hidden="true">◷</span><div><strong>Öffnungszeiten</strong><p>Mo – Do <b>09:00 – 19:00</b></p><p>Fr – Sa <b>09:00 – 20:00</b></p><p>So <b class="sa-home-closed">Geschlossen</b></p></div></div>
+  <div class="sa-home-opening"><span class="sa-home-symbol" aria-hidden="true">◷</span><div><strong>Öffnungszeiten</strong><p>Mo – Do <b>09:00 – 19:00</b></p><p>Fr – Sa <b>09:00 – 20:00</b></p><p>So <b class="sa-home-closed">Geschlossen</b></p><p id="salonOpeningStatus" class="salon-opening-status" role="status" aria-live="polite"></p></div></div>
 </div>
 <div class="sa-home-tools">
   <button type="button" id="vipPushShortcut"><span aria-hidden="true">♧</span><b>Benachrichtigungen<br>aktivieren</b></button>
@@ -1472,4 +1472,29 @@ document.querySelectorAll('#adminView .sa-admin-tabs [data-admin-target]').forEa
 saAdminGo('overview');const saDate=document.getElementById('saAdminDate');if(saDate)saDate.textContent=new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'short'}).format(new Date());
 
 (async()=>{const token=new URLSearchParams(location.search).get('card');if(token){await loadPublic(token);return}const {data}=await db.auth.getSession();if(data.session){const {data:a}=await db.from('admins').select('user_id').eq('user_id',data.session.user.id).maybeSingle();if(a){show('adminView');await refresh();await refreshAudience();return}}show('loginView')})();
-</script><script src="/admin-premium.js?v=13"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=6"></script><script src="/appointments-v3.js?v=1"></script><script src="/salon-home.js?v=2"></script><script src="/salon-management.js?v=1"></script></body></html>
+</script><script src="/admin-premium.js?v=13"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=6"></script><script src="/appointments-v3.js?v=1"></script><script src="/salon-home.js?v=2"></script><script src="/salon-management.js?v=1"></script><style>
+#publicView .sa-home-opening .salon-opening-status{display:block;margin:7px 0 0;padding:5px 8px;border:1px solid #9d743a;border-radius:9px;color:#e7c47d;font-size:11px;line-height:1.45;font-weight:600}
+#publicView .sa-home-opening .salon-opening-status[data-open="true"]{background:#d7b65d20;color:#ffe09b}
+</style>
+<script>
+(function(){
+function salonOpeningState(now){
+ const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Berlin',weekday:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now);
+ const part=type=>parts.find(p=>p.type===type).value;
+ const day=part('weekday'),minutes=Number(part('hour'))*60+Number(part('minute'));
+ const close=day==='Fri'||day==='Sat'?20:19;
+ if(day!=='Sun'&&minutes>=540&&minutes<close*60)return {open:true,text:'Geöffnet bis '+close+':00'};
+ return {open:false,text:day==='Sun'||(day==='Sat'&&minutes>=1200)?'Geschlossen · Montag ab 09:00':minutes<540?'Geschlossen · Heute ab 09:00':'Geschlossen · Morgen ab 09:00'};
+}
+function updateSalonOpening(){
+ const target=document.getElementById('salonOpeningStatus');if(!target)return;
+ const state=salonOpeningState(new Date());
+ target.textContent=(state.open?'● ':'◷ ')+state.text;
+ target.dataset.open=String(state.open);
+}
+updateSalonOpening();
+setInterval(updateSalonOpening,30000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateSalonOpening()});
+window.addEventListener('pageshow',updateSalonOpening);
+})();
+</script></body></html>
