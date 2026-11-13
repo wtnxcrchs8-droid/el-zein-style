@@ -1497,4 +1497,70 @@ setInterval(updateSalonOpening,30000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateSalonOpening()});
 window.addEventListener('pageshow',updateSalonOpening);
 })();
+</script><style>
+.sa-google-review{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;margin:12px 0;border:1px solid #9d743a;border-radius:16px;color:#f1c76d;background:linear-gradient(135deg,#302215,#0b0a09);text-decoration:none;font-weight:700}.sa-google-review>span:first-child{font-size:28px}.sa-google-review small{display:block;font-size:11px;color:#cbbb9c;margin-top:3px}
+.sa-gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:15px}.sa-gallery-grid img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:13px;border:1px solid #9d743a}.sa-gallery-grid button{cursor:pointer}.sa-gallery-photo{background:none;border:0;padding:0}.sa-gallery-scroll{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}.sa-gallery-scroll .sa-gallery-photo{flex:0 0 42%;scroll-snap-align:start}
+#saGalleryManager h3{color:#edc477}#saGalleryManager p,#saGalleryManager label{color:#d5c8b5;font-size:13px}#saGalleryFiles{display:block;width:100%;margin:12px 0;color:#edc477}#saGalleryManager .sa-gallery-grid button{margin-top:8px;width:100%}
+.sa-photo-dialog{max-width:94vw;max-height:92dvh;padding:45px 10px 10px;border:1px solid #9d743a;border-radius:18px;background:#0b0907;color:#f1c76d}.sa-photo-dialog::backdrop{background:#000d}.sa-photo-dialog img{display:block;max-width:85vw;max-height:75dvh;object-fit:contain}.sa-photo-dialog button{position:absolute;right:10px;top:8px;border:1px solid #9d743a;background:#21180f;color:#f1c76d;border-radius:50%;width:30px;height:30px}
+@media(max-width:550px){#saGalleryManager .sa-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style><script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id),bucket=db.storage.from('salon-gallery');
+const manager=document.querySelector('[data-admin-page="management"]');
+if(!manager)return;
+const panel=document.createElement('section');panel.className='sa9-panel';panel.id='saGalleryManager';
+panel.innerHTML='<h3>Salonfotos</h3><p>Fotos auswählen und veröffentlichen. Sie erscheinen automatisch auf allen Kundenkarten.</p><label for="saGalleryFiles">Bilder vom Handy auswählen</label><input id="saGalleryFiles" type="file" accept="image/*" multiple><div class="actions"><button type="button" class="sa9-primary" id="saGalleryUpload">Fotos veröffentlichen</button><button type="button" class="sa9-muted-btn" id="saGalleryRefresh">Aktualisieren</button></div><p id="saGalleryMessage" role="status" aria-live="polite"></p><div id="saGalleryAdminGrid" class="sa-gallery-grid"></div>';
+manager.append(panel);
+const customer=document.createElement('section');customer.className='vip-panel';customer.id='saGalleryPublic';customer.hidden=true;
+customer.innerHTML='<h3>Unser Salon & unsere Styles</h3><p>Entdecke unseren Salon und aktuelle Looks.</p><div id="saGalleryPublicGrid" class="sa-gallery-grid sa-gallery-scroll"></div>';
+const home=$('vipPage_start');if(home)home.insertBefore(customer,home.querySelector('.vip-home-install'));
+const review=document.createElement('a');review.href='https://maps.app.goo.gl/9dko5khDSPUVBxDz9?g_st=ic';review.target='_blank';review.rel='noopener noreferrer';review.className='sa-google-review';review.innerHTML='<span aria-hidden="true">☆</span><span>Auf Google bewerten<small>Deine Meinung hilft unserem Salon</small></span><span aria-hidden="true">↗</span>';
+const details=document.querySelector('#publicView .sa-home-details');if(details)details.after(review);
+const contact=document.querySelector('#saContactDialog .sa-contact-links');if(contact){const a=review.cloneNode(true);contact.append(a)}
+const dialog=document.createElement('dialog');dialog.className='sa-photo-dialog';dialog.setAttribute('aria-label','Salonfoto');dialog.innerHTML='<button type="button" aria-label="Foto schließen">✕</button><img alt="Salon Anas 1 – Foto in voller Größe">';
+document.body.append(dialog);dialog.querySelector('button').onclick=()=>dialog.close();
+dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
+function viewPhoto(url){dialog.querySelector('img').src=url;if(!dialog.open)dialog.showModal()}
+function message(text){$('saGalleryMessage').textContent=text}
+let busy=false,loading=null,lastLoad=0;
+async function isAdmin(){const {data,error}=await db.auth.getUser();if(error||!data.user)return false;const r=await db.from('admins').select('user_id').eq('user_id',data.user.id).maybeSingle();return !r.error&&!!r.data}
+function render(rows){
+const publicGrid=$('saGalleryPublicGrid'),adminGrid=$('saGalleryAdminGrid');publicGrid.replaceChildren();adminGrid.replaceChildren();customer.hidden=rows.length===0;
+for(const row of rows){
+const url=bucket.getPublicUrl(row.name).data.publicUrl;
+const open=document.createElement('button');open.type='button';open.className='sa-gallery-photo';open.setAttribute('aria-label','Salonfoto vergrößern');
+const img=document.createElement('img');img.src=url;img.alt='Salon Anas 1 – Salon & Styles';img.loading='lazy';img.decoding='async';open.append(img);open.onclick=()=>viewPhoto(url);publicGrid.append(open);
+const card=document.createElement('div');const preview=img.cloneNode(true);card.append(preview);
+const remove=document.createElement('button');remove.type='button';remove.className='sa9-muted-btn';remove.textContent='Foto löschen';
+remove.onclick=async()=>{if(busy)return;if(!confirm('Dieses Foto von allen Kundenkarten entfernen?'))return;remove.disabled=true;try{if(!await isAdmin())throw Error('Bitte als Administrator anmelden.');const r=await bucket.remove([row.name]);if(r.error)throw r.error;await load();message('Foto entfernt.')}catch(e){message('Löschen fehlgeschlagen: '+e.message)}finally{remove.disabled=false}};
+card.append(remove);adminGrid.append(card);
+}
+if(!rows.length)adminGrid.textContent='Noch keine Fotos. Lade die ersten Salonbilder hoch.';
+}
+async function load(){
+if(loading)return loading;
+loading=(async()=>{const rows=[];let offset=0;while(true){const {data,error}=await bucket.list('',{limit:100,offset,sortBy:{column:'name',order:'desc'}});if(error)throw error;rows.push(...data.filter(x=>x.id));if(data.length<100)break;offset+=100}render(rows);lastLoad=Date.now()})().catch(e=>message('Fotos konnten nicht geladen werden: '+e.message)).finally(()=>loading=null);
+return loading;
+}
+async function prepare(file){
+if(file.size>25*1024*1024)throw Error('Ein Bild ist zu groß (max. 25 MB).');
+const url=URL.createObjectURL(file);
+try{const img=new Image();await new Promise((ok,fail)=>{img.onload=ok;img.onerror=()=>fail(Error('Dieses Bildformat kann nicht gelesen werden. Bitte JPG, PNG oder WebP wählen.'));img.src=url});
+const scale=Math.min(1,1600/Math.max(img.naturalWidth,img.naturalHeight)),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.naturalWidth*scale));canvas.height=Math.max(1,Math.round(img.naturalHeight*scale));const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);const blob=await new Promise(ok=>canvas.toBlob(ok,'image/jpeg',0.85));if(!blob||blob.size>5242880)throw Error('Bild konnte nicht verkleinert werden.');return blob;
+}finally{URL.revokeObjectURL(url)}
+}
+$('saGalleryUpload').onclick=async()=>{
+if(busy)return;const files=Array.from($('saGalleryFiles').files||[]);if(!files.length){message('Bitte zuerst Fotos auswählen.');return}
+busy=true;$('saGalleryUpload').disabled=true;$('saGalleryFiles').disabled=true;let done=0;
+try{if(!await isAdmin())throw Error('Bitte als Administrator anmelden.');for(const file of files){message('Foto '+(done+1)+' von '+files.length+' wird hochgeladen …');const blob=await prepare(file),name=Date.now()+'-'+crypto.randomUUID()+'.jpg';const r=await bucket.upload(name,blob,{contentType:'image/jpeg',cacheControl:'3600',upsert:false});if(r.error)throw r.error;done++}$('saGalleryFiles').value='';message(done+' Fotos veröffentlicht. Sie sind auf den Kundenkarten sichtbar.')}
+catch(e){message(done+' Fotos veröffentlicht. Fehler: '+e.message)}
+finally{busy=false;$('saGalleryUpload').disabled=false;$('saGalleryFiles').disabled=false;await load()}
+};
+$('saGalleryRefresh').onclick=load;
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)load()});
+document.querySelector('#publicView .vip-bottom')?.addEventListener('click',()=>{if(Date.now()-lastLoad>15000)load()});
+setInterval(()=>{if(!document.hidden)load()},60000);
+load();
+})();
 </script></body></html>
