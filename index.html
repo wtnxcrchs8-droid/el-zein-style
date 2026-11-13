@@ -862,7 +862,22 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 #publicView .sa9-offer-public small{font-size:10px!important}
 #publicView .vip-bottom button:not(.vip-active){background:transparent!important;border:2px solid transparent!important;box-shadow:none!important;color:#ddd!important;border-radius:30px}
 #publicView .vip-bottom button.vip-active{background:linear-gradient(130deg,#e5b44c,#5c3508)!important;border:2px solid #f5c865!important;box-shadow:0 0 15px #dca74488!important}
-</style><style>#publicView #vipPage_angebote .sa9-public-heading{margin-top:0!important}#publicView #vipPage_angebote .sa9-empty{border:1px dashed #785a30;border-radius:14px;text-align:center;padding:18px!important}</style></head>
+</style><style>#publicView #vipPage_angebote .sa9-public-heading{margin-top:0!important}#publicView #vipPage_angebote .sa9-empty{border:1px dashed #785a30;border-radius:14px;text-align:center;padding:18px!important}</style><style>
+#saInstallGuide{box-sizing:border-box;width:min(94vw,410px);max-height:90dvh;overflow:auto;padding:25px 22px;border:1px solid #c69b4d;border-radius:25px;color:#eedcbb;background:radial-gradient(ellipse at top,#483015,#0d0a07 65%);font-family:system-ui}
+#saInstallGuide::backdrop{background:#000c}
+.sa-install-close{position:absolute;right:12px;top:8px;background:none;border:0;color:#eedcbb;font-size:28px}
+.sa-install-mark{margin:auto;display:grid;place-items:center;width:55px;height:55px;border:1px solid #d0ab62;border-radius:16px;font:26px Georgia;color:#ffe2a0}
+#saInstallGuide h2{font-size:23px;text-align:center;margin:16px 0 8px}
+#saInstallGuide p{font-size:12px;line-height:1.65;color:#d1c2a8}
+.sa-install-lead{text-align:center;margin-bottom:22px}
+.sa-install-step{display:flex;gap:12px;border:1px solid #826232;background:#21180e;border-radius:15px;padding:15px;margin:10px 0}
+.sa-install-step>span{display:grid;place-items:center;flex:0 0 23px;height:23px;border-radius:50%;background:#e7bd66;color:#251806;font-weight:800;font-size:12px}
+.sa-install-step svg{height:30px;width:28px;fill:none;stroke:#ffda85;stroke-width:2}
+#saInstallGuide h3{font-size:15px;margin:5px 0}
+.sa-install-plus{font-size:25px;color:#ffda85}
+#saInstallGuide .sa-install-copy,#saInstallGuide .sa-install-done{width:100%;padding:12px;border-radius:13px;font-size:13px;margin-top:8px;border:1px solid #b68c43;background:transparent;color:#f4d28d}
+#saInstallGuide .sa-install-done{background:linear-gradient(120deg,#ffe4a0,#c38b32);color:#241707;font-weight:700}
+</style></head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">S</div><div><h1>SALON ANAS 1</h1><small>TREUEPROGRAMM</small></div></div><span class="pill">BLACK · GOLD EDITION</span></header>
 
@@ -1227,16 +1242,18 @@ $('search').addEventListener('input',render);
 let deferredInstallPrompt=null;
 window.addEventListener('beforeinstallprompt', event=>{event.preventDefault();deferredInstallPrompt=event;});
 $('installCardBtn').onclick=async()=>{
-  if(deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;return;}
-  const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
-  const isAndroid=/android/i.test(navigator.userAgent);
-  if(isIOS){
-    alert('So fügst du die Karte auf deinem iPhone hinzu: Tippe in Safari auf „Teilen“ und wähle „Zum Home-Bildschirm“ aus.');
-  }else if(isAndroid){
-    alert('So fügst du die Karte auf Android hinzu: Öffne das Browsermenü (⋮) und wähle „App installieren“ oder „Zum Startbildschirm hinzufügen“.');
-  }else{
-    alert('Öffne den Kartenlink auf deinem Handy und wähle im Browsermenü „Zum Startbildschirm hinzufügen“.');
-  }
+if(deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;return}
+let lang='de';try{lang=localStorage.getItem('sa-language')||'de'}catch{}
+const texts={de:['Deine Karte. Immer dabei.','In zwei Schritten auf deinen Home-Bildschirm.','Teilen öffnen','Tippe in Safari auf das Teilen-Symbol. Es befindet sich je nach Ansicht unten oder im Menü ⋯.','Zum Home-Bildschirm','Wähle „Zum Home-Bildschirm hinzufügen“ und bestätige mit „Hinzufügen“.','Verstanden','Kartenlink kopieren','Link kopiert','Öffne deinen Kartenlink zuerst in Safari.','Browsermenü öffnen','Wähle „App installieren“ oder „Zum Startbildschirm hinzufügen“.'],ar:['بطاقتك دائماً معك','أضف بطاقتك للشاشة الرئيسية بخطوتين.','افتح المشاركة','بسفاري اضغط رمز المشاركة؛ حسب شكل المتصفح بتلاقيه تحت أو ضمن قائمة ⋯.','إضافة للشاشة الرئيسية','اختر «إضافة إلى الشاشة الرئيسية» ثم أكّد بالضغط على «إضافة».','فهمت','نسخ رابط البطاقة','تم نسخ الرابط','افتح رابط بطاقتك أولاً بمتصفح سفاري.','افتح قائمة المتصفح','اختر «تثبيت التطبيق» أو «إضافة للشاشة الرئيسية».'],en:['Your card. Always with you.','Add your card to your Home Screen in two steps.','Open Share','In Safari, tap the Share icon at the bottom or inside the ⋯ menu, depending on your layout.','Add to Home Screen','Choose “Add to Home Screen”, then confirm with “Add”.','Got it','Copy card link','Link copied','Open your card link in Safari first.','Open browser menu','Choose “Install app” or “Add to Home Screen”.']};
+const t=texts[lang]||texts.de,android=/android/i.test(navigator.userAgent);
+let d=document.getElementById('saInstallGuide');if(d)d.remove();
+d=document.createElement('dialog');d.id='saInstallGuide';d.dir=lang==='ar'?'rtl':'ltr';
+d.innerHTML='<button class="sa-install-close" aria-label="Close">×</button><div class="sa-install-mark">SA</div><h2></h2><p class="sa-install-lead"></p><div class="sa-install-step"><span>1</span><div><svg viewBox="0 0 32 36" aria-hidden="true"><path d="M9 13H4v20h24V13h-5M16 24V2m-7 7 7-7 7 7"/></svg><h3></h3><p></p></div></div><div class="sa-install-step"><span>2</span><div><b class="sa-install-plus">＋</b><h3></h3><p></p></div></div><p class="sa-install-hint"></p><button class="sa-install-copy"></button><button class="sa-install-done"></button>';
+d.querySelector('h2').textContent=t[0];d.querySelector('.sa-install-lead').textContent=t[1];
+const steps=d.querySelectorAll('.sa-install-step');steps[0].querySelector('h3').textContent=android?t[10]:t[2];steps[0].querySelector('p').textContent=android?t[11]:t[3];steps[1].querySelector('h3').textContent=t[4];steps[1].querySelector('p').textContent=android?t[11]:t[5];
+d.querySelector('.sa-install-hint').textContent=android?'':t[9];d.querySelector('.sa-install-copy').textContent=t[7];d.querySelector('.sa-install-done').textContent=t[6];
+d.querySelector('.sa-install-copy').onclick=async()=>{try{await navigator.clipboard.writeText(location.href);d.querySelector('.sa-install-copy').textContent=t[8]}catch{d.querySelector('.sa-install-hint').textContent=location.href}};
+d.querySelector('.sa-install-close').onclick=d.querySelector('.sa-install-done').onclick=()=>d.close();document.body.append(d);d.showModal();
 };
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(err=>console.warn('Service worker:',err)));}
 
