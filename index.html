@@ -1579,57 +1579,84 @@ load();
 #saGalleryPublic .sa-dialog-head{position:sticky;top:0;background:#100d09;z-index:1}
 #saGalleryPublic::backdrop{background:#000c}
 </style><style>
-#saBarberGame{width:min(440px,calc(100vw - 20px));max-height:calc(100dvh - 24px);overflow:auto;margin:auto;padding:16px;border:1px solid #b68b43;border-radius:24px;background:linear-gradient(145deg,#241b11,#080706);color:#f4dfb3;box-shadow:0 25px 90px #000c;font-family:system-ui,-apple-system,sans-serif}
-#saBarberGame::backdrop{background:#000d;backdrop-filter:blur(5px)}
-#saBarberGame header{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:14px}#saBarberGame header small{color:#b99a62;font-size:9px;letter-spacing:2px}#saBarberGame h2{font:700 25px Georgia,serif;margin:5px 0;color:#f1cc7c}
-#saBarberGame button{cursor:pointer;color:#f5d58e;border:1px solid #987139;border-radius:12px;background:#281d10;font:inherit;touch-action:manipulation}#saGameClose{width:35px;height:35px;flex-shrink:0}
-.sa-game-scores{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:#bda984;margin-bottom:12px}.sa-game-scores b{color:#ffe09b;font-size:19px;margin-left:4px}#saGameLives{color:#e4be6b;align-self:center}
-.sa-game-stage{position:relative;border:1px solid #73562d;border-radius:16px;overflow:hidden}#saGameCanvas{display:block;width:100%;height:auto;max-height:50dvh;object-fit:fill;touch-action:none;outline-offset:-4px}
-#saGameOverlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:18px;background:#080603db}#saGameOverlay[hidden]{display:none}
-.sa-game-mark{font:60px Georgia;color:#efc368;text-shadow:0 0 30px #d9a34266}#saGameOverlay h3{font:700 24px Georgia;margin:12px 0;color:#f8d68d}#saGameHint{font-size:13px;line-height:1.6;color:#d8c6a4;white-space:pre-line}
-#saBarberGame #saGameStart{background:linear-gradient(110deg,#ffe2a0,#bd852e);color:#211508;border:0;border-radius:24px;padding:13px 27px;font-weight:800;margin-top:12px}
-.sa-game-controls{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}.sa-game-controls button{min-width:43px;min-height:40px;font-size:20px;touch-action:none}.sa-game-controls span{text-align:center;font-size:10px;color:#bdac8e}#saGamePause:disabled{opacity:.4}
-#saGameAnnounce{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%)}
+#saHairStudio{width:min(440px,calc(100vw - 18px));max-height:calc(100dvh - 18px);padding:14px;overflow:auto;margin:auto;border:1px solid #ae8543;border-radius:23px;background:linear-gradient(140deg,#292016,#0b0907);color:#f0dbaf;font:14px system-ui;box-shadow:0 25px 90px #000b}
+#saHairStudio::backdrop{background:#000d;backdrop-filter:blur(5px)}#saHairStudio header{display:flex;align-items:center;justify-content:space-between;gap:8px}#saHairStudio header small{font-size:8px;letter-spacing:1.7px;color:#be9d62}#saHairStudio h2{font:700 25px Georgia;margin:5px 0 12px;color:#f2cf88}#saHairStudio button{font:inherit;cursor:pointer;border:1px solid #856737;border-radius:11px;color:#ecd39e;background:#241c13;touch-action:manipulation}#hsClose{width:34px;height:34px;flex:none}
+.hs-brief{display:flex;align-items:center;gap:14px;margin:0 0 10px;padding:8px;background:#0004;border:1px solid #66512c;border-radius:13px}#hsTarget{width:58px;height:68px;border-radius:8px;flex:none}.hs-brief small{font-size:8px;color:#b59a6f;letter-spacing:1px}.hs-brief h3{margin:3px 0;color:#f1cf8d;font:20px Georgia}.hs-brief p{margin:3px 0;font-size:11px;line-height:1.4}
+.hs-stage{position:relative;border:1px solid #8a6c36;border-radius:15px;overflow:hidden}#hsCanvas{display:block;width:100%;height:auto;max-height:44dvh;touch-action:none;outline-offset:-4px}
+#hsResult{position:absolute;inset:0;background:#090704e8;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:16px}#hsResult[hidden]{display:none}#hsStars{font-size:30px;color:#ffda80;letter-spacing:4px}#hsResult h3{font:26px Georgia;color:#f5d491;margin:14px 0 6px}#hsResult p{font-size:12px;line-height:1.6}#hsResult button{padding:10px 18px;margin-top:9px}#saHairStudio #hsNext,#saHairStudio #hsFinish{background:linear-gradient(110deg,#ffe2a2,#b8822f);color:#21170c;font-weight:750;border:0}
+.hs-guards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.hs-guards button{padding:8px;font-weight:700}.hs-guards small{display:block;font-size:9px;font-weight:400;margin-top:2px}.hs-guards button[aria-pressed="true"]{background:#6e4b21!important;border-color:#f4cf7d!important;box-shadow:0 0 10px #b7863433}
+.hs-actions{display:flex;gap:7px;margin-top:9px}.hs-actions button{padding:9px 8px;font-size:11px!important;flex:1}.hs-actions button:disabled{opacity:.4}.hs-help{font-size:10px;color:#b9a47e;text-align:center;margin:9px 0 0}
+#hsStatus{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 #publicView .vip-quick.sa-home-actions{grid-template-columns:repeat(3,minmax(0,1fr))}
-#publicView .vip-quick.sa-home-actions button{min-height:74px}
 </style><script>
 (function(){
 'use strict';
 const quick=document.querySelector('#publicView .sa-home-actions');if(!quick)return;
-const button=document.createElement('button');button.type='button';button.id='saGameOpen';button.innerHTML='<span aria-hidden="true">♧</span><b>Spielen</b><small>Barber Challenge</small>';quick.append(button);
-const dialog=document.createElement('dialog');dialog.id='saBarberGame';dialog.setAttribute('aria-labelledby','saGameTitle');
-dialog.innerHTML='<header><div><small>SA CLUB · SPIELPAUSE</small><h2 id="saGameTitle">Barber Challenge</h2></div><button id="saGameClose" type="button" aria-label="Spiel schließen">✕</button></header><div class="sa-game-scores"><span>Punkte <b id="saGameScore">0</b></span><span>Rekord <b id="saGameBest">0</b></span><span aria-label="Leben" id="saGameLives">♥ ♥ ♥</span></div><div class="sa-game-stage"><canvas id="saGameCanvas" width="360" height="390" tabindex="0" aria-label="Barber Challenge: Mit Finger oder Pfeiltasten die Schere bewegen. Haare sammeln, Flaschen vermeiden."></canvas><div id="saGameOverlay"><span class="sa-game-mark">✂</span><h3 id="saGameHeading">Bereit für den Highscore?</h3><p id="saGameHint">Sammle die goldenen Haarsträhnen.<br>Weiche den Flaschen aus!</p><button id="saGameStart" type="button">Spiel starten</button></div></div><div class="sa-game-controls"><button type="button" id="saGameLeft" aria-label="Schere nach links">←</button><span>Mit dem Finger bewegen<br>oder Pfeiltasten nutzen</span><button type="button" id="saGameRight" aria-label="Schere nach rechts">→</button><button type="button" id="saGamePause" aria-label="Spiel pausieren" disabled>Ⅱ</button></div><p id="saGameAnnounce" role="status" aria-live="polite"></p>';
+const btn=document.createElement('button');btn.id='saGameOpen';btn.type='button';btn.innerHTML='<span aria-hidden="true">✂</span><b>Spielen</b><small>Barber Studio</small>';quick.append(btn);
+const dialog=document.createElement('dialog');dialog.id='saHairStudio';dialog.setAttribute('aria-labelledby','hsTitle');
+dialog.innerHTML='<header><div><small>SALON ANAS 1 · BARBER STUDIO</small><h2 id="hsTitle">Du bist der Barber.</h2></div><button id="hsClose" aria-label="Spiel schließen">✕</button></header><div class="hs-brief"><canvas id="hsTarget" width="120" height="140" aria-label="Gewünschte Frisur"></canvas><div><small id="hsLevel"></small><h3 id="hsStyle"></h3><p id="hsOrder"></p></div></div><div class="hs-stage"><canvas id="hsCanvas" width="360" height="390" tabindex="0" aria-label="Haare schneiden: Aufsatz wählen und mit Finger ziehen. Alternativ Pfeiltasten und Leertaste."></canvas><div id="hsResult" hidden><span id="hsStars"></span><h3 id="hsResultTitle"></h3><p id="hsResultText"></p><button id="hsNext">Nächster Kunde →</button><button id="hsRetry">Nochmal versuchen</button></div></div><div class="hs-guards" role="group" aria-label="Maschinenaufsatz"><button data-hs-guard="0">0 mm<small>Ganz kurz</small></button><button data-hs-guard="1">3 mm<small>Kurz</small></button><button data-hs-guard="2" aria-pressed="true">9 mm<small>Länger</small></button></div><div class="hs-actions"><button id="hsUndo" aria-label="Letzten Schnitt rückgängig" disabled>↶ Zurück</button><button id="hsSound" aria-pressed="false">Ton aus</button><button id="hsFinish">Fertig ✦</button></div><p class="hs-help">Aufsatz wählen · Zum Schneiden über die Haare streichen</p><p id="hsStatus" role="status" aria-live="polite"></p>';
 document.body.append(dialog);
-const $=id=>document.getElementById(id),canvas=$('saGameCanvas'),ctx=canvas.getContext('2d');
-let best=0;try{best=Number(localStorage.getItem('sa-barber-best'))||0}catch{}
-$('saGameBest').textContent=best;
-const W=360,H=390;let player=180,items=[],score=0,lives=3,elapsed=0,spawn=0,last=0,frame=0,active=false,paused=false,dragging=false,move=0,invulnerable=0;
-function hud(){$('saGameScore').textContent=score;$('saGameLives').textContent=Array(lives).fill('♥').join(' ')||'—'}
-function saveBest(){if(score>best){best=score;try{localStorage.setItem('sa-barber-best',String(best))}catch{}$('saGameBest').textContent=best}}
-function background(){ctx.fillStyle='#0c0a07';ctx.fillRect(0,0,W,H);ctx.strokeStyle='#b78b3822';ctx.lineWidth=1;for(let x=0;x<W;x+=36){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}const g=ctx.createRadialGradient(180,0,5,180,0,350);g.addColorStop(0,'#ad762433');g.addColorStop(1,'#0000');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.strokeStyle='#d8b45b';ctx.beginPath();ctx.moveTo(12,H-25);ctx.lineTo(W-12,H-25);ctx.stroke()}
-function hair(x,y){ctx.strokeStyle='#f5d47b';ctx.lineWidth=3;ctx.lineCap='round';for(let n=-1;n<=1;n++){ctx.beginPath();ctx.moveTo(x+n*6-4,y-9);ctx.quadraticCurveTo(x+n*6+7,y,x+n*6-2,y+10);ctx.stroke()}}
-function bottle(x,y){ctx.fillStyle='#9d8050';ctx.fillRect(x-5,y-17,10,6);ctx.fillStyle='#27231d';ctx.strokeStyle='#d4b576';ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(x-10,y-10,20,28,5);ctx.fill();ctx.stroke();ctx.fillStyle='#d4b576';ctx.font='bold 10px system-ui';ctx.textAlign='center';ctx.fillText('×',x,y+8)}
-function draw(){background();for(const item of items){if(item.bad)bottle(item.x,item.y);else hair(item.x,item.y)}ctx.save();ctx.globalAlpha=invulnerable>0?0.45+0.4*Math.sin(elapsed*25):1;ctx.shadowColor='#e9ba57';ctx.shadowBlur=18;ctx.fillStyle='#ffe4a2';ctx.font='42px Georgia';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('✂',player,H-52);ctx.restore()}
-function overlay(title,hint,label){$('saGameHeading').textContent=title;$('saGameHint').textContent=hint;$('saGameStart').textContent=label;$('saGameOverlay').hidden=false}
-function stop(){active=false;paused=false;dragging=false;move=0;cancelAnimationFrame(frame);frame=0;$('saGamePause').disabled=true;saveBest()}
-function finish(){stop();overlay('Gut geschnitten!','Deine Punkte: '+score+' · Dein Rekord: '+best,'Nochmal spielen');$('saGameAnnounce').textContent='Spiel beendet. '+score+' Punkte.';$('saGameStart').focus()}
-function tick(t){if(!active||paused)return;const dt=Math.min((t-last)/1000||0,0.05);last=t;elapsed+=dt;invulnerable=Math.max(0,invulnerable-dt);player=Math.max(24,Math.min(W-24,player+move*270*dt));spawn-=dt;
-if(spawn<=0){items.push({x:24+Math.random()*(W-48),y:-22,bad:Math.random()<0.26});spawn=Math.max(0.27,0.78-elapsed*0.006)}
-for(let i=items.length-1;i>=0;i--){const item=items[i];item.y+=(95+Math.min(elapsed*2.3,160))*dt;if(Math.abs(item.x-player)<26&&Math.abs(item.y-(H-52))<23){items.splice(i,1);if(item.bad){if(invulnerable<=0){lives--;invulnerable=1;hud();if(lives<=0){finish();draw();return}}}else{score+=10;hud()}continue}if(item.y>H+25)items.splice(i,1)}
-draw();frame=requestAnimationFrame(tick)}
-function start(){if(active&&paused){resume();return}cancelAnimationFrame(frame);player=W/2;items=[];score=0;lives=3;elapsed=0;spawn=0.4;invulnerable=0;move=0;active=true;paused=false;hud();$('saGameAnnounce').textContent='Spiel gestartet.';$('saGameOverlay').hidden=true;$('saGamePause').disabled=false;$('saGamePause').textContent='Ⅱ';canvas.focus({preventScroll:true});last=performance.now();frame=requestAnimationFrame(tick)}
-function pause(){if(!active||paused)return;paused=true;move=0;dragging=false;cancelAnimationFrame(frame);overlay('Kurze Pause','Dein Spiel wartet auf dich.','Weiter spielen');$('saGamePause').textContent='▶';$('saGamePause').setAttribute('aria-label','Spiel fortsetzen')}
-function resume(){if(!active||!paused)return;paused=false;$('saGameOverlay').hidden=true;$('saGamePause').textContent='Ⅱ';$('saGamePause').setAttribute('aria-label','Spiel pausieren');canvas.focus({preventScroll:true});last=performance.now();frame=requestAnimationFrame(tick)}
-function open(){if(dialog.open)return;dialog.showModal();draw()}
-button.onclick=open;$('saGameClose').onclick=()=>dialog.close();dialog.addEventListener('close',()=>{stop();overlay('Bereit für den Highscore?','Goldene Haare sammeln · Flaschen vermeiden','Spiel starten')});dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
-$('saGameStart').onclick=start;$('saGamePause').onclick=()=>paused?resume():pause();
-function pointer(e){const rect=canvas.getBoundingClientRect();player=Math.max(24,Math.min(W-24,(e.clientX-rect.left)*W/rect.width))}
-canvas.addEventListener('pointerdown',e=>{if(!active||paused)return;dragging=true;canvas.setPointerCapture(e.pointerId);pointer(e)});
-canvas.addEventListener('pointermove',e=>{if(dragging&&active&&!paused)pointer(e)});canvas.addEventListener('pointerup',()=>dragging=false);canvas.addEventListener('pointercancel',()=>dragging=false);
-for(const [id,direction] of [['saGameLeft',-1],['saGameRight',1]]){const el=$(id);el.onpointerdown=e=>{if(active&&!paused){move=direction;el.setPointerCapture(e.pointerId)}};el.onpointerup=el.onpointercancel=el.onlostpointercapture=()=>move=0}
-dialog.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight'].includes(e.key)&&active&&!paused){e.preventDefault();move=e.key==='ArrowLeft'?-1:1}if(e.code==='Space'&&e.target===canvas&&active){e.preventDefault();paused?resume():pause()}});
-dialog.addEventListener('keyup',e=>{if(['ArrowLeft','ArrowRight'].includes(e.key))move=0});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)pause()});window.addEventListener('blur',pause);
-draw();if(location.hash==='#spielen')open();
+const $=id=>document.getElementById(id),canvas=$('hsCanvas'),c=canvas.getContext('2d'),target=$('hsTarget').getContext('2d');
+const styles=[
+{name:'Clean Fade',order:'Seiten: 3 mm · Oben: 9 mm',top:2,side:1},
+{name:'Fresh Buzz',order:'Überall gleichmäßig auf 3 mm kürzen.',top:1,side:1},
+{name:'Bold Undercut',order:'Seiten: 0 mm · Oben: 9 mm behalten.',top:2,side:0},
+{name:'Short & Sharp',order:'Seiten: 0 mm · Oben: 3 mm.',top:1,side:0}
+];
+let level=0,guard=2,hair=[],undo=[],cutting=false,previous=null,cursor={x:280,y:280},particles=[],raf=0,done=false,sound=false,audio=null,osc=null,gain=null,best=0;
+try{best=Number(localStorage.getItem('sa-studio-best'))||0}catch{}
+function desired(h){return h.side?styles[level%styles.length].side:styles[level%styles.length].top}
+function build(){hair=[];for(let y=87;y<224;y+=8)for(let x=96;x<=264;x+=7){const dx=(x-180)/88,dy=(y-158)/80;const side=y>145&&Math.abs(x-180)>57;if((dx*dx+dy*dy<1)&&(y<151||side)){hair.push({x,y,side,length:3,seed:Math.sin(x*12.7+y*3.1)*0.5+0.5})}}}
+function rounded(ctx,x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.roundRect(x,y,w,h,r);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.stroke()}}
+function portrait(ctx,preview){
+ctx.save();
+const bg=ctx.createLinearGradient(0,0,0,390);bg.addColorStop(0,'#30271e');bg.addColorStop(1,'#0a0908');ctx.fillStyle=bg;ctx.fillRect(0,0,360,390);
+ctx.strokeStyle='#92734033';for(let x=20;x<360;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,390);ctx.stroke()}
+rounded(ctx,53,21,254,312,34,'#151715','#967744');
+const mirror=ctx.createLinearGradient(70,30,285,295);mirror.addColorStop(0,'#555e5944');mirror.addColorStop(.5,'#1c252544');mirror.addColorStop(1,'#a2afa22a');rounded(ctx,60,28,240,298,28,mirror);
+ctx.fillStyle='#d9bc77';ctx.font='10px Georgia';ctx.textAlign='center';ctx.fillText('SALON ANAS 1',180,49);
+ctx.strokeStyle='#fff1';ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(75,60);ctx.lineTo(148,31);ctx.stroke();
+rounded(ctx,118,310,124,69,18,'#211a12','#775d35');
+ctx.fillStyle='#181b1d';ctx.beginPath();ctx.moveTo(70,390);ctx.quadraticCurveTo(78,294,148,286);ctx.lineTo(212,286);ctx.quadraticCurveTo(282,294,290,390);ctx.closePath();ctx.fill();
+const cape=ctx.createLinearGradient(75,300,270,390);cape.addColorStop(0,'#4a4335');cape.addColorStop(.45,'#151718');cape.addColorStop(1,'#32312c');ctx.fillStyle=cape;ctx.fill();
+ctx.strokeStyle='#a7874944';ctx.lineWidth=1;for(let i=0;i<6;i++){ctx.beginPath();ctx.moveTo(170+i*4,300);ctx.lineTo(94+i*34,390);ctx.stroke()}
+rounded(ctx,156,250,48,49,17,'#b37b55');ctx.fillStyle='#e5c47c';ctx.font='20px Georgia';ctx.fillText('SA',180,348);ctx.font='6px system-ui';ctx.fillText('BARBER STUDIO',180,361);
+ctx.fillStyle='#bd8661';for(const x of [105,255]){ctx.beginPath();ctx.ellipse(x,196,13,23,0,0,Math.PI*2);ctx.fill()}
+const skin=ctx.createRadialGradient(155,160,5,180,195,100);skin.addColorStop(0,'#f0c39a');skin.addColorStop(.7,'#d59b71');skin.addColorStop(1,'#a46c4c');
+ctx.fillStyle=skin;ctx.beginPath();ctx.moveTo(111,154);ctx.bezierCurveTo(110,102,245,94,250,157);ctx.lineTo(244,226);ctx.bezierCurveTo(231,286,133,286,117,226);ctx.closePath();ctx.fill();
+ctx.strokeStyle='#6d4431';ctx.lineWidth=4;ctx.lineCap='round';for(const x of [147,210]){ctx.beginPath();ctx.moveTo(x-12,181);ctx.quadraticCurveTo(x,176,x+12,181);ctx.stroke()}
+for(const x of [147,211]){ctx.fillStyle='#fff9';ctx.beginPath();ctx.ellipse(x,193,10,4,0,0,7);ctx.fill();ctx.fillStyle='#30291d';ctx.beginPath();ctx.arc(x,193,3.4,0,7);ctx.fill()}
+ctx.strokeStyle='#ad7855';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(181,192);ctx.lineTo(177,216);ctx.quadraticCurveTo(180,221,188,216);ctx.stroke();
+ctx.strokeStyle='#7b493c';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(162,239);ctx.quadraticCurveTo(180,done&&!preview?248:243,198,239);ctx.stroke();
+ctx.fillStyle='#2e201a';ctx.beginPath();ctx.moveTo(159,231);ctx.quadraticCurveTo(170,224,180,230);ctx.quadraticCurveTo(190,224,202,231);ctx.quadraticCurveTo(186,236,180,233);ctx.quadraticCurveTo(167,235,159,231);ctx.fill();
+for(const h of hair){const len=preview?desired(h):h.length;ctx.strokeStyle=len===0?'#573c2b88':h.seed>.5?'#3a291e':'#251b15';ctx.lineWidth=len===0?1.5:3.5;
+ctx.beginPath();ctx.moveTo(h.x,h.y);ctx.quadraticCurveTo(h.x-3,h.y-(len*5+2),h.x+(h.seed-.5)*9,h.y-(len*9+2));ctx.stroke()}
+ctx.restore();
+}
+function clipper(){c.save();c.translate(cursor.x,cursor.y);c.rotate(-.24);c.shadowColor='#0009';c.shadowBlur=12;rounded(c,-13,-7,26,51,7,'#bd9650','#efd497');rounded(c,-15,-17,30,13,3,'#bfc4c3','#fff9');c.strokeStyle='#353b3e';c.lineWidth=1;for(let x=-12;x<14;x+=4){c.beginPath();c.moveTo(x,-17);c.lineTo(x,-7);c.stroke()}rounded(c,-7,4,14,20,4,'#252622');c.fillStyle='#d5b36e';c.font='7px system-ui';c.textAlign='center';c.fillText('SA',0,17);c.restore()}
+function render(){portrait(c,false);if(!done){c.save();c.strokeStyle='#efd08c88';c.setLineDash([3,4]);c.beginPath();c.arc(cursor.x,cursor.y,20,0,7);c.stroke();c.restore();clipper()}for(const p of particles){c.strokeStyle='#b18c55';c.lineWidth=2;c.beginPath();c.moveTo(p.x,p.y);c.lineTo(p.x+3,p.y+6);c.stroke()}}
+function animate(){cancelAnimationFrame(raf);if(!dialog.open)return;for(const p of particles){p.x+=p.vx;p.y+=p.vy;p.vy+=.2;p.life--}particles=particles.filter(p=>p.life>0);render();if(particles.length)raf=requestAnimationFrame(animate)}
+function preview(){target.save();target.scale(1/3,140/390);portrait(target,true);target.restore()}
+function buzz(on){if(!audio||!gain)return;gain.gain.setTargetAtTime(on&&sound?.025:0,audio.currentTime,.04)}
+function soundToggle(){sound=!sound;if(sound){try{const AC=window.AudioContext||window.webkitAudioContext;if(!audio){audio=new AC();osc=audio.createOscillator();gain=audio.createGain();osc.type='sawtooth';osc.frequency.value=95;gain.gain.value=0;osc.connect(gain);gain.connect(audio.destination);osc.start()}audio.resume().catch(()=>{})}catch{sound=false}}
+$('hsSound').textContent=sound?'Ton an':'Ton aus';$('hsSound').setAttribute('aria-pressed',String(sound));buzz(cutting)}
+function reset(){cutting=false;previous=null;buzz(false);done=false;undo=[];particles=[];build();$('hsResult').hidden=true;$('hsFinish').disabled=false;$('hsUndo').disabled=true;const style=styles[level%styles.length];$('hsLevel').textContent='KUNDE '+(level+1)+' · REKORD '+best+' %';$('hsStyle').textContent=style.name;$('hsOrder').textContent=style.order;$('hsStatus').textContent='Wähle einen Aufsatz und schneide wie auf dem Vorbild.';preview();render()}
+function snapshot(){undo.push(hair.map(h=>h.length));if(undo.length>25)undo.shift();$('hsUndo').disabled=false}
+function cutAt(x,y){let removed=0;for(const h of hair){if(Math.hypot(h.x-x,h.y-y)<20&&h.length>guard){h.length=guard;removed++;if(particles.length<100)particles.push({x:h.x,y:h.y,vx:(Math.random()-.5)*3,vy:Math.random()*2,life:25+Math.random()*15})}}if(removed)animate();else render()}
+function stroke(x,y){const from=previous||{x,y};const distance=Math.hypot(x-from.x,y-from.y),n=Math.max(1,Math.ceil(distance/7));for(let i=1;i<=n;i++)cutAt(from.x+(x-from.x)*i/n,from.y+(y-from.y)*i/n);cursor={x,y};previous={x,y};render()}
+function point(e){const r=canvas.getBoundingClientRect();return {x:Math.max(0,Math.min(360,(e.clientX-r.left)*360/r.width)),y:Math.max(0,Math.min(390,(e.clientY-r.top)*390/r.height))}}
+canvas.onpointerdown=e=>{if(done)return;e.preventDefault();snapshot();cutting=true;canvas.setPointerCapture(e.pointerId);const p=point(e);previous=null;stroke(p.x,p.y);buzz(true)};
+canvas.onpointermove=e=>{if(done)return;const p=point(e);cursor=p;if(cutting)stroke(p.x,p.y);else render()};
+function release(){cutting=false;previous=null;buzz(false)}
+canvas.onpointerup=canvas.onpointercancel=canvas.onlostpointercapture=release;
+dialog.querySelectorAll('[data-hs-guard]').forEach(b=>{b.type='button';b.onclick=()=>{guard=Number(b.dataset.hsGuard);dialog.querySelectorAll('[data-hs-guard]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));$('hsStatus').textContent=b.textContent+' gewählt.'}});
+$('hsUndo').onclick=()=>{if(!undo.length||done)return;const old=undo.pop();hair.forEach((h,i)=>h.length=old[i]);$('hsUndo').disabled=!undo.length;particles=[];render()};
+$('hsFinish').onclick=()=>{release();done=true;cancelAnimationFrame(raf);particles=[];let total=0;for(const side of [false,true]){const group=hair.filter(h=>h.side===side);total+=group.reduce((s,h)=>s+Math.max(0,1-Math.abs(h.length-desired(h))/Math.max(desired(h),3-desired(h))),0)/group.length}const accuracy=Math.round(total/2*100),stars=accuracy>=94?5:accuracy>=83?4:accuracy>=68?3:accuracy>=48?2:1;if(accuracy>best){best=accuracy;try{localStorage.setItem('sa-studio-best',String(best))}catch{}}
+$('hsStars').textContent='★'.repeat(stars)+'☆'.repeat(5-stars);$('hsResultTitle').textContent=stars>=4?'Starker Look!':stars===3?'Schon ziemlich gut!':'Da geht noch mehr!';$('hsResultText').textContent=accuracy+' % Übereinstimmung · Rekord '+best+' %';$('hsResult').hidden=false;$('hsFinish').disabled=true;$('hsUndo').disabled=true;$('hsStatus').textContent=stars+' von 5 Sternen. '+accuracy+' Prozent Übereinstimmung.';render();$('hsNext').focus()};
+$('hsNext').onclick=()=>{level++;reset()};$('hsRetry').onclick=reset;$('hsSound').onclick=soundToggle;
+canvas.onkeydown=e=>{if(done)return;const directions={ArrowLeft:[-9,0],ArrowRight:[9,0],ArrowUp:[0,-9],ArrowDown:[0,9]};if(directions[e.key]){e.preventDefault();cursor.x=Math.max(0,Math.min(360,cursor.x+directions[e.key][0]));cursor.y=Math.max(0,Math.min(390,cursor.y+directions[e.key][1]));render()}if(e.code==='Space'){e.preventDefault();if(!e.repeat)snapshot();cutAt(cursor.x,cursor.y)}};
+function open(){if(dialog.open)return;dialog.showModal();reset()}
+btn.onclick=open;$('hsClose').onclick=()=>dialog.close();dialog.addEventListener('close',()=>{release();cancelAnimationFrame(raf)});dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});document.addEventListener('visibilitychange',()=>{if(document.hidden)release()});window.addEventListener('blur',release);
+build();if(location.hash==='#spielen')open();
 })();
 </script></body></html>
