@@ -1512,11 +1512,16 @@ if(!manager)return;
 const panel=document.createElement('section');panel.className='sa9-panel';panel.id='saGalleryManager';
 panel.innerHTML='<h3>Salonfotos</h3><p>Fotos auswählen und veröffentlichen. Sie erscheinen automatisch auf allen Kundenkarten.</p><label for="saGalleryFiles">Bilder vom Handy auswählen</label><input id="saGalleryFiles" type="file" accept="image/*" multiple><div class="actions"><button type="button" class="sa9-primary" id="saGalleryUpload">Fotos veröffentlichen</button><button type="button" class="sa9-muted-btn" id="saGalleryRefresh">Aktualisieren</button></div><p id="saGalleryMessage" role="status" aria-live="polite"></p><div id="saGalleryAdminGrid" class="sa-gallery-grid"></div>';
 manager.append(panel);
-const customer=document.createElement('section');customer.className='vip-panel';customer.id='saGalleryPublic';customer.hidden=true;
-customer.innerHTML='<h3>Unser Salon & unsere Styles</h3><p>Entdecke unseren Salon und aktuelle Looks.</p><div id="saGalleryPublicGrid" class="sa-gallery-grid sa-gallery-scroll"></div>';
-const home=$('vipPage_start');if(home)home.insertBefore(customer,home.querySelector('.vip-home-install'));
+const customer=document.createElement('dialog');customer.className='sa-home-dialog';customer.id='saGalleryPublic';customer.setAttribute('aria-labelledby','saGalleryTitle');
+customer.innerHTML='<div class="sa-dialog-head"><div><small>SALON ANAS 1</small><h2 id="saGalleryTitle">Salonfotos</h2></div><button type="button" aria-label="Fotos schließen">✕</button></div><div id="saGalleryPublicGrid" class="sa-gallery-grid"></div><p id="saGalleryEmpty">Noch keine Fotos veröffentlicht.</p>';
+document.body.append(customer);
+customer.querySelector('button').onclick=()=>customer.close();
+customer.addEventListener('click',e=>{if(e.target===customer)customer.close()});
+const galleryButton=document.createElement('button');galleryButton.type='button';galleryButton.id='saGalleryOpen';galleryButton.innerHTML='<span aria-hidden="true">▧</span><b>Salonfotos</b><small>Unsere Styles</small>';
+document.querySelector('#publicView .sa-home-actions')?.append(galleryButton);
+galleryButton.onclick=()=>{if(!customer.open)customer.showModal();load()};
 const review=document.createElement('a');review.href='https://maps.app.goo.gl/9dko5khDSPUVBxDz9?g_st=ic';review.target='_blank';review.rel='noopener noreferrer';review.className='sa-google-review';review.innerHTML='<span aria-hidden="true">☆</span><span>Auf Google bewerten<small>Deine Meinung hilft unserem Salon</small></span><span aria-hidden="true">↗</span>';
-const details=document.querySelector('#publicView .sa-home-details');if(details)details.after(review);
+
 const contact=document.querySelector('#saContactDialog .sa-contact-links');if(contact){const a=review.cloneNode(true);contact.append(a)}
 const dialog=document.createElement('dialog');dialog.className='sa-photo-dialog';dialog.setAttribute('aria-label','Salonfoto');dialog.innerHTML='<button type="button" aria-label="Foto schließen">✕</button><img alt="Salon Anas 1 – Foto in voller Größe">';
 document.body.append(dialog);dialog.querySelector('button').onclick=()=>dialog.close();
@@ -1526,7 +1531,7 @@ function message(text){$('saGalleryMessage').textContent=text}
 let busy=false,loading=null,lastLoad=0;
 async function isAdmin(){const {data,error}=await db.auth.getUser();if(error||!data.user)return false;const r=await db.from('admins').select('user_id').eq('user_id',data.user.id).maybeSingle();return !r.error&&!!r.data}
 function render(rows){
-const publicGrid=$('saGalleryPublicGrid'),adminGrid=$('saGalleryAdminGrid');publicGrid.replaceChildren();adminGrid.replaceChildren();customer.hidden=rows.length===0;
+const publicGrid=$('saGalleryPublicGrid'),adminGrid=$('saGalleryAdminGrid');publicGrid.replaceChildren();adminGrid.replaceChildren();$('saGalleryEmpty').hidden=rows.length>0;
 for(const row of rows){
 const url=bucket.getPublicUrl(row.name).data.publicUrl;
 const open=document.createElement('button');open.type='button';open.className='sa-gallery-photo';open.setAttribute('aria-label','Salonfoto vergrößern');
@@ -1563,4 +1568,14 @@ document.querySelector('#publicView .vip-bottom')?.addEventListener('click',()=>
 setInterval(()=>{if(!document.hidden)load()},60000);
 load();
 })();
-</script></body></html>
+</script><style>
+#publicView .vip-quick.sa-home-actions{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+#publicView .vip-quick.sa-home-actions button{min-height:85px;padding:9px 3px}
+#publicView .vip-quick.sa-home-actions button b{font-size:13px}
+#publicView .vip-quick.sa-home-actions button small{font-size:10px}
+#publicView .vip-quick.sa-home-actions button>span{font-size:25px;margin-bottom:5px}
+#saGalleryPublic{width:min(680px,94vw);max-height:85dvh;overflow:auto}
+#saGalleryPublic .sa-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+#saGalleryPublic .sa-dialog-head{position:sticky;top:0;background:#100d09;z-index:1}
+#saGalleryPublic::backdrop{background:#000c}
+</style></body></html>
