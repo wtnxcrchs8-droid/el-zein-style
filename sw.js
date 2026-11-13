@@ -1,5 +1,5 @@
-const CACHE_NAME = 'salon-anas-push-v30';
-const APP_SHELL = ['/salon-anas-1-icon-180.png','/salon-anas-1-icon-192.png','/salon-anas-1-icon-512.png','/', '/index.html', '/manifest.json', '/icon-192.png', '/icon-512.png', '/icon-180.png', '/admin-premium.css', '/admin-premium.js', '/customer-cards.css', '/customer-cards.js', '/appointments-premium.css', '/appointments-premium.js', '/appointments-v3.css', '/appointments-v3.js', '/push-confirm.css', '/salon-home.css', '/salon-home.js', '/salon-home-compact.css', '/salon-gold-only.css', '/salon-tabs-fix.css', '/salon-management.css', '/salon-management.js', '/admin-club.css', '/admin-club.js', '/admin-messages.css', '/admin-messages.js'];
+const CACHE_NAME = 'salon-anas-push-v31';
+const APP_SHELL = ['/sa-club-icon-180.png','/sa-club-icon-192.png','/sa-club-icon-512.png','/', '/index.html', '/manifest.json', '/icon-192.png', '/icon-512.png', '/icon-180.png', '/admin-premium.css', '/admin-premium.js', '/customer-cards.css', '/customer-cards.js', '/appointments-premium.css', '/appointments-premium.js', '/appointments-v3.css', '/appointments-v3.js', '/push-confirm.css', '/salon-home.css', '/salon-home.js', '/salon-home-compact.css', '/salon-gold-only.css', '/salon-tabs-fix.css', '/salon-management.css', '/salon-management.js', '/admin-club.css', '/admin-club.js', '/admin-messages.css', '/admin-messages.js'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)));
   self.skipWaiting();

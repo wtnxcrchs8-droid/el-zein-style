@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "Salon Anas 1 Treueprogramm",
-  "short_name": "Salon Anas 1",
+  "name": "SA Club",
+  "short_name": "SA Club",
   "description": "Digitale Treuekarte von Salon Anas 1",
   "scope": "/",
   "display": "standalone",
@@ -11,13 +11,13 @@
   "dir": "ltr",
   "icons": [
     {
-      "src": "/salon-anas-1-icon-192.png",
+      "src": "/sa-club-icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/salon-anas-1-icon-512.png",
+      "src": "/sa-club-icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
