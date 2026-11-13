@@ -835,6 +835,11 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
 #publicView #vipPage_start .vip-appointment{max-height:125px!important;min-height:0!important;overflow:hidden}
 #publicView #vipPage_start .sa-home-actions button{min-height:64px!important}
 #publicView .vip-footer{font-size:9px!important}
+</style><style>
+#publicView .sa-home-opening .salon-opening-status{display:flex!important;align-items:center;gap:7px}
+#publicView .sa-home-opening .salon-opening-status::before{content:"";width:9px;height:9px;flex:0 0 9px;border-radius:50%;background:#ef6666;box-shadow:0 0 7px #ef444499}
+#publicView .sa-home-opening .salon-opening-status[data-open="true"]{background:#143522!important;border-color:#3d9c64!important;color:#baf5cb!important}
+#publicView .sa-home-opening .salon-opening-status[data-open="true"]::before{background:#42ef82;box-shadow:0 0 4px #42ef82,0 0 11px #42ef82aa}
 </style></head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">S</div><div><h1>SALON ANAS 1</h1><small>TREUEPROGRAMM</small></div></div><span class="pill">BLACK · GOLD EDITION</span></header>
@@ -1523,7 +1528,7 @@ function salonOpeningState(now){
 function updateSalonOpening(){
  const target=document.getElementById('salonOpeningStatus');if(!target)return;
  const state=salonOpeningState(new Date());
- target.textContent=(state.open?'● ':'◷ ')+state.text;
+ target.textContent=state.text;
  target.dataset.open=String(state.open);
 }
 updateSalonOpening();
