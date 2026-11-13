@@ -1593,14 +1593,15 @@ load();
 'use strict';
 const quick=document.querySelector('#publicView .sa-home-actions');if(!quick)return;
 const openButton=document.createElement('button');openButton.id='saGameOpen';openButton.type='button';openButton.innerHTML='<span aria-hidden="true">◉</span><b>Spielen</b><small>Gold Club Pool</small>';quick.append(openButton);
-const modal=document.createElement('dialog');modal.id='saPool';modal.setAttribute('aria-labelledby','poolTitle');modal.innerHTML='<header><div><small>SA CLUB · THE GAMES ROOM</small><h2 id="poolTitle">Gold Club Pool</h2></div><button id="poolClose" aria-label="Spiel schließen">✕</button></header><div class="pool-stats"><span>VERSENKT <b id="poolCount">0 / 6</b></span><span>STÖSSE <b id="poolShots">0</b></span><span>REKORD <b id="poolBest">—</b></span></div><div class="pool-board"><canvas id="poolCanvas" width="360" height="500" tabindex="0" aria-label="Billiard: Von der weißen Kugel nach hinten ziehen und loslassen. Alternativ Pfeiltasten zum Zielen, Plus und Minus für Stärke, Leertaste zum Stoßen."></canvas><div id="poolWin" hidden><small>SA CLUB · TABLE CLEARED</small><span>♛</span><h3>Sauber abgeräumt!</h3><p id="poolResult"></p><button id="poolAgain">Neue Runde ↗</button></div></div><div class="pool-power"><span>POWER</span><div><i id="poolPower"></i></div><b id="poolPercent">0 %</b></div><p id="poolMessage" role="status" aria-live="polite">Ziehe von der weißen Kugel nach hinten. Loslassen = Stoß.</p><div class="pool-footer"><button id="poolReset">↻ Neu starten</button><span>6 Kugeln · Dein Tisch · Dein Rekord</span></div>';
+const modal=document.createElement('dialog');modal.id='saPool';modal.setAttribute('aria-labelledby','poolTitle');modal.innerHTML='<header><div><small>SA CLUB · THE GAMES ROOM</small><h2 id="poolTitle">Gold Club Pool</h2></div><button id="poolClose" aria-label="Spiel schließen">✕</button></header><div class="pool-stats"><span>VERSENKT <b id="poolCount">0 / 6</b></span><span>STÖSSE <b id="poolShots">0</b></span><span>REKORD <b id="poolBest">—</b></span></div><div class="pool-board"><canvas id="poolCanvas" width="360" height="500" tabindex="0" aria-label="Billard: Auf dem Tisch zielen, Stärke einstellen und Stoßen drücken. Alternativ Pfeiltasten und Leertaste."></canvas><div id="poolWin" hidden><small>SA CLUB · TABLE CLEARED</small><span>♛</span><h3>Sauber abgeräumt!</h3><p id="poolResult"></p><button id="poolAgain">Neue Runde ↗</button></div></div><div class="pool-controls"><div class="pool-control-label"><label for="poolAngle">Ausrichtung der Queue</label><output id="poolAngleValue">−90°</output></div><input id="poolAngle" type="range" min="-180" max="180" step="1" value="-90" aria-label="Richtung der Queue"><div class="pool-control-label"><label for="poolStrength">Stoßkraft</label><output id="poolPercent">55 %</output></div><input id="poolStrength" type="range" min="5" max="100" value="55" aria-label="Stärke des Stoßes"><div class="pool-power"><span>POWER</span><div><i id="poolPower"></i></div><button id="poolShoot" type="button">Stoßen ↗</button></div></div><p id="poolMessage" role="status" aria-live="polite">Auf dem Tisch zielen · Stärke einstellen · Stoßen.</p><div class="pool-footer"><button id="poolReset">↻ Neu starten</button><span>6 Kugeln · Dein Tisch · Dein Rekord</span></div>';
 document.body.append(modal);
 const $=id=>document.getElementById(id),canvas=$('poolCanvas'),ctx=canvas.getContext('2d');
 const R=8.5,L=34,T=33,RIGHT=326,BOTTOM=467,PI=Math.PI,pockets=[{x:L,y:T},{x:RIGHT,y:T},{x:L,y:250},{x:RIGHT,y:250},{x:L,y:BOTTOM},{x:RIGHT,y:BOTTOM}];
 const colors=['#f5c244','#3e80d6','#d04e42','#a276c9','#e99441','#2b9983'];
 let balls=[],shots=0,sunk=0,best=0,moving=false,aim=null,raf=0,last=0,done=false,scratch=false,keyAngle=-PI/2,keyPower=0.55,dragId=null;
 try{best=Number(localStorage.getItem('sa-pool-best'))||0}catch{}
-function powerUI(value){const percent=Math.round(value*100);$('poolPower').style.width=percent+'%';$('poolPercent').textContent=percent+' %'}
+function powerUI(value){const percent=Math.round(value*100);$('poolPower').style.width=percent+'%';$('poolPercent').textContent=percent+' %';$('poolStrength').value=percent}
+function controlUI(){const locked=moving||done;for(const id of ['poolAngle','poolStrength','poolShoot'])$(id).disabled=locked;let degrees=Math.round(keyAngle*180/PI);degrees=((degrees+180)%360+360)%360-180;$('poolAngle').value=degrees;$('poolAngleValue').textContent=degrees+'°';powerUI(keyPower)}
 function status(text){$('poolMessage').textContent=text}
 function hud(){$('poolCount').textContent=sunk+' / 6';$('poolShots').textContent=shots;$('poolBest').textContent=best?best+' Stöße':'—'}
 function round(x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.roundRect(x,y,w,h,r);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.stroke()}}
@@ -1632,8 +1633,8 @@ if(hit){const nx=(hit.x-end.x)/(R*2),ny=(hit.y-end.y)/(R*2);ctx.strokeStyle='#ee
 ctx.translate(cue.x,cue.y);ctx.rotate(angle);const offset=20+power*28;
 const stick=ctx.createLinearGradient(-150-offset,0,-offset,0);stick.addColorStop(0,'#9d7542');stick.addColorStop(.8,'#e5c58b');stick.addColorStop(1,'#d9c79c');round(-130-offset,-2.4,130,4.8,2,stick);ctx.fillStyle='#8fb0a8';ctx.fillRect(-offset-2,-2.4,3,4.8);ctx.restore()
 }
-function draw(){table();const cue=balls[0];if(!done&&!moving&&cue&&!cue.potted){const angle=aim?aim.angle:keyAngle,power=aim?aim.power:0;aimLine(cue,angle,power)}for(const b of balls)if(!b.potted)drawBall(b)}
-function setup(){cancelAnimationFrame(raf);moving=false;aim=null;dragId=null;done=false;shots=0;sunk=0;scratch=false;balls=[{x:180,y:363,vx:0,vy:0,cue:true,potted:false}];const layout=[[180,131],[170,149],[190,149],[160,167],[180,167],[200,167]];layout.forEach(([x,y],i)=>balls.push({x,y,vx:0,vy:0,cue:false,potted:false,n:i+1,color:colors[i]}));$('poolWin').hidden=true;powerUI(0);hud();status('Ziehe von der weißen Kugel nach hinten. Loslassen = Stoß.');draw()}
+function draw(){controlUI();table();const cue=balls[0];if(!done&&!moving&&cue&&!cue.potted){const angle=aim?aim.angle:keyAngle,power=keyPower;aimLine(cue,angle,power)}for(const b of balls)if(!b.potted)drawBall(b)}
+function setup(){cancelAnimationFrame(raf);moving=false;aim=null;dragId=null;done=false;shots=0;sunk=0;scratch=false;keyAngle=-PI/2;keyPower=.55;balls=[{x:180,y:363,vx:0,vy:0,cue:true,potted:false}];const layout=[[180,131],[170,149],[190,149],[160,167],[180,167],[200,167]];layout.forEach(([x,y],i)=>balls.push({x,y,vx:0,vy:0,cue:false,potted:false,n:i+1,color:colors[i]}));$('poolWin').hidden=true;powerUI(0);hud();status('Auf dem Tisch zielen · Stärke einstellen · Stoßen.');draw()}
 function cueRespawn(){const cue=balls[0];for(let y=365;y>270;y-=22)for(let x=180;x<RIGHT-20;x+=22){if(balls.slice(1).every(b=>b.potted||Math.hypot(b.x-x,b.y-y)>R*2+2)){cue.x=x;cue.y=y;cue.potted=false;cue.vx=cue.vy=0;return}}cue.x=180;cue.y=365;cue.potted=false}
 function finish(){done=true;if(!best||shots<best){best=shots;try{localStorage.setItem('sa-pool-best',String(best))}catch{}}hud();$('poolResult').textContent='6 Kugeln in '+shots+' Stößen. Dein Rekord: '+best+'.';$('poolWin').hidden=false;status('Tisch abgeräumt! '+shots+' Stöße.');$('poolAgain').focus();draw()}
 function step(dt){
@@ -1645,20 +1646,32 @@ const speed=Math.hypot(b.vx,b.vy),next=Math.max(0,speed-48*dt),ratio=speed?next/
 }
 for(let i=0;i<balls.length;i++)for(let j=i+1;j<balls.length;j++){const a=balls[i],b=balls[j];if(a.potted||b.potted)continue;let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy);if(d>=R*2)continue;if(d<.001){dx=1;dy=0;d=1}const nx=dx/d,ny=dy/d,overlap=R*2-d;a.x-=nx*overlap/2;a.y-=ny*overlap/2;b.x+=nx*overlap/2;b.y+=ny*overlap/2;const relative=(a.vx-b.vx)*nx+(a.vy-b.vy)*ny;if(relative>0){const impulse=relative*.97;a.vx-=impulse*nx;a.vy-=impulse*ny;b.vx+=impulse*nx;b.vy+=impulse*ny}}
 }
-function tick(now){if(!moving||!modal.open)return;const dt=Math.min(.04,Math.max(0,(now-last)/1000));last=now;for(let i=0;i<4;i++)step(dt/4);draw();const speed=balls.some(b=>!b.potted&&Math.hypot(b.vx,b.vy)>0);if(speed){raf=requestAnimationFrame(tick)}else{moving=false;if(scratch){shots+=2;cueRespawn();scratch=false;hud();status('Weiße Kugel versenkt: +2 Strafstöße. Weiter geht’s!')}else status('Dein nächster Stoß: Weiße Kugel zurückziehen.');if(sunk===6)finish();else draw()}}
+function tick(now){if(!moving||!modal.open)return;const dt=Math.min(.04,Math.max(0,(now-last)/1000));last=now;for(let i=0;i<4;i++)step(dt/4);draw();const speed=balls.some(b=>!b.potted&&Math.hypot(b.vx,b.vy)>0);if(speed){raf=requestAnimationFrame(tick)}else{moving=false;if(scratch){shots+=2;cueRespawn();scratch=false;hud();status('Weiße Kugel versenkt: +2 Strafstöße. Weiter geht’s!')}else status('Nächster Stoß: Richtung und Stärke einstellen.');if(sunk===6)finish();else draw()}}
 function shoot(angle,power){if(moving||done||power<.04)return;const cue=balls[0];if(cue.potted)return;shots++;hud();const speed=70+power*540;cue.vx=Math.cos(angle)*speed;cue.vy=Math.sin(angle)*speed;keyAngle=angle;moving=true;aim=null;powerUI(0);status('Die Kugeln rollen …');last=performance.now();raf=requestAnimationFrame(tick)}
 function point(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*360/r.width,y:(e.clientY-r.top)*500/r.height}}
-function updateAim(p){const cue=balls[0],dx=cue.x-p.x,dy=cue.y-p.y,dist=Math.hypot(dx,dy);aim={angle:dist>2?Math.atan2(dy,dx):keyAngle,power:Math.min(1,dist/110)};powerUI(aim.power);draw()}
-canvas.onpointerdown=e=>{if(moving||done||dragId!==null)return;const p=point(e),cue=balls[0];if(Math.hypot(p.x-cue.x,p.y-cue.y)>48){status('Beginne direkt an der weißen Kugel und ziehe zurück.');return}e.preventDefault();dragId=e.pointerId;canvas.setPointerCapture(e.pointerId);updateAim(p)};
-canvas.onpointermove=e=>{if(e.pointerId===dragId&&aim)updateAim(point(e))};
-canvas.onpointerup=e=>{if(e.pointerId!==dragId)return;const shot=aim;dragId=null;aim=null;if(shot&&shot.power>=.04)shoot(shot.angle,shot.power);else{powerUI(0);draw()}};
-function cancelAim(){dragId=null;aim=null;powerUI(0);draw()}
+function updateAim(p){const cue=balls[0],dx=p.x-cue.x,dy=p.y-cue.y;if(Math.hypot(dx,dy)>6)keyAngle=Math.atan2(dy,dx);aim={angle:keyAngle,power:keyPower};draw()}
+canvas.onpointerdown=e=>{if(moving||done||dragId!==null)return;e.preventDefault();dragId=e.pointerId;canvas.setPointerCapture(e.pointerId);updateAim(point(e))};
+canvas.onpointermove=e=>{if(e.pointerId===dragId)updateAim(point(e))};
+canvas.onpointerup=e=>{if(e.pointerId!==dragId)return;dragId=null;aim=null;draw()};
+function cancelAim(){dragId=null;aim=null;draw()}
 canvas.onpointercancel=cancelAim;canvas.onlostpointercapture=()=>{if(dragId!==null)cancelAim()};
-canvas.onkeydown=e=>{if(moving||done)return;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-',' '].includes(e.key)){e.preventDefault();if(e.key==='ArrowLeft')keyAngle-=.06;if(e.key==='ArrowRight')keyAngle+=.06;if(e.key==='ArrowUp'||e.key==='+')keyPower=Math.min(1,keyPower+.05);if(e.key==='ArrowDown'||e.key==='-')keyPower=Math.max(.08,keyPower-.05);if(e.key===' ')shoot(keyAngle,keyPower);else{aim={angle:keyAngle,power:keyPower};powerUI(keyPower);draw();aim=null}}};
+$('poolAngle').oninput=e=>{if(moving||done)return;keyAngle=Number(e.target.value)*PI/180;aim=null;draw()};
+$('poolStrength').oninput=e=>{if(moving||done)return;keyPower=Number(e.target.value)/100;aim=null;draw()};
+$('poolShoot').onclick=()=>shoot(keyAngle,keyPower);
+canvas.onkeydown=e=>{if(moving||done)return;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-',' '].includes(e.key)){e.preventDefault();if(e.key==='ArrowLeft')keyAngle-=.025;if(e.key==='ArrowRight')keyAngle+=.025;if(e.key==='ArrowUp'||e.key==='+')keyPower=Math.min(1,keyPower+.05);if(e.key==='ArrowDown'||e.key==='-')keyPower=Math.max(.05,keyPower-.05);if(e.key===' ')shoot(keyAngle,keyPower);else{aim=null;draw()}}};
 function open(){if(!modal.open){modal.showModal();setup()}}
 openButton.onclick=open;$('poolClose').onclick=()=>modal.close();$('poolReset').onclick=()=>{if(shots>0&&!done&&!confirm('Neue Runde starten? Der aktuelle Spielstand wird zurückgesetzt.'))return;setup()};$('poolAgain').onclick=setup;
 modal.addEventListener('close',()=>{cancelAnimationFrame(raf);moving=false;dragId=null;aim=null});modal.addEventListener('click',e=>{if(e.target===modal)modal.close()});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(raf);if(dragId!==null)cancelAim()}else if(moving&&modal.open){last=performance.now();raf=requestAnimationFrame(tick)}});window.addEventListener('blur',()=>{if(dragId!==null)cancelAim()});
 if(location.hash==='#spielen')open();
 })();
-</script></body></html>
+</script><style>
+#saPool .pool-board{width:min(100%,calc(43dvh * .72))}
+#saPool .pool-controls{margin-top:10px;padding:10px 12px;background:#0003;border:1px solid #80633777;border-radius:14px}
+.pool-control-label{display:flex;justify-content:space-between;color:#d5bd89;font-size:11px;margin:2px 0 4px}.pool-control-label output{color:#f8dda1;font-variant-numeric:tabular-nums}
+#saPool input[type="range"]{display:block;width:100%;height:25px;margin:0 0 7px;accent-color:#d8b166;cursor:pointer;touch-action:pan-y}
+#saPool #poolShoot{padding:10px 22px;background:linear-gradient(100deg,#f6dda1,#ac7c35);border:0;color:#1c170d;font-weight:800;min-height:42px}
+#saPool button:disabled,#saPool input:disabled{opacity:.45;cursor:default}
+#saPool .pool-power{margin-top:0}
+#saPool #poolMessage{margin:8px 0;min-height:20px}
+</style></body></html>
