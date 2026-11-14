@@ -101,10 +101,10 @@ async function refreshAvailability(){
  const day=dateInput.value,request=++availabilitySeq;
  availabilityLoading=true;drawTimes();
  try{
-  const {data,error}=await db.from("salon_appointments").select("start_time").eq("appointment_date",day).in("status",["pending","confirmed"]);
+  const {data,error}=await db.from("salon_appointments").select("id,start_time").eq("appointment_date",day).in("status",["pending","confirmed"]);
   if(request!==availabilitySeq||day!==dateInput.value)return false;
   if(error)throw error;
-  occupied=new Set((data||[]).map(a=>a.start_time.slice(0,5)));
+  occupied=new Set((data||[]).filter(a=>a.id!==window.saEditingAppointment?.id).map(a=>a.start_time.slice(0,5)));
   availabilityDay=day;return true;
  }catch(error){
   availabilityDay="";
@@ -161,7 +161,7 @@ syncServices();drawCalendar();drawTimes();refreshAvailability();
 window.sa10RefreshAppointments=function(){
  const date=dateInput.value;
  if(date&&validDate(date)&&date!==selected){selected=date;viewDate=date;drawCalendar();}
- syncServices();drawTimes();refreshAvailability();
+ syncServices();refreshAvailability();
 };
 // Ensure the original save handler never receives a past/Sunday date or
 // unselected/expired time. Capture before existing inline click handler.
