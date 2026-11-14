@@ -1233,6 +1233,21 @@ function render(){
     if(amount>0)menuAction('Letzten Stempel entfernen',backIcon,()=>removeStamp(c),true);
     if(amount>=goal)menuAction('Belohnung einlösen',userIcon,()=>redeemReward(c));
     if(amount>0)menuAction('Karte zurücksetzen',backIcon,()=>resetCard(c),true);
+    menuAction('Karte endgültig löschen','<span aria-hidden="true">🗑</span>',async()=>{
+      const name=c.customers?.full_name||'Kunde';
+      if(!confirm('Karte von „'+name+'“ endgültig löschen?\\n\\nStempel, zugehörige Termine und Benachrichtigungs-Abos dieser Karte werden gelöscht. Der Kartenlink funktioniert danach nicht mehr. Dieser Vorgang kann nicht rückgängig gemacht werden.'))return;
+      if(card.dataset.deleting==='1')return;
+      card.dataset.deleting='1';
+      try{
+        const {data,error}=await db.from('loyalty_cards').delete().eq('id',c.id).select('id');
+        if(error)throw error;
+        if(!data?.length)throw new Error('Karte nicht gefunden oder keine Berechtigung.');
+        await refresh();
+        if(typeof refreshAudience==='function')await refreshAudience();
+        msg($('adminMsg'),'Karte von '+name+' wurde gelöscht.');
+      }catch(e){msg($('adminMsg'),'Löschen fehlgeschlagen: '+e.message,true)}
+      finally{delete card.dataset.deleting}
+    },true);
     list.append(card);
   });
 }
