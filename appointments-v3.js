@@ -96,6 +96,23 @@ modeToggle.addEventListener("click",()=>{
 });
 dateInput.value=selected;
 dateInput.min=today;
+let occupied=new Set(),availabilityDay="",availabilityLoading=false,availabilitySeq=0;
+async function refreshAvailability(){
+ const day=dateInput.value,request=++availabilitySeq;
+ availabilityLoading=true;drawTimes();
+ try{
+  const {data,error}=await db.from("salon_appointments").select("start_time").eq("appointment_date",day).in("status",["pending","confirmed"]);
+  if(request!==availabilitySeq||day!==dateInput.value)return false;
+  if(error)throw error;
+  occupied=new Set((data||[]).map(a=>a.start_time.slice(0,5)));
+  availabilityDay=day;return true;
+ }catch(error){
+  availabilityDay="";
+  const box=byId("appointmentMsg");if(box)box.textContent="Verfügbarkeit konnte nicht geladen werden. Bitte erneut versuchen.";
+  return false;
+ }finally{if(request===availabilitySeq){availabilityLoading=false;drawTimes()}}
+}
+dateInput.addEventListener("change",refreshAvailability);
 function drawTimes(){
  timeBox.replaceChildren();
  const now=inBerlin(),sameDay=selected===now.date;
@@ -104,11 +121,15 @@ function drawTimes(){
  for(let mins=9*60+30;mins<=18*60+30;mins+=30){
   const time=pad(Math.floor(mins/60))+":"+pad(mins%60);
   const b=document.createElement("button");
-  b.type="button";b.textContent=time;
+  b.type="button";b.textContent=time;b.dataset.time=time;
   const tooEarly=sameDay&&mins<=now.minute;
-  b.disabled=tooEarly;
-  if(chosen===time&&!tooEarly)validChosen=true;
-  b.setAttribute("aria-pressed",String(chosen===time&&!tooEarly));
+  const booked=availabilityDay===selected&&occupied.has(time);
+  b.disabled=tooEarly||booked||availabilityLoading||availabilityDay!==selected;
+  b.classList.toggle("sa10-booked",booked);
+  b.title=booked?"Bereits gebucht":b.disabled?"Nicht verfügbar":"Verfügbar";
+  if(booked){const label=document.createElement("small");label.textContent="Belegt";b.append(label)}
+  if(chosen===time&&!b.disabled)validChosen=true;
+  b.setAttribute("aria-pressed",String(chosen===time&&!b.disabled));
   b.addEventListener("click",()=>{
    if(b.disabled)return;
    timeInput.value=time;
@@ -117,7 +138,7 @@ function drawTimes(){
   });
   timeBox.append(b);
  }
- if(!validChosen)timeInput.value="";
+ if(!validChosen&&!availabilityLoading)timeInput.value="";
 }
 function syncServices(){
  const current=serviceSelect.value||"Haarschnitt";
@@ -134,13 +155,13 @@ serviceBox.querySelectorAll("[data-sa10-service]").forEach(b=>b.addEventListener
  syncServices();
 }));
 serviceSelect.addEventListener("change",syncServices);
-syncServices();drawCalendar();drawTimes();
+syncServices();drawCalendar();drawTimes();refreshAvailability();
 /* Support previous quick-action links and show the selected service when
    an admin returns to this page. */
 window.sa10RefreshAppointments=function(){
  const date=dateInput.value;
  if(date&&validDate(date)&&date!==selected){selected=date;viewDate=date;drawCalendar();}
- syncServices();drawTimes();
+ syncServices();drawTimes();refreshAvailability();
 };
 // Ensure the original save handler never receives a past/Sunday date or
 // unselected/expired time. Capture before existing inline click handler.
@@ -158,4 +179,27 @@ byId("appointmentSave")?.addEventListener("click",event=>{
   if(box){box.replaceChildren();const p=document.createElement("div");p.className="notice error";p.textContent=error;box.append(p)}
  }
 },{capture:true});
+let saving=false;
+byId("appointmentSave")?.addEventListener("click",async event=>{
+ event.preventDefault();event.stopImmediatePropagation();
+ if(saving)return;
+ const day=dateInput.value,time=timeInput.value;
+ if(!time)return;
+ saving=true;
+ try{
+  const ok=await refreshAvailability();
+  if(!ok||day!==dateInput.value)return;
+  if(occupied.has(time)){
+   timeInput.value="";drawTimes();
+   byId("appointmentMsg").textContent="Diese Uhrzeit ist bereits gebucht. Bitte eine andere wählen.";
+   return;
+  }
+  timeInput.value=time;
+  await byId("appointmentSave").onclick?.call(byId("appointmentSave"),event);
+  await refreshAvailability();
+ }finally{saving=false}
+},{capture:true});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshAvailability()});
+setInterval(()=>{if(!document.hidden&&root.getClientRects().length)refreshAvailability()},15000);
+const style=document.createElement("style");style.textContent="#sa10Times button.sa10-booked{opacity:.65;background:#41251c;border-color:#a86649;color:#e5b49b;cursor:not-allowed}#sa10Times button.sa10-booked small{display:block;font-size:8px;line-height:1.1;font-weight:600}";document.head.append(style);
 })();
