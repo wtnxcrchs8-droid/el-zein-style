@@ -1509,12 +1509,57 @@ $('sendBroadcastBtn').addEventListener('click',sendBroadcast);
 
 function luxToday(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Berlin',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
 function luxAddRow(el,title,sub,time){const row=document.createElement('div');row.className='lux-entry';const left=document.createElement('div');const b=document.createElement('b');b.textContent=title;const sm=document.createElement('small');sm.textContent=sub;left.append(b,sm);const t=document.createElement('em');t.textContent=time||'';row.append(left,t);el.append(row)}
-async function luxLoadAppointments(){const el=$('appointmentList');el.innerHTML='';const {data,error}=await db.from('salon_appointments').select('card_id,appointment_date,start_time,service_name,status').gte('appointment_date',luxToday()).order('appointment_date').order('start_time').limit(30);if(error){el.textContent='Termine konnten nicht geladen werden.';return}const rows=(data||[]).filter(a=>!['cancelled','canceled'].includes(a.status));const todayCount=rows.filter(a=>a.appointment_date===luxToday()).length;const n=$('saTodayAppointments');if(n)n.textContent=todayCount;if(!rows.length){el.textContent='Keine anstehenden Termine.';return}rows.slice(0,5).forEach(a=>{const c=(window.cards||[]).find(x=>x.id===a.card_id);luxAddRow(el,c?.customers?.full_name||'Kunde',a.service_name+' · '+a.appointment_date,(a.start_time||'').slice(0,5))})}
+function saResetAppointmentEdit(){window.saEditingAppointment=null;$('appointmentSave').textContent='▦ Termin speichern';$('saCancelAppointmentEdit').hidden=true}
+function saEditAppointment(a){
+ window.saEditingAppointment=a;
+ $('appointmentCustomer').value=a.card_id;$('appointmentDate').value=a.appointment_date;
+ $('appointmentTime').value=(a.start_time||'').slice(0,5);$('appointmentService').value=a.service_name||'Haarschnitt';
+ $('appointmentSave').textContent='✓ Änderungen speichern';$('saCancelAppointmentEdit').hidden=false;
+ msg($('appointmentMsg'),'Termin bearbeiten: Datum, Uhrzeit oder Service ändern.');
+ window.sa6ShowAppointmentTab?.('new');window.sa10RefreshAppointments?.();
+}
+async function luxLoadAppointments(){
+ const el=$('appointmentList');el.innerHTML='';
+ const {data,error}=await db.from('salon_appointments').select('id,card_id,appointment_date,start_time,service_name,status').gte('appointment_date',luxToday()).order('appointment_date').order('start_time').limit(100);
+ if(error){el.textContent='Termine konnten nicht geladen werden.';return}
+ const rows=(data||[]).filter(a=>['pending','confirmed'].includes(a.status));
+ const n=$('saTodayAppointments');if(n)n.textContent=rows.filter(a=>a.appointment_date===luxToday()).length;
+ if(!rows.length){el.textContent='Keine anstehenden Termine.';return}
+ rows.forEach(a=>{
+  const c=(window.cards||[]).find(x=>x.id===a.card_id);
+  luxAddRow(el,c?.customers?.full_name||'Kunde',a.service_name+' · '+a.appointment_date,(a.start_time||'').slice(0,5));
+  const actions=document.createElement('div');actions.className='sa-appointment-actions';
+  const edit=document.createElement('button');edit.type='button';edit.textContent='✎ Bearbeiten';edit.onclick=()=>saEditAppointment(a);
+  const cancel=document.createElement('button');cancel.type='button';cancel.textContent='× Termin absagen';
+  cancel.onclick=async()=>{
+   if(!confirm('Termin am '+a.appointment_date+' um '+a.start_time.slice(0,5)+' wirklich absagen?'))return;
+   cancel.disabled=true;edit.disabled=true;
+   try{
+    const {data,error}=await db.from('salon_appointments').update({status:'cancelled'}).eq('id',a.id).select('id');
+    if(error||!data?.length)throw error||Error('Keine Änderung gespeichert.');
+    if(window.saEditingAppointment?.id===a.id)saResetAppointmentEdit();
+    await luxLoadAppointments();window.sa10RefreshAppointments?.();
+   }catch(e){alert('Absage fehlgeschlagen: '+e.message);cancel.disabled=false;edit.disabled=false}
+  };
+  actions.append(edit,cancel);el.append(actions);
+ });
+}
 async function luxLoadActivity(){const el=$('activityList');el.innerHTML='';const {data,error}=await db.from('loyalty_card_events').select('card_id,event_type,created_at').order('created_at',{ascending:false}).limit(5);if(error){el.textContent='Aktivitäten nicht verfügbar.';return}if(!data?.length){el.textContent='Noch keine Aktivitäten.';return}data.forEach(a=>{const c=(window.cards||[]).find(x=>x.id===a.card_id);luxAddRow(el,String(a.event_type||'Aktivität').replaceAll('_',' '),c?.customers?.full_name||'Kunde',new Date(a.created_at).toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Berlin'}))})}
 async function luxRefresh(){const sel=$('appointmentCustomer'),current=sel.value;sel.replaceChildren(new Option('Kunde auswählen',''));(window.cards||[]).forEach(c=>sel.add(new Option(c.customers?.full_name||'Kunde',c.id)));sel.value=current;await Promise.all([luxLoadAppointments(),luxLoadActivity()])}
 $('appointmentDate').value=luxToday();
-$('appointmentSave').onclick=async()=>{const card=(window.cards||[]).find(c=>c.id===$('appointmentCustomer').value);const date=$('appointmentDate').value,time=$('appointmentTime').value;if(!card||!date||!time){msg($('appointmentMsg'),'Kunde, Datum und Uhrzeit auswählen.',true);return}const {error}=await db.from('salon_appointments').insert({card_id:card.id,customer_id:card.customer_id,appointment_date:date,start_time:time,service_name:$('appointmentService').value,status:'pending'});if(error){msg($('appointmentMsg'),'Fehler: '+error.message,true);return}msg($('appointmentMsg'),'Termin gespeichert.');await luxLoadAppointments()};
-
+const cancelEdit=document.createElement('button');cancelEdit.id='saCancelAppointmentEdit';cancelEdit.type='button';cancelEdit.hidden=true;cancelEdit.textContent='Bearbeitung abbrechen';cancelEdit.onclick=()=>{saResetAppointmentEdit();$('appointmentTime').value='';$('appointmentMsg').textContent='';window.sa6ShowAppointmentTab?.('upcoming');window.sa10RefreshAppointments?.()};$('appointmentSave').after(cancelEdit);
+document.querySelectorAll('[data-sa6-tab="new"],#sa6NewFromList').forEach(b=>b.addEventListener('click',()=>{saResetAppointmentEdit();$('appointmentTime').value='';$('appointmentMsg').textContent='';window.sa10RefreshAppointments?.()}));
+$('appointmentSave').onclick=async()=>{
+ const card=(window.cards||[]).find(c=>c.id===$('appointmentCustomer').value);
+ const date=$('appointmentDate').value,time=$('appointmentTime').value,editing=window.saEditingAppointment;
+ if(!card||!date||!time){msg($('appointmentMsg'),'Kunde, Datum und Uhrzeit auswählen.',true);return}
+ const values={card_id:card.id,customer_id:card.customer_id,appointment_date:date,start_time:time,service_name:$('appointmentService').value,status:editing?.status||'pending'};
+ const query=editing?db.from('salon_appointments').update(values).eq('id',editing.id).in('status',['pending','confirmed']):db.from('salon_appointments').insert(values);
+ const {data,error}=await query.select('id');
+ if(error||!data?.length){msg($('appointmentMsg'),error?.code==='23505'?'Diese Uhrzeit ist bereits gebucht. Bitte eine andere wählen.':'Speichern fehlgeschlagen: '+(error?.message||'Termin nicht mehr verfügbar.'),true);return}
+ saResetAppointmentEdit();$('appointmentTime').value='';msg($('appointmentMsg'),editing?'Termin geändert.':'Termin gespeichert.');
+ await luxLoadAppointments();window.sa6ShowAppointmentTab?.('upcoming');
+};
 
 function vipSetupTabs(){
 const root=$('publicView');if(root.dataset.tabsReady)return;root.dataset.tabsReady='1';
@@ -1617,7 +1662,7 @@ document.querySelectorAll('#adminView .sa-admin-tabs [data-admin-target]').forEa
 saAdminGo('overview');const saDate=document.getElementById('saAdminDate');if(saDate)saDate.textContent=new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'short'}).format(new Date());
 
 (async()=>{const token=new URLSearchParams(location.search).get('card');if(token){await loadPublic(token);return}if(!new URLSearchParams(location.search).has('admin')){show('signupView');return}const {data}=await db.auth.getSession();if(data.session){const {data:a}=await db.from('admins').select('user_id').eq('user_id',data.session.user.id).maybeSingle();if(a){show('adminView');await refresh();await refreshAudience();return}}show('loginView')})();
-</script><script src="/admin-premium.js?v=13"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=6"></script><script src="/appointments-v3.js?v=2"></script><script src="/salon-home.js?v=2"></script><script src="/salon-management.js?v=1"></script><style>
+</script><script src="/admin-premium.js?v=13"></script><script src="/customer-cards.js?v=1"></script><script src="/appointments-premium.js?v=1"></script><script src="/admin-club.js?v=1"></script><script src="/admin-messages.js?v=6"></script><script src="/appointments-v3.js?v=3"></script><script src="/salon-home.js?v=2"></script><script src="/salon-management.js?v=1"></script><style>
 #publicView .sa-home-opening .salon-opening-status{display:block;margin:7px 0 0;padding:5px 8px;border:1px solid #9d743a;border-radius:9px;color:#e7c47d;font-size:11px;line-height:1.45;font-weight:600}
 #publicView .sa-home-opening .salon-opening-status[data-open="true"]{background:#d7b65d20;color:#ffe09b}
 </style>
@@ -1872,4 +1917,4 @@ slots.addEventListener('click',e=>{const b=e.target.closest('[data-time]');if(b&
 send.addEventListener('click',async e=>{e.preventDefault();e.stopImmediatePropagation();const selected=time.value;await refresh();if(!selected||checked!==date.value||!available.has(selected)){status.textContent='Bitte eine verfügbare Uhrzeit wählen.';return}send.onclick?.call(send,new Event('click'))},true);
 date.addEventListener('change',refresh);document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh()});setInterval(()=>{if(!document.hidden)refresh()},15000);refresh();
 })();
-</script><style>#publicView #vipTimeSlots button:disabled{opacity:.3!important;background:#15120c!important;border-color:#68522b!important;color:#aaa!important;box-shadow:none!important;cursor:not-allowed!important}</style></body></html>
+</script><style>#publicView #vipTimeSlots button:disabled{opacity:.3!important;background:#15120c!important;border-color:#68522b!important;color:#aaa!important;box-shadow:none!important;cursor:not-allowed!important}</style><style>.sa-appointment-actions{display:flex;gap:8px;padding:0 0 14px;flex-wrap:wrap}.sa-appointment-actions button,#saCancelAppointmentEdit{border:1px solid #a48143;border-radius:10px;background:#241b0f;color:#f4d28b;font:600 12px system-ui;padding:9px 13px;cursor:pointer}.sa-appointment-actions button:last-child{background:#261713;color:#e4b49e;border-color:#80553f}#saCancelAppointmentEdit{margin-top:8px;width:100%}#saCancelAppointmentEdit[hidden]{display:none}</style></body></html>
