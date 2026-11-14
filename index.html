@@ -1595,7 +1595,7 @@ function vipInitCalendar(){
 const root=$('vipCalendar'),input=$('vipBookingDate');if(!root||!input)return;
 const now=new Date();now.setHours(0,0,0,0);let year=now.getFullYear(),month=now.getMonth();
 const fmt=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-input.min=fmt(now);
+input.min=fmt(now);if(!input.value){const initial=new Date(now);if(initial.getDay()===0)initial.setDate(initial.getDate()+1);input.value=fmt(initial)}
 function draw(){
 const first=new Date(year,month,1),offset=(first.getDay()+6)%7,days=new Date(year,month+1,0).getDate();
 const title=new Intl.DateTimeFormat('de-DE',{month:'long',year:'numeric'}).format(first);
@@ -1603,7 +1603,7 @@ root.innerHTML='<div class="vip-cal-header"><button type="button" id="vipCalPrev
 root.querySelector('#vipCalPrev').disabled=year===now.getFullYear()&&month===now.getMonth();
 root.querySelector('#vipCalPrev').onclick=()=>{month--;if(month<0){month=11;year--}draw()};
 root.querySelector('#vipCalNext').onclick=()=>{month++;if(month>11){month=0;year++}draw()};
-root.querySelectorAll('[data-date]').forEach(b=>b.onclick=()=>{input.value=b.dataset.date;draw()});
+root.querySelectorAll('[data-date]').forEach(b=>b.onclick=()=>{input.value=b.dataset.date;input.dispatchEvent(new Event('change',{bubbles:true}));draw()});
 }
 draw();
 }
