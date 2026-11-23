@@ -961,6 +961,7 @@ body:has(#adminView:not(.hidden)),body:has(#adminView:not(.hidden)) main{backgro
   <button type="button" id="vipPushShortcut"><span aria-hidden="true">♧</span><b>Benachrichtigungen<br>aktivieren</b></button>
   <button type="button" id="vipAddHomeTile"><span aria-hidden="true">⊞</span><b>Zum Home-Bildschirm<br>hinzufügen</b></button>
 </div>
+<button type="button" id="appleWalletBtn" class="vip-gold-btn">Zu Apple Wallet hinzufügen</button>
 <div class="sa-home-legacy-shortcuts" hidden aria-hidden="true"><button type="button" id="vipHistoryShortcut" tabindex="-1">Verlauf</button><button type="button" id="vipOffersShortcut" tabindex="-1">Angebote</button></div>
 <div class="vip-panel vip-ai-teaser hidden"><div><h3>✦ KI Style Studio</h3><p>Finde Inspiration für deinen nächsten Haarschnitt.</p></div><button type="button" class="vip-gold-btn" id="vipAiOpen">KI entdecken ›</button></div><div class="vip-panel vip-appointment"><div class="vip-appointment-copy"><h3>Neuer Look?</h3><p>Buche jetzt deinen<br>nächsten Termin!</p><a class="vip-gold-btn" href="#vipBookingPanel" id="vipAppointmentLink"><span class="vip-calendar">▦</span> Termin buchen ❯</a></div><div class="vip-chair-art" aria-hidden="true"><div class="vip-chair-head"></div><div class="vip-chair-back"><span>SA</span><small>Salon Anas 1</small></div><div class="vip-chair-seat"></div></div></div>
 
@@ -1672,6 +1673,26 @@ resetPublicScroll();
 requestAnimationFrame(()=>{resetPublicScroll();requestAnimationFrame(resetPublicScroll)});
 }
 function vipRenderStamps(count,goal){const p=$('saRewardProgress'),f=$('saRewardFill');const left=Math.max(0,goal-count);let lang='de';try{lang=localStorage.getItem('sa-language')||'de'}catch{}if(p)p.textContent=lang==='ar'?(left?'باقيلك '+left+' أختام للمكافأة':'مكافأتك جاهزة! أبرز بطاقتك بالصالون'):lang==='en'?(left?left+' more stamps until your reward':'Your reward is ready! Show your card at the salon.'):(left?'Noch '+left+' Stempel bis zu deiner Belohnung':'Deine Belohnung ist bereit! Zeige deine Karte im Salon.');if(f)f.style.width=Math.min(100,100*count/Math.max(1,goal))+'%';const el=$('pubStamps');el.replaceChildren();for(let i=0;i<Math.min(30,Math.max(1,Number(goal)||6));i++){const x=document.createElement('div');x.className='vip-stamp'+(i<count?' on':'');x.innerHTML='<span aria-hidden="true">✂︎</span>';el.append(x)}}
+$('appleWalletBtn').onclick = async () => {
+  const button = $('appleWalletBtn');
+  if(button.disabled) return;
+  button.disabled = true;
+  try {
+    const cardToken = new URLSearchParams(location.search).get('card');
+    if(!cardToken) throw new Error('Bitte öffne den persönlichen Link deiner Treuekarte.');
+    const {data, error} = await db.functions.invoke('wallet-pass', {
+      body: {action:'create', card_token:cardToken}
+    });
+    if(error || !data?.shareUrl) throw new Error('Apple Wallet ist gerade nicht verfügbar. Bitte versuche es später erneut.');
+    const link = new URL(data.shareUrl);
+    if(link.protocol !== 'https:') throw new Error('Ungültiger Wallet-Link.');
+    location.assign(link.href);
+  } catch(error) {
+    alert(error.message);
+  } finally {
+    button.disabled = false;
+  }
+};
 $('vipPushShortcut').onclick=()=>{
   const dialog = $('vipPushPanel');
   if(!dialog.open) dialog.showModal();
